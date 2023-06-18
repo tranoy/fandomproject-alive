@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/static/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/static/css/rockville.css">
     <link rel="stylesheet" href="/static/css/slicknav.min.css">
-
 </head>
 <body>
  <!-- Page Preloder -->
@@ -38,6 +37,7 @@
                                 <li>
                                     <a href="/login">LOGIN</a>
                                 </li>
+                                
                             </ul>
                         </nav>
                     </div>
@@ -47,7 +47,9 @@
                         <source src="/static/img/videos/back.mp4" type="video/mp4">
                     </video>
                     <div class="text-overlay">
-                        <h2 style="color: white;" id="changetext">Making someting people love?</h2>
+                        <h2 style="color: white;" id="changetext">
+                            {{ user.username }} 님 환영합니다
+                        </h2>
                     </div>
                 </div> 
             </div>

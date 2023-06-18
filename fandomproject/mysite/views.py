@@ -11,6 +11,6 @@ class Main(APIView):
 
         username = request.session['username']
 
-        User.objects.filter(username = username).first()
+        user = User.objects.filter(username = username).first()
 
-        return render(request, 'index.html')
+        return render(request, 'index.html', context=dict(user=user))
