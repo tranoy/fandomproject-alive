@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import Main
+from .views import Main,LogOut
 
 
 
@@ -8,6 +8,7 @@ from .views import Main
 
 urlpatterns = [
     path('',Main.as_view()),
+    path('logout',LogOut.as_view()),
     path('login',include('accounts.urls')),
     path('making',include('making.urls')),
     path('ranking',include('ranking.urls')),
