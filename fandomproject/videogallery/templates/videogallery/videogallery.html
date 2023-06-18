@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'vcss/bootstrap.min.css' %}">
+    <title>Gallery</title>
+</head>
+<body>
+    <h2>Image Gallery</h2>
+
+    <div class="row">
+        {% for image in images %}
+        <div class="col-lg-3 col-md-6 col-sm-12 mt-4">
+            <img src="{{image.image.url}}" width="100%" alt="{{image.title}}">
+        </div>
+
+        {% endfor %}
+    </div>
+    
+    {% block content %}
+    {% endblock %}
+    <script src="{% static 'vjs/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'vjs/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

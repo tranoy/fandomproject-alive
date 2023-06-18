@@ -1,0 +1,186 @@
+{% load static %}
+{% block extrahead %}
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'rkcss/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'rkcss/rockville.css'%}">
+    <link rel="stylesheet" href="{% static 'rkcss/magnific-popup.min.css'%}">
+    <link rel="stylesheet" href="{% static 'rkcss/owl-carousel.min.css'%}">
+    <link rel="stylesheet" href="{% static 'rkcss/slicknav.min.css'%}">
+    <link rel="stylesheet" href="{% static 'rkcss/ranking.css'%}">
+    {% endblock %}
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                    <div class="header__logo">
+                        <a href="/"><img src="/static/img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="/">HOME</a></li>
+                                <li><a href="/making">MAKING</a></li>
+                                <li><a href="/ranking">RANKING</a></li>
+                                <li><a href="/board">BOARD</a></li>
+                                <li><a href="/login">LOGIN</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <section>
+        <div class="content-container">
+            <div class="content-container-inner">
+                <p>저희 서비스에 총 x 명이 참가하였습니다.</p>
+            </div>
+            <div class="css-1pyzh3d">
+                <div>
+                    <div>
+                        <div>
+                            <label class="hidden" for="kr">kr</label>
+                            <select id="kr">
+                                <option value="kr">KR</option>
+                                <option value="jp">JP</option>
+                            </select>
+                        </div>
+                        <div class="css-uurdic e5qh6tw1">
+                            <div>
+                                <button type="button" class="css-1kqx39n e5qh6tw2">
+                                    <img src="https://s-lol-web.op.gg/assets/images/regions/01-icon-icon-kr.svg?v=1686705833965" alt="" width="24" height="24">
+                                    <span>KR</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form action="">
+                    <label class="hidden" for="summonerNameInput">참가자명</label>
+                    <input id="summonerNameInput" name="summonerNameInput" autocomplete="off"
+                    type="text" placeholder="참가자명">
+                </form>
+            </div>
+            <div class="css-ndvmk6 e1fnyy5m0">
+                <table class="css-8xctw3 exo2f213">
+                    <colgroup>
+                        <col width="40">
+                        <col width="*">
+                        <col width="110">
+                        <col width="60">
+                        <col width="130">
+                        <col width="50">
+                        <col width="172">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th align="left" scope="col">등수</th>
+                            <th align="left" scope="col">이름</th>
+                            <th align="left" scope="col">티어</th>
+                            <th align="left" scope="col">LP</th>
+                            <th align="left" scope="col">노래</th>
+                            <th align="left" scope="col">레벨</th>
+                            <th align="left" scope="col">승률</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="" class="">
+                            <td>1</td>
+                            <td>배준오</td>
+                            <td>챌린저</td>
+                            <td>1000</td>
+                            <td>치얼업</td>
+                            <td>7</td>
+                            <td>100</td>
+                        </tr>
+                        <tr id="" class="">
+                            <td>2</td>
+                            <td>조창근</td>
+                            <td>그랜드마스터</td>
+                            <td>950</td>
+                            <td>톰보이</td>
+                            <td>6</td>
+                            <td>100</td>
+                        </tr>
+                        <tr id="" class="">
+                            <td>3</td>
+                            <td>김규리</td>
+                            <td>마스터</td>
+                            <td>900</td>
+                            <td>퀸카</td>
+                            <td>5</td>
+                            <td>100</td>
+                        </tr>
+                        <tr id="" class="">
+                            <td>4</td>
+                            <td>김민주</td>
+                            <td>다이아</td>
+                            <td>850</td>
+                            <td>Spicy</td>
+                            <td>4</td>
+                            <td>100</td>
+                        </tr>
+                        <tr id="" class="">
+                            <td>5</td>
+                            <td>이진하</td>
+                            <td>플레티넘</td>
+                            <td>800</td>
+                            <td>하입보이</td>
+                            <td>3</td>
+                            <td>100</td>
+                        </tr>
+                        <tr id="" class="">
+                            <td>6</td>
+                            <td>이민흠</td>
+                            <td>골드</td>
+                            <td>800</td>
+                            <td>OMG</td>
+                            <td>2</td>
+                            <td>100</td>
+                        </tr>
+                        <tr id="" class="">
+                            <td>7</td>
+                            <td>송준원</td>
+                            <td>실버</td>
+                            <td>750</td>
+                            <td>꽃</td>
+                            <td>2</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="display: flex; justify-content: space-between;">
+                    <a href="">
+                        <img src="https://s-lol-web.op.gg/images/icon/icon-arrow-left.svg?v=1686705833965" alt="" width="24" height="24">
+                    </a>
+                    <div>
+                        <a href="">
+                            1
+                        </a>
+                        <a href="">
+                            2
+                        </a>
+                        <a href="">
+                            3
+                        </a>
+                        <a href="">
+                            4
+                        </a>
+                        <a href="">
+                            5
+                        </a>
+                    </div>
+                    <a href="">
+                        <img src="https://s-lol-web.op.gg/images/icon/icon-arrow-right.svg?v=1686705833965" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>

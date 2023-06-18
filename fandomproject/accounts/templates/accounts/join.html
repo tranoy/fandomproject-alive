@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'accounts/bootstrap.min1.css'%}">
+    <link rel="stylesheet" href="{% static 'accounts/login.css'%}">
+    <link rel="stylesheet" href="{% static 'accounts/style.css'%}">
+    <link rel="stylesheet" href="{% static 'accounts/font-awesome.min.css'%}">
+    <link rel="stylesheet" href="{% static 'accounts/nowfont.css'%}">
+    <title>Document</title>
+</head>
+<body>
+    <section class="login-form">
+        <h1>JOIN</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="int-area">
+                <input type="text" name="username" id="id"
+                autocomplete="off" required>
+                <label for="id">ID</label>
+            </div>
+            <div class="int-area">
+                <input type="password" name="password1" id="pw1"
+                autocomplete="off" required>
+                <label for="pw1">PASSWORD</label>
+            </div>
+            <div class="int-area">
+                <input type="password" name="password2" id="pw2"
+                autocomplete="off" required>
+                <label for="pw2">PASSWORD CHECK</label>
+            </div>
+            <div class="int-area">
+                <input type="email" name="email" id="email"
+                autocomplete="off" required>
+                <label for="email">EMAIL</label>
+            </div>
+            <div class="btn-area">
+                <button id="join_btn"
+                type="submit" value="Join">JOIN</button>
+            </div>
+        </form>
+        {% block extrahead %}
+        {% endblock %}
+    <script src="{% static 'accjs/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'accjs/join.js' %}"></script>
+</body>
+</html>
