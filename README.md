@@ -16,3 +16,8 @@ Once clone and path setup is complete.
 (env)$ cd project
 (env)$ python manage.py runserver
 ```
+
+One `pip` install
+```sh
+pip install djangorestframework
+```
