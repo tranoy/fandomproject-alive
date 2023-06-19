@@ -2,12 +2,12 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import GalleryMain
+from .views import ChallengeMain
 
-app_name = 'videogallery'
+app_name = 'challenge'
 
 urlpatterns = [
-    path('', GalleryMain.as_view(), name='index')
+    path('',ChallengeMain.as_view(),name='index'),
 ]
 
 if settings.DEBUG:

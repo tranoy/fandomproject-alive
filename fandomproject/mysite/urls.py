@@ -9,6 +9,7 @@ from .views import Main,LogOut
 urlpatterns = [
     path('',Main.as_view()),
     path('logout',LogOut.as_view()),
+    path('challenge',include('challenge.urls')),
     path('login',include('accounts.urls')),
     path('making',include('making.urls')),
     path('ranking',include('ranking.urls')),
