@@ -2,11 +2,12 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import GalleryMain
 
 app_name = 'videogallery'
 
 urlpatterns = [
-    path('', views.index, name='index')
+    path('', GalleryMain.as_view(), name='index')
 ]
 
 if settings.DEBUG:

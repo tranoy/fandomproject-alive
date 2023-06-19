@@ -28,9 +28,9 @@ let id = $('#id');
 $('#join_btn').click(function () {
 
     let username = $('#id').val();
-    let password = $('pw1').val();
-    let password_2 = $('pw2').val();
-    let email = $('email').val();
+    let password = $('#pw1').val();
+    let password_2 = $('#pw2').val();
+    let email = $('#email').val();
 
     console.log(username,password,email)
     
