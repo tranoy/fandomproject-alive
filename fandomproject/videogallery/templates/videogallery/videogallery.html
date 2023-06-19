@@ -6,24 +6,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'vcss/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vcss/videomain.css' %}">
     <title>Gallery</title>
 </head>
 <body>
-    <h2>Image Gallery</h2>
-
-    <div class="row">
-        {% for image in images %}
-        <div class="col-lg-3 col-md-6 col-sm-12 mt-4">
-            <img src="{{image.image.url}}" width="100%" alt="{{image.title}}">
-        </div>
-
-        {% endfor %}
+    <div id="preloder">
+        <div class="loader"></div>
     </div>
-    
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                    <div class="header__logo">
+                        <a href="/"><img src="/static/img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="/">HOME</a></li>
+                                <li><a href="/making">MAKING</a></li>
+                                <li><a href="/ranking">RANKING</a></li>
+                                <li><a href="/board">BOARD</a></li>
+                                <li><a href="/login">LOGIN</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+
+    <!-- Discography Section Begin -->
+    <section class="discography spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="width: 115px; height: 30px;"></div>
+                    <div class="section-title center-title">
+                        <h2 style="color: white;">Video Board</h2>
+                    </div>
+                    <div><button>Upload Video</button></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="discography__item">
+                        <div class="discography__item__pic">
+                            <img src="/media/20230424_002724.png" alt="">
+                        </div>
+                        <div class="discography__item__text" style="background-color: white;">
+                            <span>accuracy</span>
+                            <h4>title</h4>
+                            <h4>name</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="discography__item">
+                        <div class="discography__item__pic">
+                            <img src="/media/20230424_002724.png" alt="">
+                        </div>
+                        <div class="discography__item__text" style="background-color: white;">
+                            <span>accuracy</span>
+                            <h4>title</h4>
+                            <h4>name</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="discography__item">
+                        <div class="discography__item__pic">
+                            <img src="/media/20230424_002724.png" alt="">
+                        </div>
+                        <div class="discography__item__text" style="background-color: white;">
+                            <span>accuracy</span>
+                            <h4>title</h4>
+                            <h4>name</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="discography__item">
+                        <div class="discography__item__pic">
+                            <img src="/media/20230424_002724.png" alt="">
+                        </div>
+                        <div class="discography__item__text" style="background-color: white;">
+                            <span>accuracy</span>
+                            <h4>title</h4>
+                            <h4>name</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="discography__item">
+                        <div class="discography__item__pic">
+                            <img src="/media/20230424_002724.png" alt="">
+                        </div>
+                        <div class="discography__item__text" style="background-color: white;">
+                            <span>accuracy</span>
+                            <h4>title</h4>
+                            <h4>name</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="discography__item">
+                        <div class="discography__item__pic">
+                            <img src="/media/20230424_002724.png" alt="">
+                        </div>
+                        <div class="discography__item__text" style="background-color: white;">
+                            <span>accuracy</span>
+                            <h4>title</h4>
+                            <h4>name</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <div style="padding-left: 15px;"><button>Back</button></div>
+                    <h2 style="color: white;">Video</h2>
+                    <div style="padding-right: 15px;"><button>Next</button></div>
+                </div>
+            </div>
+        </div>
+</section>
+
+
     {% block content %}
     {% endblock %}
     <script src="{% static 'vjs/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'vjs/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vjs/main.js' %}"></script>
 
 </body>
 </html>
