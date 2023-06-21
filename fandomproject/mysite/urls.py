@@ -14,7 +14,7 @@ urlpatterns = [
     path('making',include('making.urls')),
     path('ranking',include('ranking.urls')),
     path("videogallery",include('videogallery.urls')),
-    path("admin", admin.site.urls),
+    path("admin/", admin.site.urls),
 ]
 
 from django.conf import settings

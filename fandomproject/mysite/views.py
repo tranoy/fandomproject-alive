@@ -7,16 +7,15 @@ from accounts.models import User
 # 메인화면
 class Main(APIView):
     def get(self, request):
-        # 메인페이지 첫 진입시 keyerror
         try:
             # 세션 데이터 가져오기
-            username = request.session['username']
-            user = User.objects.filter(username=username).first()
+            nickname = request.session['nickname']
+            user = User.objects.filter(nickname=nickname).first()
             print(user)
         except KeyError:
-            username = None
+            nickname = None
             user = None
-        return render(request, 'index.html', context=dict(user=user))
+        return render(request, 'index.html',context=dict(user=user))
 
 
 # 로그아웃 시 세션 지워야 함
