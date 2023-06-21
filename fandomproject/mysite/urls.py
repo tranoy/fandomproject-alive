@@ -13,7 +13,6 @@ urlpatterns = [
     path('login',include('accounts.urls')),
     path('making',include('making.urls')),
     path('ranking',include('ranking.urls')),
-    path('board',include('board.urls',namespace="app_name")),
     path("videogallery",include('videogallery.urls')),
     path("admin", admin.site.urls),
 ]

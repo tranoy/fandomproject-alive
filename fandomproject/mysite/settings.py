@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "challenge",
     "accounts",
-    "board",
     "making",
     "ranking",
     "videogallery",
