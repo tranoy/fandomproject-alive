@@ -44,3 +44,6 @@ class Login(APIView):
         else:
              return Response(status=400, data=dict(message="회원정보가 잘못되었습니다."))
 
+class Checkbox(APIView):
+    def get(self,request):
+        return render(request,'accounts/checkbox.html')
