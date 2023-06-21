@@ -9,3 +9,11 @@ from rest_framework.views import APIView
 class ChallengeMain(APIView):
     def get(self,request):
         return render(request, "challenge/challenge.html")
+    
+class ChallengeOne(APIView):
+    def get(self,request):
+        return render(request,"challenge/ch1.html")
+    
+class ChallengeCompareResult(APIView):
+    def get(self, request):
+        return render(request, "challenge/compare_result.html")

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'chcss/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'chcss/challenge.css' %}">
+    <title>Result</title>
+</head>
+<body>
+    <h2>당신의 점수는... {{ score }} 입니다!!</h2>
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="/static/output/c_video_audio_output.mp4" type="video/mp4">
+        </video>
+    </div>
+</body>
+</html>

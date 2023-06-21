@@ -1,0 +1,97 @@
+{% load static %}
+{% block extrahead %}
+    <!-- Google Font -->
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'mkcss/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'mkcss/rockville.css'%}">
+    <link rel="stylesheet" href="{% static 'mkcss/slicknav.min.css'%}">
+    <link rel="stylesheet" href="{% static 'mkcss/index.css'%}">
+    {% endblock %}
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                    <div class="header__logo">
+                        <a href="/"><img src="/static/img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="/">HOME</a></li>
+                                <li><a href="/making">MAKING</a></li>
+                                <li><a href="/ranking">RANKING</a></li>
+                                <li><a href="/board">BOARD</a></li>
+                                <li><a href="/login">LOGIN</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Main -->
+    <div class="wrapper style1">
+        <div class="container">
+            <div id="root">
+                <div class="Contents">
+                    <div class="upload-box">
+                        <svg viewBox="0 0 2500 400">
+                            <symbol id="s-text">
+                                <text text-anchor="middle" x="50%" y="80%">Create your Album Art</text>
+                            </symbol>
+                            <g class = "g-ants">
+                                <use xlink:href="#s-text" class="text-copy"></use>
+                                <use xlink:href="#s-text" class="text-copy"></use>
+                                <use xlink:href="#s-text" class="text-copy"></use>
+                                <use xlink:href="#s-text" class="text-copy"></use>
+                                <use xlink:href="#s-text" class="text-copy"></use>
+                            </g>
+                        </svg>
+                        <!-- <h2 class="title" style="color:white; margin-bottom:10px;">Create your <em>Album Art</em></h2> -->
+                        <hr style="color:whilte;">
+                        <div>
+                            <input type="text" id="album_name_input" placeholder="앨범 아트 이름 입력">
+                        </div>
+                        <div id="drop-file" class="drag-file">
+                            <img src="/making/static/mkimg/file-earmark-image.svg" alt="업로드 아이콘" class="image">
+                            <p class="drag_message">Upload by dragging files</p>
+                            <img src="" alt="미리보기" class="preview">
+                        </div>
+                        <ul style="list-style: none;">
+                            <li style="margin:20px 0; text-align:center;">
+                                <!-- 파일 업로드 버튼 만들기.  -->
+                                <label class="image-upload" for="chooseImage">Choose Image</label>
+                                <br>
+                                <!-- 파일 업로드 버튼. 사용자 지정파일로 png, jpeg, gif만 기본적으로 업로드 가능하게. -->
+                                <!-- 기본적으로 input type="file" 에는 스타일이 적용되지 않기 때문에 input과 label을 같이 써서 label에 이벤트 발생하게 함. -->
+                                <input class="file" id="chooseImage" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif">
+                            </li>
+                            <li>
+                                <input type="submit" id="Request_album" value="Create Album Art">
+                            </li>
+                        </ul>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="{% static 'mkjs/jquery-3.3.1.min.js'%}"></script>
+    <script src="{% static 'mkjs/bootstrap.min.js'%}"></script>
+    <script src="{% static 'mkjs/main.js'%}"></script>
+    <script src="{% static 'mkjs/jquery.magnific-popup.min.js'%}"></script>
+    <script src="{% static 'mkjs/jquery.nicescroll.min.js'%}"></script>
+    <script src="{% static 'mkjs/jquery.countdown.min.js'%}"></script>
+    <script src="{% static 'mkjs/jquery.slicknav.js'%}"></script>
+    <script src="{% static 'mkjs/DragNdrop.js'%}"></script>
+
