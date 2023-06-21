@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
 * {margin: 0; padding: 0; box-sizing: border-box;}
-body {
+.main_section {
     font-family: 'Noto Sans KR', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 40vh;
+    margin-top: 200px;
     background-color: black;
     background-size: cover;
 }
 
-body::before {
+.main_section::before {
     content: "";
     position: absolute; z-index: 1;
     top: 0; right: 0; bottom: 0; left: 0;
@@ -56,7 +57,7 @@ body::before {
 .int-area input:focus + label,
 .int-area input:valid + label {
     top: -2px;
-    font-size: 13px; color: #166cea;
+    font-size: 13px; color: #166cea;  
 }
 
 .btn-area {margin-top: 30px;}

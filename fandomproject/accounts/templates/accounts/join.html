@@ -5,19 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'accounts/bootstrap.min1.css'%}">
-    <link rel="stylesheet" href="{% static 'accounts/login.css'%}">
     <link rel="stylesheet" href="{% static 'accounts/style.css'%}">
+    <link rel="stylesheet" href="{% static 'accounts/join.css'%}">
     <link rel="stylesheet" href="{% static 'accounts/font-awesome.min.css'%}">
-    <link rel="stylesheet" href="{% static 'accounts/nowfont.css'%}">
     <title>Document</title>
 </head>
 <body>
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                    <div class="header__logo">
+                        <a href="/"><img src="/static/img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="/">HOME</a></li>
+                                <li class=><a href="/challenge">Challenge</a></li>
+                                <li><a href="/making">MAKING</a></li>
+                                <li><a href="/ranking">RANKING</a></li>
+                                <li><a href="/videogallery">BOARD</a></li>
+                                {% if user.username %}
+                                <li>
+                                    <a href="/logout">LOGOUT</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a href="/login">LOGIN</a>
+                                </li>
+                                {% endif%}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="main_section">
     <section class="login-form">
         <h1>JOIN</h1>
         <form action="" method="POST">
             {% csrf_token %}
             <div class="int-area">
-                <input type="text" name="username" id="id"
+                <input type="text" name="nickname" id="nick"
                 autocomplete="off" required>
                 <label for="id">ID</label>
             </div>
@@ -36,13 +69,63 @@
                 autocomplete="off" required>
                 <label for="email">EMAIL</label>
             </div>
+            <div class="int-area">
+                <input type="text" name="username" id="id"
+                autocomplete="off" required>
+                <label for="id">NAME</label>
+            </div>
             <div class="btn-area">
                 <button id="join_btn"
                 type="submit" value="Join">JOIN</button>
             </div>
         </form>
-        {% block extrahead %}
-        {% endblock %}
+        </section>
+        </div>
+        <footer class="footer spad set-bg" data-setbg="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer__address">
+                            <ul>
+                                <li>
+                                    <a href="/policy" target='_blank' style="color: white;">이용약관</a>
+                                </li>
+                                <li>
+                                    <a href="/privacy" target='_blank' style="color: white;">개인정보 처리방침</a>
+                                </li>
+                                <li style="color: white;">
+                                    연락처 : 010-7764-1983
+                                </li>
+    
+                                <li style="color: white;">
+                                    Email : wnsdhqo@naver.com
+                                </li>
+    
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 offset-lg-1 col-md-6">
+                        <div class="footer__social">
+                            <h2>ALIVE</h2>
+                            <div class="footer__social__links">
+                                <p>주소 부분</p>
+                                <p style="color:white;">광주광역시 북구 신안동 무등로202번길 15<br>KT신안빌딩</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                <div class="footer__copyright__text">
+                    <p>Copyright &copy; 카피라이트 부분
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> 
+                        All rights reserved | This template is made with 
+                        <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">링크</a></p>
+                </div>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </div>
+        </footer>
     <script src="{% static 'accjs/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'accjs/join.js' %}"></script>
 </body>
