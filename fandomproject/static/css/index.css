@@ -619,10 +619,7 @@ ol {
 
 
 .footer {
-	padding-top: 300px;
-	padding-bottom: 60px;
-	margin-top: -547px;
-	height: 549px;
+	height: 400px;
 }
 
 .footer.footer--normal {
@@ -630,14 +627,13 @@ ol {
 }
 
 .footer__address {
-	margin-bottom: 50px;
+	margin-top: 25px;
 }
 
 .footer__address ul li {
 	list-style: none;
-	padding-left: 70px;
+	font-size: 15px;
 	position: relative;
-	margin-bottom: 30px;
 }
 
 .footer__address ul li:last-child {
@@ -1245,7 +1241,6 @@ ol {
 		padding-bottom: 776px;
 	}
 	.footer {
-		margin-top: -740px;
 		background-position: top 0 left 19%;
 	}
 }
@@ -1394,7 +1389,6 @@ ol {
 		padding-bottom: 940px;
 	}
 	.footer {
-		margin-top: -940px;
 		background-position: top 0 left 19%;
 	}
 }
@@ -1469,14 +1463,5 @@ ol {
 	.countdown {
 		padding-bottom: 980px;
 	}
-	.footer {
-		margin-top: -970px;
-		background-position: top 0 left 19%;
-	}
 }
 
-/* 이름 = 어디영역 고쳤는지 */
-
-
-
-/*  */

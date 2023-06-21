@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import Main,LogOut
+from .views import Main,LogOut,Policy,Privacy
 
 
 
@@ -14,6 +14,8 @@ urlpatterns = [
     path('making',include('making.urls')),
     path('ranking',include('ranking.urls')),
     path("videogallery",include('videogallery.urls')),
+    path("privacy", Privacy.as_view()),
+    path("policy", Policy.as_view()),
     path("admin/", admin.site.urls),
 ]
 

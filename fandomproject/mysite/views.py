@@ -26,3 +26,10 @@ class LogOut(APIView):
     def get(self, request):
         request.session.flush()
         return redirect("/")
+    
+class Privacy(APIView):
+    def get(self,request):
+        return render(request,'privacy.html')
+class Policy(APIView):
+    def get(self,request):
+        return render(request,'policy.html')
