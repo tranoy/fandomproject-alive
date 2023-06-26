@@ -52,7 +52,7 @@
   <section>
     <div class="content-container">
       <div class="content-container-inner">
-        <p>저희 서비스에 총 x 명이 참가하였습니다.</p>
+        <p>저희 서비스에 총 {{ score_count }} 명이 참가하였습니다.</p>
       </div>
       <div class="css-1pyzh3d">
         <div>
@@ -105,77 +105,21 @@
             <tr>
               <th align="left" scope="col">등수</th>
               <th align="left" scope="col">이름</th>
-              <th align="left" scope="col">티어</th>
-              <th align="left" scope="col">LP</th>
+              <th align="left" scope="col">가수</th>
               <th align="left" scope="col">노래</th>
-              <th align="left" scope="col">레벨</th>
-              <th align="left" scope="col">승률</th>
+              <th align="left" scope="col">Score</th>
             </tr>
           </thead>
           <tbody>
+            {% for res in result %}
             <tr id="" class="">
-              <td>1</td>
-              <td>배준오</td>
-              <td>챌린저</td>
-              <td>1000</td>
-              <td>치얼업</td>
-              <td>7</td>
-              <td>100</td>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ res.0 }}</td>
+              <td>{{ res.3 }}</td>
+              <td>{{ res.2 }}</td>
+              <td>{{ res.1 }}</td>
             </tr>
-            <tr id="" class="">
-              <td>2</td>
-              <td>조창근</td>
-              <td>그랜드마스터</td>
-              <td>950</td>
-              <td>톰보이</td>
-              <td>6</td>
-              <td>100</td>
-            </tr>
-            <tr id="" class="">
-              <td>3</td>
-              <td>김규리</td>
-              <td>마스터</td>
-              <td>900</td>
-              <td>퀸카</td>
-              <td>5</td>
-              <td>100</td>
-            </tr>
-            <tr id="" class="">
-              <td>4</td>
-              <td>김민주</td>
-              <td>다이아</td>
-              <td>850</td>
-              <td>Spicy</td>
-              <td>4</td>
-              <td>100</td>
-            </tr>
-            <tr id="" class="">
-              <td>5</td>
-              <td>이진하</td>
-              <td>플레티넘</td>
-              <td>800</td>
-              <td>하입보이</td>
-              <td>3</td>
-              <td>100</td>
-            </tr>
-            <tr id="" class="">
-              <td>6</td>
-              <td>이민흠</td>
-              <td>골드</td>
-              <td>800</td>
-              <td>OMG</td>
-              <td>2</td>
-              <td>100</td>
-            </tr>
-            <tr id="" class="">
-              <td>7</td>
-              <td>송준원</td>
-              <td>실버</td>
-              <td>750</td>
-              <td>꽃</td>
-              <td>2</td>
-              <td>100</td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
         <div style="display: flex; justify-content: space-between">
