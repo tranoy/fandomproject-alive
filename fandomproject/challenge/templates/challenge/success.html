@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Success</title>
+</head>
+<body>
+    <h1>Upload Success</h1>
+
+    <button>
+        <a href="{% url 'challenge:compare' challenge.id %}">
+        영상비교하기
+        </a>
+    </button>
+    {% comment %} {% if video_url %}
+    <video controls>
+        <source src="{{ video_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    {% endif %} {% endcomment %}
+</body>
+</html>
