@@ -5,6 +5,7 @@ let nick = $('#nick');
 let pw1 = $('#pw1');
 let pw2 = $('#pw2');
 let btn = $('#join_btn');
+let email = $('#email');
     $(btn).on('click', function() {
         if($(id).val() == "") {
             $(id).next('label').addClass('warning');
@@ -12,19 +13,25 @@ let btn = $('#join_btn');
                 $('label').removeClass('warning');
             }, 1500);
         }
-        else if($(nick).val() == "") {
+        if($(nick).val() == "") {
             $(nick).next('label').addClass('warning');
             setTimeout(function()  {
                 $('label').removeClass('warning');
             }, 1500);
         }
-        else if($(pw1).val() == "") {
+        if($(email).val() == "") {
+            $(email).next('label').addClass('warning');
+            setTimeout(function()  {
+                $('label').removeClass('warning');
+            }, 1500);
+        }
+        if($(pw1).val() == "") {
             $(pw1).next('label').addClass('warning');
             setTimeout(function()  {
                 $('label').removeClass('warning');
             }, 1500);
         }
-        else if($(pw2).val() == "") {
+        if($(pw2).val() == "") {
             $(pw2).next('label').addClass('warning');
             setTimeout(function()  {
                 $('label').removeClass('warning');

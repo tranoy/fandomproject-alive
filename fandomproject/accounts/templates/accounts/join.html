@@ -53,29 +53,41 @@
         <form action="" method="POST">
             {% csrf_token %}
             <div class="int-area">
+                <div>
                 <input type="text" name="nickname" id="nick"
-                autocomplete="off" required>
+                autocomplete="false" required>
                 <label for="id">ID</label>
+                </div>
+                <div style="padding-left:10px; color:red;" > This ID is already taken
+                </div>
             </div>
             <div class="int-area">
+                <div>
                 <input type="password" name="password1" id="pw1"
-                autocomplete="off" required>
+                autocomplete="false" required>
                 <label for="pw1">PASSWORD</label>
+                </div>
             </div>
             <div class="int-area">
+                <div>
                 <input type="password" name="password2" id="pw2"
-                autocomplete="off" required>
+                autocomplete="false" required>
                 <label for="pw2">PASSWORD CHECK</label>
+                </div>
             </div>
             <div class="int-area">
+                <div>
                 <input type="email" name="email" id="email"
-                autocomplete="off" required>
+                autocomplete="false" required>
                 <label for="email">EMAIL</label>
+                </div>
             </div>
             <div class="int-area">
+                <div>
                 <input type="text" name="username" id="id"
-                autocomplete="off" required>
+                autocomplete="false" required>
                 <label for="id">NAME</label>
+                </div>
             </div>
             <div class="btn-area">
                 <button id="join_btn"

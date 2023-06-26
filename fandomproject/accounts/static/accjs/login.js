@@ -1,4 +1,4 @@
-let id = $('#id');
+let id = $('#nick');
 let pw = $('#pw');
 let btn = $('#login_btn');
 
