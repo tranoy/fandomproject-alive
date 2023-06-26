@@ -51,7 +51,6 @@ class Login(APIView):
         if user.check_password(password):
             # 로그인을 했다. 세션 or 쿠키에 삽입
             request.session['nickname'] = nickname
-            request.session.set_expiry(1200)
             return redirect('/')
         else:
              return Response(status=400, data=dict(message="회원정보가 잘못되었습니다."))
