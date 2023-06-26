@@ -1,44 +1,52 @@
 
 // clickmotion javascript
 let id = $('#id');
-        let pw1 = $('#pw1');
-        let pw2 = $('#pw2');
-        let btn = $('#join_btn');
-        $(btn).on('click', function() {
-            if($(id).val() == "") {
-                $(id).next('label').addClass('warning');
-                setTimeout(function()  {
-                    $('label').removeClass('warning');
-                }, 1500);
-            }
-            else if($(pw1).val() == "") {
-                $(pw1).next('label').addClass('warning');
-                setTimeout(function()  {
-                    $('label').removeClass('warning');
-                }, 1500);
-            }
-            else if($(pw2).val() == "") {
-                $(pw2).next('label').addClass('warning');
-                setTimeout(function()  {
-                    $('label').removeClass('warning');
-                }, 1500);
-            }
-        });
+let nick = $('#nick');
+let pw1 = $('#pw1');
+let pw2 = $('#pw2');
+let btn = $('#join_btn');
+    $(btn).on('click', function() {
+        if($(id).val() == "") {
+            $(id).next('label').addClass('warning');
+            setTimeout(function()  {
+                $('label').removeClass('warning');
+            }, 1500);
+        }
+        else if($(nick).val() == "") {
+            $(nick).next('label').addClass('warning');
+            setTimeout(function()  {
+                $('label').removeClass('warning');
+            }, 1500);
+        }
+        else if($(pw1).val() == "") {
+            $(pw1).next('label').addClass('warning');
+            setTimeout(function()  {
+                $('label').removeClass('warning');
+            }, 1500);
+        }
+        else if($(pw2).val() == "") {
+            $(pw2).next('label').addClass('warning');
+            setTimeout(function()  {
+                $('label').removeClass('warning');
+            }, 1500);
+        }
+    });
 
 // $('#join_btn').click(function () {
 
 //     let username = $('#id').val();
+//     let nickname = $('#nick').val();
 //     let password = $('#pw1').val();
 //     let password_2 = $('#pw2').val();
 //     let email = $('#email').val();
 
-//     console.log(username,password,email)
     
 //     // ajax 통신
 //     $.ajax({
 //         url : "/login/join",
 //         data : {
 //             username : username,
+//             nickname : nickname,
 //             password : password,
 //             password_2 : password_2,
 //             email : email, 

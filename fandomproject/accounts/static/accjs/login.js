@@ -1,32 +1,32 @@
 let id = $('#id');
-        let pw = $('#pw');
-        let btn = $('#login_btn');
+let pw = $('#pw');
+let btn = $('#login_btn');
 
-        $(btn).on('click', function() {
-            if($(id).val() == "") {
-                $(id).next('label').addClass('warning');
-                setTimeout(function()  {
-                    $('label').removeClass('warning');
-                }, 1500);
-            }
-            else if($(pw).val() == "") {
-                $(pw).next('label').addClass('warning');
-                setTimeout(function()  {
-                    $('label').removeClass('warning');
-                }, 1500);
-            }
-        });
+$(btn).on('click', function() {
+    if($(id).val() == "") {
+        $(id).next('label').addClass('warning');
+        setTimeout(function()  {
+            $('label').removeClass('warning');
+        }, 1500);
+    }
+    else if($(pw).val() == "") {
+        $(pw).next('label').addClass('warning');
+        setTimeout(function()  {
+            $('label').removeClass('warning');
+        }, 1500);
+    }
+});
 
 
 // $('#login_btn').click(function () {
 
-//     let username = $('#id').val();
+//     let nickname = $('#nick').val();
 //     let password = $('#pw').val();
 //     // ajax 통신
 //     $.ajax({
-//         url : "/login/join",
+//         url : "/login/",
 //         data : {
-//             username : username,
+//             nickname : nickname,
 //             password : password,
 //         },
 //         method : "POST",
