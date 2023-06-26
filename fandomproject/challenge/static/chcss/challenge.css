@@ -1363,6 +1363,22 @@ ol {
 	justify-content: center;
 }
 
+#upload-button{
+	width: 100px;
+	background-color:#ee1e31;
+    color: white;
+    border:none;
+    border-radius:50px;
+}
+
+#upload-button:hover{
+	background-color: white;
+	color: black;
+	border-radius:50px;
+	transition: all .5s cubic-bezier(.6,0,0,1);
+}
+
+
 .modal-contents{
 	margin: 0;
     background: white;
