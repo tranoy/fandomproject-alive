@@ -7,7 +7,7 @@ from rest_framework import status
 from django.views import View
 from dance_30 import compare_video
 from .models import *
-from django.db.models import Max
+from django.db.models import Max, Count
 from .forms import VideoForm
 # Create your views here.
 
@@ -16,8 +16,15 @@ from .forms import VideoForm
 class ChallengeMain(APIView):
     def get(self,request):
         #Refv = Ref_Video.objects.all()
-        score = Score.objects.all()
-        context = {'score' : score}
+        max_scores = Score.objects.values('ref_id').annotate(max_scores=Max('score'))
+        videos = Ref_Video.objects.filter(id__in = max_scores.values('ref_id')).values('title', 'singer', 'video_file')
+        data_count = Score.objects.values('ref_id').annotate(count=Count('ref_id'))
+        data = Score.objects.filter(ref_id__in=videos.values('id'), score=models.Subquery(Score.objects.filter(ref_id=models.OuterRef('ref_id')).values('score').order_by('-score')[:1])).values('nickname', 'score')
+        data = data.annotate(id=models.Subquery(videos.filter(id=models.OuterRef('ref_id')).values('id')[:1]),
+                             title=models.Subquery(videos.filter(id=models.OuterRef('ref_id')).values('title')[:1]),
+                             singer=models.Subquery(videos.filter(id=models.OuterRef('ref_id')).values('singer')[:1]))
+        combined_data = zip(data, data_count)
+        context = {'combined_data' : combined_data}
         return render(request, "challenge/challenge.html", context)
     
 class ChallengeOne(APIView):
@@ -27,8 +34,11 @@ class ChallengeOne(APIView):
     """
     def get(self, request, pk):
         print("ChallengeONE - GET")
-        challenge = Ref_Video.objects.get(id=pk)
-        return render(request, "challenge/ch1.html", {'challenge': challenge})
+        score = Score.objects.filter(ref_id=pk)
+        ref_video = Ref_Video.objects.get(id=pk)
+        context = {'score' : score,
+                   'ref' : ref_video}
+        return render(request, "challenge/ch1.html", context)
     def post(self, request, pk):
         print("ChallengeOne - POST")
         score = Score.objects.all()
@@ -69,8 +79,7 @@ class ChallengeOne(APIView):
             print("문제없음")
         return render(request, 'challenge/ch1.html', context)
 
-    
-    
+
 ## 추가
 class Upload_success(APIView):
     
@@ -82,26 +91,7 @@ class Upload_success(APIView):
             }
         return render(request, "challenge/success.html", context)
  
-# class ChallengeTwo(APIView):
-#     def get(self,request):
-#         return render(request,"challenge/ch2.html")
-    
-# class ChallengeThree(APIView):
-#     def get(self,request):
-#         return render(request,"challenge/ch3.html")
-
-#########################################################    
-# class ChallegeUpload1(APIView):
-#     def get(self,request):
-#         return render(request,"challenge/ch1.html")
-#     def post(self, request):
-#         form = VideoForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             video = form.save()
-#             return Response({'video': video.id}, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
-#########################################################
+     
         
 class ChallengeCompareResult(APIView):
     
@@ -118,9 +108,8 @@ class ChallengeCompareResult(APIView):
         
         score = compare_video(ref_path, video_path)
         
-        nickname = request.user.nickname
-        title = 'sample Title'
-        score_instance = Score(user=request.user, nickname=nickname, score=score, title=title)
+        nickname = request.session['nickname']
+        score_instance = Score(nickname=nickname, score=score, ref_id=pk)
         score_instance.save()
         
         context = {
@@ -129,53 +118,3 @@ class ChallengeCompareResult(APIView):
         }
         
         return render(request, "challenge/compare_result.html", context)
-        # return render(request, "challenge/compare_result.html", {'score': 0})
-
-
-######################################
-
-def upload_video(request, pk):
-    print("upload_video")
-    challenge = Ref_Video.objects.get(id=pk)
-    if request.method == 'POST':
-        form = VideoForm(request.POST, request.FILES)
-        form.ref_id = pk
-        
-        if form.is_valid():
-            video = form.save(commit=False)  # commit=False를 사용하여 객체를 임시로 저장
-            video.ref_id = pk  # 동영상 객체에 ref_id 할당
-            video.save()  # 동영상 객체를 저장
-            context = {
-                'form': form,
-                'challenge': challenge,  # challenge 객체 추가
-            }
-            return render(request, "challenge/success.html", context)
-    else:
-        form = VideoForm()
-        form.ref_id = pk
-        # print('-'*100, form.ref_id, '-'*100)
-        
-        context = {
-            'form': form,
-            'challenge': challenge,  # challenge 객체 추가
-        }
-    return render(request, 'challenge/upload.html', context)
-
-# class upload_video(APIView):
-#     def get(self, request):
-#         return render(request, )
-#     def upload_video(request):
-#         if request.method == 'POST' and request.FILES['files']:
-#             form = VideoForm(request.POST, request.FILES)
-#             if form.is_valid():
-#                 video = form.save()  # 동영상 저장
-#                 # 모델에 동영상 전달하여 처리
-#                 score = compare_video('challenge/static/video/knock_step.mp4', video)
-#                 return render(request, "challenge/compare_result.html", {'score': score})
-#         else:
-#             form = VideoForm()
-        
-#         return render(request, 'ch1.html', {'form': form})
-
-
-###################################################

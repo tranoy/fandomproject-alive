@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import ChallengeMain,ChallengeOne,ChallengeCompareResult, upload_video,Upload_success
+from .views import ChallengeMain,ChallengeOne,ChallengeCompareResult,Upload_success
 
 app_name = 'challenge'
 
