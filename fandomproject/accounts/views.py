@@ -33,7 +33,6 @@ class Login(APIView):
         nickname = request.data.get('nickname',None)
         password = request.data.get('password',None)
         user = User.objects.filter(nickname=nickname).first()
-        print(user)
         if user is None:
             return Response(status=404, data=dict(message="회원정보가 잘못되었습니다."))
 
