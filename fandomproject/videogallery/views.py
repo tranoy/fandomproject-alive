@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from . models import Gallery
 from rest_framework.views import APIView
 from .models import Gallery
+from accounts.models import User
 
 # Create your views here.
 
@@ -10,6 +10,17 @@ from .models import Gallery
 class GalleryMain(APIView):
     def get(self,request):
         video_list = Gallery.objects.all() # select * from content_video
+        try:
+            # 세션 데이터 가져오기
+            nickname = request.session['nickname']
+            user = User.objects.filter(nickname=nickname).first()
+            print(user)
+        except KeyError:
+            nickname = None
+            user = None
 
-        return render(request, "videogallery/videogallery.html",context=dict(videos=video_list))
+        return render(request, "videogallery/videogallery.html",context=dict(videos=video_list,user=user))
+        
+
+
 
