@@ -23,17 +23,17 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="/">HOME</a></li>
+                                <li><a href="/">HOME</a></li>
                                 <li class=><a href="/challenge">Challenge</a></li>
                                 <li><a href="/making">MAKING</a></li>
                                 <li><a href="/ranking">RANKING</a></li>
                                 <li><a href="/videogallery">BOARD</a></li>
-                                {% if user.username %}
+                                {% if user.nickname %}
                                 <li>
                                     <a href="/logout">LOGOUT</a>
                                 </li>
                                 {% else %}
-                                <li>
+                                <li class="active">
                                     <a href="/login">LOGIN</a>
                                 </li>
                                 {% endif%}

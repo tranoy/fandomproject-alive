@@ -1,133 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'chcss/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'chcss/challenge.css' %}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'chcss/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'chcss/challenge.css' %}" />
     <title>Gallery</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="preloder">
-        <div class="loader"></div>
+      <div class="loader"></div>
     </div>
     <header class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-md-2">
-                    <div class="header__logo">
-                        <a href="/"><img src="/static/img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-10 col-md-10">
-                    <div class="header__nav">
-                        <nav class="header__menu mobile-menu">
-                            <ul>
-                                <li class="active"><a href="/">HOME</a></li>
-                                <li><a href="/making">MAKING</a></li>
-                                <li><a href="/ranking">RANKING</a></li>
-                                <li><a href="/board">BOARD</a></li>
-                                <li><a href="/login">LOGIN</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2 col-md-2">
+            <div class="header__logo">
+              <a href="/"><img src="/static/img/logo.png" alt="" /></a>
             </div>
-            <div id="mobile-menu-wrap"></div>
+          </div>
+          <div class="col-lg-10 col-md-10">
+            <div class="header__nav">
+              <nav class="header__menu mobile-menu">
+                <ul>
+                  <li><a href="/">HOME</a></li>
+                  <li class="active"><a href="/challenge">CHALLENGE</a></li>
+                  {% if user.nickname %}
+                  <li><a href="/making">MAKING</a></li>
+                  {% endif %}
+                  <li><a href="/ranking">RANKING</a></li>
+                  <li><a href="/videogallery">BOARD</a></li>
+                  {% if user.nickname %}
+                  <li>
+                    <a href="/logout">LOGOUT</a>
+                  </li>
+                  {% else %}
+                  <li>
+                    <a href="/login">LOGIN</a>
+                  </li>
+                  {% endif%}
+                </ul>
+              </nav>
+            </div>
+          </div>
         </div>
+        <div id="mobile-menu-wrap"></div>
+      </div>
     </header>
 
     <!-- Discography Section Begin -->
     <section class="discography spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12" style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="width: 115px; height: 30px;"></div>
-                    <div class="section-title center-title">
-                        <h2 style="color: white;">Challenge</h2>
-                    </div>
-                    <div style="width: 115px; height: 30px;"></div>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-lg-12"
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <div style="width: 115px; height: 30px"></div>
+            <div class="section-title center-title">
+              <h2 style="color: white">Challenge</h2>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="discography__item">
-                        <div class="discography__item__pic">
-                            <img src="/media/flower2.jpg" alt="">
-                        </div>
-                        <div class="discography__item__text" style="background-color: black;">
-                            <span style="color: white;">[Ji Soo - Flower]</span>
-                            <h5 style="color: white;">Participants - 24</h5>
-                            <h5 style="color: white;">Best User - Jun O Bae</h5>
-                            <h5 style="color: white;">Accuracy - 100%</h5>
-                        </div>
-                        <div>
-                            <a href="/challenge/1" class="entrance_1">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                Challenge Start
-                            </a>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="discography__item">
-                        <div class="discography__item__pic">
-                            <img src="/media/hypeboy.jpg" alt="">
-                        </div>
-                        <div class="discography__item__text" style="background-color: black; color:white">
-                            <span style="color: white;">[New Jeans - Hype Boy]</span>
-                            <h5 style="color: white;">Participants - 19</h5>
-                            <h5 style="color: white;">Best User - Jun O Bae</h5>
-                            <h5 style="color: white;">Accuracy - 95%</h5>
-                        </div>
-                        <div>
-                            <a href="#" class="entrance_1">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                Challenge Start
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="discography__item">
-                        <div class="discography__item__pic">
-                            <img src="/media/queen.jpg" alt="">
-                        </div>
-                        <div class="discography__item__text" style="background-color: black; color:white">
-                            <span style="color: white;">[IDLE - QueenCard]</span>
-                            <h5 style="color: white;">Participants - 5</h5>
-                            <h5 style="color: white;">Best User - Jun O Bae</h5>
-                            <h5 style="color: white;">Accuracy - 98%</h5>
-                        </div>
-                        <div>
-                            <a href="#" class="entrance_1">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                Challenge Start
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div style="width: 115px; height: 30px"></div>
+          </div>
         </div>
-</section>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="discography__item">
+              <div class="discography__item__pic">
+                <img src="/media/flower2.jpg" alt="" />
+              </div>
+              <div
+                class="discography__item__text"
+                style="background-color: black"
+              >
+                <span style="color: white">[Ji Soo - Flower]</span>
+                <h5 style="color: white">Participants - 24</h5>
+                <h5 style="color: white">Best User - Jun O Bae</h5>
+                <h5 style="color: white">Accuracy - 100%</h5>
+              </div>
+              <div>
+                <a href="/challenge/1" class="entrance_1">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  Challenge Start
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="discography__item">
+              <div class="discography__item__pic">
+                <img src="/media/hypeboy.jpg" alt="" />
+              </div>
+              <div
+                class="discography__item__text"
+                style="background-color: black; color: white"
+              >
+                <span style="color: white">[New Jeans - Hype Boy]</span>
+                <h5 style="color: white">Participants - 19</h5>
+                <h5 style="color: white">Best User - Jun O Bae</h5>
+                <h5 style="color: white">Accuracy - 95%</h5>
+              </div>
+              <div>
+                <a href="#" class="entrance_1">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  Challenge Start
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="discography__item">
+              <div class="discography__item__pic">
+                <img src="/media/queen.jpg" alt="" />
+              </div>
+              <div
+                class="discography__item__text"
+                style="background-color: black; color: white"
+              >
+                <span style="color: white">[IDLE - QueenCard]</span>
+                <h5 style="color: white">Participants - 5</h5>
+                <h5 style="color: white">Best User - Jun O Bae</h5>
+                <h5 style="color: white">Accuracy - 98%</h5>
+              </div>
+              <div>
+                <a href="#" class="entrance_1">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  Challenge Start
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-
-    {% block content %}
-    {% endblock %}
+    {% block content %} {% endblock %}
     <script src="{% static 'chjs/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'chjs/bootstrap.min.js' %}"></script>
     <script src="{% static 'chjs/main.js' %}"></script>
-
-</body>
+  </body>
 </html>
