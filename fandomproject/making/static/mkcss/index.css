@@ -3133,5 +3133,76 @@ button.alt:hover,
     background: #3B353C;
 }
 
+#album_name_input {
+    width: 500px;
+    /* 원하는 너비로 설정 */
+    height: 35px;
+    /* 원하는 높이로 설정 */
+    padding: 10px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 13px;
+    outline: none;
+}
+
+#album_name_input::placeholder {
+    color: #999;
+}
+
+#album_name_input:focus {
+    border-color: #0077ff;
+}
+
+svg {
+    display: block;
+    font: 200px 'Montserrat';
+    width: 800px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.text-copy {
+    fill: none;
+    stroke: white;
+    stroke-dasharray: 7% 29%;
+    stroke-width: 10px;
+    stroke-dashoffset: 0%;
+    animation: stroke-offset 5.5s infinite linear;
+}
+
+.text-copy:nth-child(1) {
+    stroke: #1b1b1b;
+    animation-delay: -1;
+}
+
+.text-copy:nth-child(2) {
+    stroke: #535353;
+    animation-delay: -2s;
+}
+
+.text-copy:nth-child(3) {
+    stroke: #838383;
+    animation-delay: -3s;
+}
+
+.text-copy:nth-child(4) {
+    stroke: #b3b3b3;
+    animation-delay: -4s;
+}
+
+.text-copy:nth-child(5) {
+    stroke: #ffffff;
+    animation-delay: -5s;
+}
+
+@keyframes stroke-offset {
+    100% {
+        stroke-dashoffset: -35%;
+    }
+}
+
+
+/* 끝 */
 
 /* 끝 */
