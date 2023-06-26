@@ -69,23 +69,28 @@
           </div>
         </div>
         <div class="row">
+          {% for item, c in combined_data %}
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="discography__item">
               <div class="discography__item__pic">
-                <a href="/challenge/1">
+                <a href="{% url 'challenge:one' item.id %}">
                   <div class="image-container">
                     <img src="/media/flower2.jpg" alt="" />
                     <div class="image-info">
-                      <span style="color: white">[Ji Soo - Flower]</span>
-                      <h5 style="color: white">Participants - 24</h5>
-                      <h5 style="color: white">Best User - Jun O Bae</h5>
-                      <h5 style="color: white">Accuracy - 100%</h5>
+                      <span style="color: white"
+                        >[{{ item.singer }} - {{ item.title }}]</span
+                      >
+                      <h5 style="color: white">Participants - {{ c.count }}</h5>
+                      <h5 style="color: white">
+                        Best User - {{ item.nickname }}
+                      </h5>
+                      <h5 style="color: white">Accuracy - {{ item.score }}%</h5>
                     </div>
                   </div>
                 </a>
               </div>
               <div>
-                <a href="/challenge/1" class="entrance_1">
+                <a href="{% url 'challenge:one' item.id %}" class="entrance_1">
                   <span></span>
                   <span></span>
                   <span></span>
@@ -95,58 +100,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="discography__item">
-              <div class="discography__item__pic">
-                <a href="/challenge/2">
-                  <div class="image-container">
-                    <img src="/media/hypeboy.jpg" alt="" />
-                    <div class="image-info">
-                      <span style="color: white">[New Jeans - Hype Boy]</span>
-                      <h5 style="color: white">Participants - 19</h5>
-                      <h5 style="color: white">Best User - Jun O Bae</h5>
-                      <h5 style="color: white">Accuracy - 95%</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href="/challenge/2" class="entrance_1">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  Challenge Start
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-6">
-            <div class="discography__item">
-              <div class="discography__item__pic">
-                <a href="/challenge/3">
-                  <div class="image-container">
-                    <img src="/media/queen.jpg" alt="" />
-                    <div class="image-info">
-                      <span style="color: white">[IDLE - QueenCard]</span>
-                      <h5 style="color: white">Participants - 5</h5>
-                      <h5 style="color: white">Best User - Jun O Bae</h5>
-                      <h5 style="color: white">Accuracy - 98%</h5>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href="/challenge/3" class="entrance_1">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  Challenge Start
-                </a>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </section>
