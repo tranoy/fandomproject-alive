@@ -1,13 +1,15 @@
-{% load static %}
-{% block extrahead %}
-    <!-- Google Font -->
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="{% static 'mkcss/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'mkcss/rockville.css'%}">
-    <link rel="stylesheet" href="{% static 'mkcss/slicknav.min.css'%}">
-    <link rel="stylesheet" href="{% static 'mkcss/index.css'%}">
-    {% endblock %}
-    <!-- Page Preloder -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'chcss/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'chcss/challenge.css' %}">
+    <title>Gallery</title>
+</head>
+<body>
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -36,62 +38,194 @@
             <div id="mobile-menu-wrap"></div>
         </div>
     </header>
-    <!-- Main -->
-    <div class="wrapper style1">
+
+    <!-- Discography Section Begin -->
+    <section class="discography spad">
         <div class="container">
-            <div id="root">
-                <div class="Contents">
-                    <div class="upload-box">
-                        <svg viewBox="0 0 2500 400">
-                            <symbol id="s-text">
-                                <text text-anchor="middle" x="50%" y="80%">Create your Album Art</text>
-                            </symbol>
-                            <g class = "g-ants">
-                                <use xlink:href="#s-text" class="text-copy"></use>
-                                <use xlink:href="#s-text" class="text-copy"></use>
-                                <use xlink:href="#s-text" class="text-copy"></use>
-                                <use xlink:href="#s-text" class="text-copy"></use>
-                                <use xlink:href="#s-text" class="text-copy"></use>
-                            </g>
-                        </svg>
-                        <!-- <h2 class="title" style="color:white; margin-bottom:10px;">Create your <em>Album Art</em></h2> -->
-                        <hr style="color:whilte;">
-                        <div>
-                            <input type="text" id="album_name_input" placeholder="앨범 아트 이름 입력">
+            <div class="row">
+                <div class="col-lg-12" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="width: 115px; height: 30px;"></div>
+                    <div class="section-title center-title">
+                        <h2 style="color: white;">Video Board</h2>
+                    </div>
+                    <div><button id="upload-button">Upload Video</button></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="discography__item">
+                        <div class="discography__item__pic">
+                            <img src="/media/20230424_002724.png" alt="">
                         </div>
-                        <div id="drop-file" class="drag-file">
-                            <img src="/making/static/mkimg/file-earmark-image.svg" alt="업로드 아이콘" class="image">
-                            <p class="drag_message">Upload by dragging files</p>
-                            <img src="" alt="미리보기" class="preview">
+                        <div class="discography__item__text" style="background-color: white;">
+                            <span>accuracy</span>
+                            <h4>title</h4>
+                            <h4>name</h4>
                         </div>
-                        <ul style="list-style: none;">
-                            <li style="margin:20px 0; text-align:center;">
-                                <!-- 파일 업로드 버튼 만들기.  -->
-                                <label class="image-upload" for="chooseImage">Choose Image</label>
-                                <br>
-                                <!-- 파일 업로드 버튼. 사용자 지정파일로 png, jpeg, gif만 기본적으로 업로드 가능하게. -->
-                                <!-- 기본적으로 input type="file" 에는 스타일이 적용되지 않기 때문에 input과 label을 같이 써서 label에 이벤트 발생하게 함. -->
-                                <input class="file" id="chooseImage" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif">
-                            </li>
-                            <li>
-                                <input type="submit" id="Request_album" value="Create Album Art">
-                            </li>
-                        </ul>
-    
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="discography__item">
+                        <div class="discography__item__pic">
+                            <img src="/media/20230424_002724.png" alt="">
+                        </div>
+                        <div class="discography__item__text" style="background-color: white;">
+                            <span>제목 : {{videos.title}}</span>
+                            <h4>accuracy</h4>
+                            <h4>유저이름 : {{videos.user_id}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="discography__item">
+                        <div class="discography__item__pic">
+                            <img src="/media/20230424_002724.png" alt="">
+                        </div>
+                        <div class="discography__item__text" style="background-color: white;">
+                            <span>accuracy</span>
+                            <h4>title</h4>
+                            <h4>name</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="discography__item">
+                        <div class="discography__item__pic">
+                            <img src="/media/20230424_002724.png" alt="">
+                        </div>
+                        <div class="discography__item__text" style="background-color: white;">
+                            <span>accuracy</span>
+                            <h4>title</h4>
+                            <h4>name</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="discography__item">
+                        <div class="discography__item__pic">
+                            <img src="/media/20230424_002724.png" alt="">
+                        </div>
+                        <div class="discography__item__text" style="background-color: white;">
+                            <span>accuracy</span>
+                            <h4>title</h4>
+                            <h4>name</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="discography__item">
+                        <div class="discography__item__pic">
+                            <img src="/media/20230424_002724.png" alt="">
+                        </div>
+                        <div class="discography__item__text" style="background-color: white;">
+                            <span>accuracy</span>
+                            <h4>title</h4>
+                            <h4>name</h4>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <div style="padding-left: 15px;"><button>Back</button></div>
+                    <h2 style="color: white;">Video</h2>
+                    <div style="padding-right: 15px;"><button>Next</button></div>
+                </div>
+            </div>
+            <div id="upload-modal" class="modal-box">
+                <div class="modal-contents">
+     
+                        <span class="close">
+                        &times;
+                        </span>
+                        <div class="modal-header">
+                            동영상 업로드
+                        </div>
+                        <form  form id="upload-form" method="post" enctype="multipart/form-data" >
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="upload-form">
+                            <img src="/static/img/upload.png" class="upload-img"></img>
+                            <p style="font-size: 20px; margin-top: 15px;">동영상 파일을 드래그 앤 드롭하여 업로드</p>
+                            <div class="filebox">
+                            <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+                            <label for="video-file">파일 찾기</label>
+                            <input type="file" id="video-file" accept="video/*" readonly />
+                            <button id = "submit-btn" type="submit" onclick="window.location.href = '/challenge/1/challenge_result';">업로드</button>
+                            </div>
+                            </div>
+                        </form>
+    
+                </div> 
+            </div>
+            </div>
+</section>
+<footer class="footer spad set-bg" data-setbg="">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="footer__address">
+                    <ul>
+                        <li>
+                            <a href="/policy" target='_blank' style="color: white;">이용약관</a>
+                        </li>
+                        <li>
+                            <a href="/privacy" target='_blank' style="color: white;">개인정보 처리방침</a>
+                        </li>
+                        <li>
+                            <h2 style="color: white;">ALIVE</h2>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 offset-lg-1 col-md-6">
+                <div class="footer__social">
+                    <div class="footer__social__links">
+                        <p>주소 부분</p>
+                        <p style="color:white;">광주광역시 북구 신안동 무등로202번길 15<br>KT신안빌딩</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer__address" style="margin-left: 90px;">
+                    <ul style="display: flex;">
+                        <li class="icon_li">
+                            <a href="https://www.youtube.com/watch?v=oSfiSswjiBQ&list=PL_WCuvyChN3g7tC-_q1UexhM61t51yPM_" target='_blank' style="color: white;">
+                                <img src="/static/img/youtube.png" alt="" style="width: 50px;">
+                            </a>
+                        </li>
+                        <li class="icon_li">
+                            <a href="https://github.com/Junobee25/ai-33-project/tree/develop" target='_blank' style="color: white;">
+                                <img src="/static/img/github.png" alt="" style="width: 50px;">
+                            </a>
+                        </li>
+                        <li class="icon_li">
+                            <a href="https://www.instagram.com/aivlestory/" target='_blank' style="color: white;">
+                                <img src="/static/img/instagram.png" alt="" style="width: 50px;">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        <div class="footer__copyright__text">
+            <p>Copyright &copy; 카피라이트 부분
+                <script>
+                    document.write(new Date().getFullYear());
+                </script> 
+                All rights reserved | This template is made with 
+                <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">링크</a></p>
+        </div>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
     </div>
-    <!-- Footer Section End -->
+</footer>
+    {% block content %}
+    {% endblock %}
+    <script src="{% static 'chjs/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'chjs/bootstrap.min.js' %}"></script>
+    <script src="{% static 'chjs/modal.js' %}"></script>
+    <script src="{% static 'chjs/main.js' %}"></script>
 
-    <!-- Js Plugins -->
-    <script src="{% static 'mkjs/jquery-3.3.1.min.js'%}"></script>
-    <script src="{% static 'mkjs/bootstrap.min.js'%}"></script>
-    <script src="{% static 'mkjs/main.js'%}"></script>
-    <script src="{% static 'mkjs/jquery.magnific-popup.min.js'%}"></script>
-    <script src="{% static 'mkjs/jquery.nicescroll.min.js'%}"></script>
-    <script src="{% static 'mkjs/jquery.countdown.min.js'%}"></script>
-    <script src="{% static 'mkjs/jquery.slicknav.js'%}"></script>
-    <script src="{% static 'mkjs/DragNdrop.js'%}"></script>
-
+</body>
+</html>

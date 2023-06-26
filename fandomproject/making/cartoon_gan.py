@@ -1,3 +1,4 @@
+
 from .cartoongan_pytorch_main.network.Transformer import Transformer
 import os
 import numpy as np
