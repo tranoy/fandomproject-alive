@@ -11,6 +11,9 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
     <header class="header">
         <div class="container">
             <div class="row">
@@ -93,24 +96,39 @@
                                 <li>
                                     <a href="/privacy" target='_blank' style="color: white;">개인정보 처리방침</a>
                                 </li>
-                                <li style="color: white;">
-                                    연락처 : 010-7764-1983
+                                <li>
+                                    <h2 style="color: white;">ALIVE</h2>
                                 </li>
-    
-                                <li style="color: white;">
-                                    Email : wnsdhqo@naver.com
-                                </li>
-    
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-4 offset-lg-1 col-md-6">
                         <div class="footer__social">
-                            <h2>ALIVE</h2>
                             <div class="footer__social__links">
                                 <p>주소 부분</p>
                                 <p style="color:white;">광주광역시 북구 신안동 무등로202번길 15<br>KT신안빌딩</p>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer__address" style="margin-left: 90px;">
+                            <ul style="display: flex;">
+                                <li class="icon_li">
+                                    <a href="https://www.youtube.com/watch?v=oSfiSswjiBQ&list=PL_WCuvyChN3g7tC-_q1UexhM61t51yPM_" target='_blank' style="color: white;">
+                                        <img src="/static/img/youtube.png" alt="" style="width: 50px;">
+                                    </a>
+                                </li>
+                                <li class="icon_li">
+                                    <a href="https://github.com/Junobee25/ai-33-project/tree/develop" target='_blank' style="color: white;">
+                                        <img src="/static/img/github.png" alt="" style="width: 50px;">
+                                    </a>
+                                </li>
+                                <li class="icon_li">
+                                    <a href="https://www.instagram.com/aivlestory/" target='_blank' style="color: white;">
+                                        <img src="/static/img/instagram.png" alt="" style="width: 50px;">
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -128,5 +146,6 @@
         </footer>
     <script src="{% static 'accjs/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'accjs/join.js' %}"></script>
+    <script src="{% static 'accjs/main.js' %}"></script>
 </body>
 </html>
