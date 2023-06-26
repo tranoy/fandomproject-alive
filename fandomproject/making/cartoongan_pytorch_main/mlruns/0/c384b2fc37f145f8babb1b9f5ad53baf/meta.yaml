@@ -1,0 +1,16 @@
+artifact_uri: file:///C:/Users/ccg70/OneDrive/desktop/Big_project/cartoongan-pytorch-main/mlruns/0/c384b2fc37f145f8babb1b9f5ad53baf/artifacts
+deleted_time: 1687147387106
+end_time: 1687137390388
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: c384b2fc37f145f8babb1b9f5ad53baf
+run_name: bouncy-stag-730
+run_uuid: c384b2fc37f145f8babb1b9f5ad53baf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1687137279239
+status: 3
+tags: []
+user_id: ccg70

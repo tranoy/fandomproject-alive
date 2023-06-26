@@ -1,0 +1,74 @@
+Collecting aiofiles
+  Downloading aiofiles-23.1.0-py3-none-any.whl (14 kB)
+Collecting altair
+  Downloading altair-5.0.1-py3-none-any.whl (471 kB)
+     ------------------------------------- 471.5/471.5 kB 30.8 MB/s eta 0:00:00
+Collecting fastapi
+  Downloading fastapi-0.97.0-py3-none-any.whl (56 kB)
+     ---------------------------------------- 57.0/57.0 kB ? eta 0:00:00
+Collecting ffmpy
+  Downloading ffmpy-0.3.0.tar.gz (4.8 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting httpx
+  Downloading httpx-0.24.1-py3-none-any.whl (75 kB)
+     ---------------------------------------- 75.4/75.4 kB 4.1 MB/s eta 0:00:00
+Collecting markdown-it-py[linkify,plugins]
+  Downloading markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
+     ---------------------------------------- 87.5/87.5 kB ? eta 0:00:00
+Collecting pycryptodome
+  Downloading pycryptodome-3.18.0-cp35-abi3-win_amd64.whl (1.7 MB)
+     ---------------------------------------- 1.7/1.7 MB 27.4 MB/s eta 0:00:00
+Collecting pydub
+  Downloading pydub-0.25.1-py2.py3-none-any.whl (32 kB)
+Collecting python-multipart
+  Downloading python_multipart-0.0.6-py3-none-any.whl (45 kB)
+     ---------------------------------------- 45.7/45.7 kB ? eta 0:00:00
+Collecting uvicorn
+  Downloading uvicorn-0.22.0-py3-none-any.whl (58 kB)
+     ---------------------------------------- 58.3/58.3 kB 3.0 MB/s eta 0:00:00
+Collecting websockets
+  Downloading websockets-11.0.3-cp39-cp39-win_amd64.whl (124 kB)
+     ---------------------------------------- 124.7/124.7 kB ? eta 0:00:00
+Requirement already satisfied: jsonschema>=3.0 in c:\users\ccg70\anaconda3\lib\site-packages (from altair) (4.16.0)
+Requirement already satisfied: numpy in c:\users\ccg70\anaconda3\lib\site-packages (from altair) (1.23.5)
+Requirement already satisfied: jinja2 in c:\users\ccg70\anaconda3\lib\site-packages (from altair) (2.11.3)
+Requirement already satisfied: pandas>=0.18 in c:\users\ccg70\anaconda3\lib\site-packages (from altair) (1.4.4)
+Requirement already satisfied: toolz in c:\users\ccg70\anaconda3\lib\site-packages (from altair) (0.11.2)
+Requirement already satisfied: typing-extensions>=4.0.1 in c:\users\ccg70\anaconda3\lib\site-packages (from altair) (4.3.0)
+Requirement already satisfied: pydantic!=1.8,!=1.8.1,<2.0.0,>=1.7.4 in c:\users\ccg70\anaconda3\lib\site-packages (from fastapi) (1.10.7)
+Collecting starlette<0.28.0,>=0.27.0
+  Downloading starlette-0.27.0-py3-none-any.whl (66 kB)
+     ---------------------------------------- 67.0/67.0 kB 3.5 MB/s eta 0:00:00
+Requirement already satisfied: idna in c:\users\ccg70\anaconda3\lib\site-packages (from httpx) (3.3)
+Requirement already satisfied: certifi in c:\users\ccg70\anaconda3\lib\site-packages (from httpx) (2023.5.7)
+Requirement already satisfied: sniffio in c:\users\ccg70\anaconda3\lib\site-packages (from httpx) (1.2.0)
+Collecting httpcore<0.18.0,>=0.15.0
+  Downloading httpcore-0.17.2-py3-none-any.whl (72 kB)
+     ---------------------------------------- 72.5/72.5 kB 4.1 MB/s eta 0:00:00
+Requirement already satisfied: mdurl~=0.1 in c:\users\ccg70\anaconda3\lib\site-packages (from markdown-it-py[linkify,plugins]) (0.1.2)
+Collecting linkify-it-py<3,>=1
+  Downloading linkify_it_py-2.0.2-py3-none-any.whl (19 kB)
+Collecting mdit-py-plugins
+  Downloading mdit_py_plugins-0.4.0-py3-none-any.whl (54 kB)
+     ---------------------------------------- 54.1/54.1 kB ? eta 0:00:00
+Requirement already satisfied: click>=7.0 in c:\users\ccg70\anaconda3\lib\site-packages (from uvicorn) (8.0.4)
+Requirement already satisfied: h11>=0.8 in c:\users\ccg70\anaconda3\lib\site-packages (from uvicorn) (0.14.0)
+Requirement already satisfied: colorama in c:\users\ccg70\anaconda3\lib\site-packages (from click>=7.0->uvicorn) (0.4.5)
+Requirement already satisfied: anyio<5.0,>=3.0 in c:\users\ccg70\anaconda3\lib\site-packages (from httpcore<0.18.0,>=0.15.0->httpx) (3.5.0)
+Requirement already satisfied: pyrsistent!=0.17.0,!=0.17.1,!=0.17.2,>=0.14.0 in c:\users\ccg70\anaconda3\lib\site-packages (from jsonschema>=3.0->altair) (0.18.0)
+Requirement already satisfied: attrs>=17.4.0 in c:\users\ccg70\anaconda3\lib\site-packages (from jsonschema>=3.0->altair) (21.4.0)
+Collecting uc-micro-py
+  Downloading uc_micro_py-1.0.2-py3-none-any.whl (6.2 kB)
+Requirement already satisfied: python-dateutil>=2.8.1 in c:\users\ccg70\anaconda3\lib\site-packages (from pandas>=0.18->altair) (2.8.2)
+Requirement already satisfied: pytz>=2020.1 in c:\users\ccg70\anaconda3\lib\site-packages (from pandas>=0.18->altair) (2022.1)
+Requirement already satisfied: MarkupSafe>=0.23 in c:\users\ccg70\anaconda3\lib\site-packages (from jinja2->altair) (2.0.1)
+Requirement already satisfied: six>=1.5 in c:\users\ccg70\anaconda3\lib\site-packages (from python-dateutil>=2.8.1->pandas>=0.18->altair) (1.16.0)
+Building wheels for collected packages: ffmpy
+  Building wheel for ffmpy (setup.py): started
+  Building wheel for ffmpy (setup.py): finished with status 'done'
+  Created wheel for ffmpy: filename=ffmpy-0.3.0-py3-none-any.whl size=4693 sha256=b7f034c80814c54a932eff2d09a4cb3b9cbfba375db74d8b063af4d47bffac9f
+  Stored in directory: c:\users\ccg70\appdata\local\pip\cache\wheels\91\e2\96\f676aa08bfd789328c6576cd0f1fde4a3d686703bb0c247697
+Successfully built ffmpy
+Installing collected packages: pydub, ffmpy, websockets, uc-micro-py, python-multipart, pycryptodome, markdown-it-py, aiofiles, uvicorn, starlette, mdit-py-plugins, linkify-it-py, httpcore, httpx, fastapi, altair
+Successfully installed aiofiles-23.1.0 altair-5.0.1 fastapi-0.97.0 ffmpy-0.3.0 httpcore-0.17.2 httpx-0.24.1 linkify-it-py-2.0.2 markdown-it-py-3.0.0 mdit-py-plugins-0.4.0 pycryptodome-3.18.0 pydub-0.25.1 python-multipart-0.0.6 starlette-0.27.0 uc-micro-py-1.0.2 uvicorn-0.22.0 websockets-11.0.3
