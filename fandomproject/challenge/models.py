@@ -24,10 +24,8 @@ class Ref_Video(models.Model):
     video_file = models.FileField(upload_to='ref_video/', default=0)
     
 class Score(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     nickname = models.CharField(max_length=255)
     score = models.IntegerField()
-    title = models.CharField(max_length=255)
     video_file = models.FileField(upload_to='output/', default = 0)
     ref_id = models.IntegerField(default=0)
     create_at = models.DateTimeField(auto_now_add=True)
