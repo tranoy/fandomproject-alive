@@ -28,22 +28,11 @@
                 <div class="header__nav">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li ><a href="/">HOME</a></li>
-                            <li class=><a href="/challenge">Challenge</a></li>
-                            {% if user.nickname %}
-                            <li class="active"><a href="/making">MAKING</a></li>
-                            {% endif %}
+                            <li class="active"><a href="/">HOME</a></li>
+                            <li><a href="/making">MAKING</a></li>
                             <li><a href="/ranking">RANKING</a></li>
-                            <li><a href="/videogallery">BOARD</a></li>
-                            {% if user.nickname %}
-                            <li>
-                                <a href="/logout">LOGOUT</a>
-                            </li>
-                            {% else %}
-                            <li>
-                                <a href="/login">LOGIN</a>
-                            </li>
-                            {% endif%}
+                            <li><a href="/board">BOARD</a></li>
+                            <li><a href="/login">LOGIN</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -78,7 +67,7 @@
                     <form id="upload-form" method="post" action="{% url 'making:transform' %}" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div id="drop-file" class="drag-file">
-                            <img src="/making/static/mkimg/file-earmark-image.svg" alt="Upload Icon" class="image">
+                            <img src="/making/static/mkimg/file-earmark-image.svg" class="image">
                             <p class="drag_message">이미지를 드래그하여 업로드하세요.</p>
                             <img src="" alt="Preview" class="preview" id="previewImage">
                             <div id="image-preview-container"></div> <!-- 이미지 미리보기 컨테이너 추가 -->
@@ -100,6 +89,9 @@
                         </select>
                         <button type="submit" id="create-album-art-button">앨범 아트 생성</button>
                     </form>
+
+
+                </form>
                     {% if transformed_image %}
                         <h2>변환된 이미지</h2>
                         <img src="data:image/jpeg;base64,{{ transformed_image }}" alt="Transformed Image" id="transformedImage">

@@ -1,106 +1,119 @@
-import io
-import torch
-
+from django.core.files.base import ContentFile
 from django.shortcuts import render
-from django.http import JsonResponse
-from PIL import Image
-import numpy as np
-from torchvision import transforms
-import base64
+from django.http import JsonResponse, HttpResponse
+from django.core.files.base import ContentFile
 from django.urls import reverse
-from rest_framework.views import APIView
-from accounts.models import User
+from .models import TransformedImage
 from .cartoongan_pytorch_main.network.Transformer import Transformer
+from .cartoongan_pytorch_main.network.Transformer_aivle import Transformer_aivle
+import io
+import os
+import torch
+import json
+import numpy as np
+from PIL import Image
+from torchvision import transforms
+from torchvision.transforms.functional import to_pil_image
+from django.shortcuts import get_object_or_404
 
+model_path = 'making/cartoongan_pytorch_main/pretrained_model/'
+styles = ['Hayao', 'Hosoda', 'Shinkai', 'Paprika', 'spongebob', 'simpson', 'anime']
 
-
-class CartoonGAN:
-    def __init__(self, model_path, style):
-        self.model_path = model_path
-        self.style = style
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        self.model = Transformer().to(self.device)
-        self.model.load_state_dict(torch.load(self.model_path, map_location=self.device))
-        self.model.eval()
-
-    def transform_image(self, image):
-        with torch.no_grad():
-            image = image.to(self.device)
-            transformed_image = self.model(image)
-        return transformed_image
-
-
-
-model_path = 'making/cartoongan_pytorch_main/pretrained_model/Hosoda_net_G_float.pth'
-styles = ['Hosoda', 'Shinkai', 'Paprika', 'spongebob']
-
-
-# MakPage tranform_url, User session 가져오기 , making.html 렌더
-class Index(APIView):
-    def get(self, request):
-        transform_url = reverse('making:transform')
-        data = {'transform_url': transform_url, 'styles': styles}
-        try:
-            # 세션 데이터 가져오기
-            nickname = request.session['nickname']
-            user = User.objects.filter(nickname=nickname).first()
-            print(user)
-        except KeyError:
-            nickname = None
-            user = None
-        return render(request, 'making/making.html',context=dict(user=user,data=data))
-
-
+def index(request):
+    transform_url = reverse('making:transform')
+    context = {'transform_url': transform_url, 'styles': styles}
+    return render(request, 'making/making.html', context)
 
 def transform(request):
     if request.method == 'POST':
         if 'image' not in request.FILES:
-            return JsonResponse({'error': 'No image file provided.'}, status=400)
+            return JsonResponse({'error': '이미지 파일이 제공되지 않았습니다.'}, status=400)
 
         image = request.FILES['image']
-        style = request.POST.get('style', 'Hosoda')
+        style = request.POST.get('style')
 
-        # Preprocess image
+        # 이미지 전처리
         pil_image = Image.open(image)
 
-        # Convert to RGB if necessary
+        # RGB로 변환
         if pil_image.mode != 'RGB':
             pil_image = pil_image.convert('RGB')
 
         input_image = np.asarray(pil_image)
-        input_image = input_image[:, :, [2, 1, 0]]  # RGB to BGR
+        input_image = input_image[:, :, [0, 1, 2]]  # RGB에서 BGR로 변경
         input_image = transforms.ToTensor()(input_image).unsqueeze(0)
-        input_image = -1 + 2 * input_image  # preprocess, (-1, 1)
+        input_image = input_image * 2 - 1  # 전처리, (-1, 1)
 
-        # Load pretrained model
-        model = CartoonGAN(model_path, style)
-        input_image = torch.FloatTensor(input_image).to(model.device)
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-        output_image = model.transform_image(input_image)
+        # 사전 학습된 모델 불러오기
+        if style in ['Hayao', 'Hosoda', 'Shinkai', 'Paprika']:
+            model = Transformer()
+            state_dict = torch.load(os.path.join(model_path, style + '_net_G_float.pth'), map_location=device)
+            model.load_state_dict(state_dict, strict=True)
+        elif style in ['spongebob', 'simpson', 'anime']:
+            model = Transformer_aivle().to(device)
+            state_dict = torch.load(os.path.join(model_path, style + "_net_G_float.pth"), map_location=device)
+            model.load_state_dict(state_dict['g_state_dict'])
+            model.eval()
+        else:
+            return JsonResponse({'error': '지원되지 않는 스타일입니다.'}, status=400)
 
-        # Convert tensor to numpy array
-        output_image = output_image[0].cpu().detach().numpy()
-        output_image = output_image.transpose((1, 2, 0))
-        output_image = (output_image + 1) / 2  # scale from (-1, 1) to (0, 1)
-        output_image = (output_image * 255).astype(np.uint8)
+        # 모델을 GPU로 이동
+        model = model.to(device)
+        input_image = input_image.to(device)
 
-        # Reverse BGR to RGB
-        output_image = output_image[:, :, [2, 1, 0]]
+        # 순전파
+        with torch.no_grad():
+            output_image = model(input_image)
+        output_image = output_image[0]
+        # BGR에서 RGB로 변경
+        output_image = output_image.permute(1, 2, 0).cpu().float()
+        output_image = (output_image * 0.5 + 0.5).clamp(0, 1)  # 색상 반전 방지 및 범위 제한
 
-        # Convert numpy array to PIL image
-        output_image = Image.fromarray(output_image)
+        # 넘파이 배열을 PIL 이미지로 변환
+        output_image = Image.fromarray((output_image * 255).byte().cpu().numpy())
 
-        # Encode output image as Base64
-        buffered = io.BytesIO()
-        output_image.save(buffered, format='JPEG')
-        encoded_image = base64.b64encode(buffered.getvalue()).decode('utf-8')
+        # 이미지를 저장할 임시 파일 생성
+        temp_image_buffer = io.BytesIO()
+        output_image.save(temp_image_buffer, format='JPEG')
 
-        request.session['transformed_image'] = encoded_image
-        return JsonResponse({'success': True})
+        # 변환된 이미지를 데이터베이스에 저장
+        transformed_image = TransformedImage(style=style)
+        transformed_image.image.save('transformed_image.jpg', ContentFile(temp_image_buffer.getvalue()))
 
+        # 세션에 변환된 이미지 정보 저장
+        request.session['transformed_image_id'] = transformed_image.id
+
+        # 성공 응답 생성
+        response_data = {
+            'success': True,
+            'transformed_image_url': transformed_image.image.url
+        }
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
     else:
-        return JsonResponse({'error': 'Invalid request method.'}, status=405)
+        return JsonResponse({'error': '잘못된 요청 메서드입니다.'}, status=405)
+
 
 def display(request):
-    transformed_image = request.session.get('transformed_image', None)
-    return render(request, 'making/display.html', {'transformed_image': transformed_image})
+    transformed_image_id = request.session.get('transformed_image_id')
+    if transformed_image_id is not None:
+        transformed_image = get_object_or_404(TransformedImage, id=transformed_image_id)
+        context = {
+            'transformed_image_url': transformed_image.image.url,
+            'style': transformed_image.style
+        }
+        return render(request, 'making/display.html', context)
+    else:
+        return JsonResponse({'error': '변환된 이미지가 없습니다.'}, status=404)
+
+
+def download(request):
+    transformed_image_id = request.session.get('transformed_image_id')
+    if transformed_image_id is not None:
+        transformed_image = get_object_or_404(TransformedImage, id=transformed_image_id)
+        response = HttpResponse(transformed_image.image, content_type='image/jpeg')
+        response['Content-Disposition'] = 'attachment; filename="transformed_image.jpg"'
+        return response
+    else:
+        return HttpResponse('Image not found.', status=404)

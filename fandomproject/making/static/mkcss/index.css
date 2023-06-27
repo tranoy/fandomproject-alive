@@ -2968,8 +2968,8 @@ ol {
     }
     .blog__large__text {
         padding: 30px 20px 0;
-    }image-uploImage_result
-    .blog__large__widget {
+    }
+    image-uploImage_result .blog__large__widget {
         margin: 0;
     }
     .blog__details__tags a {
@@ -3018,11 +3018,12 @@ ol {
     justify-content: center;
     align-items: center;
     border: 3px outset #dbdbdb;
-    background-color: #ffffff;
+    border-radius: 25px;
+    background-color: #000000;
 }
 
 .upload-box .drag-file.highlight {
-    border: 3px solid rgb(86, 94, 168);
+    border: 3px solid #EE1E31;
 }
 
 .upload-box .drag-file .image {
@@ -3030,13 +3031,16 @@ ol {
 }
 
 .image-upload:hover {
-    background-color: #ef8376;
+    background-color: #ffffff;
+    color: black;
+    font-weight: 600;
+    transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
 }
 
 .upload-box .drag-file .drag_message {
     margin-top: 10px;
     margin-bottom: 0;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .upload-box .drag-file .preview {
@@ -3051,25 +3055,25 @@ ol {
 }
 
 .image-upload {
-    margin-top: 30px;
+    margin-top: 10px;
     margin-bottom: 10px;
-    background-color: #455191;
+    background-color: #EE1E31;
     color: #fff;
     text-align: center;
     padding: 15px 15px;
-    border-radius: 6px;
+    border-radius: 25px;
     cursor: pointer;
 }
 
-.Image_result{
+.Image_result {
     width: 1080px;
     height: 950px;
     margin-top: 100px;
     margin-bottom: 80px;
 }
 
-.Image_button{
-    list-style: none; 
+.Image_button {
+    list-style: none;
     display: flex;
     justify-content: space-between;
 }
@@ -3092,10 +3096,10 @@ button,
 .button {
     position: relative;
     display: inline-block;
-    background: #455191;
+    background: #EE1E31;
     color: #fff;
     text-align: center;
-    border-radius: 0.5em;
+    border-radius: 25px;
     text-decoration: none;
     padding: 0.65em 3em 0.65em 3em;
     border: 0;
@@ -3113,8 +3117,9 @@ input[type="submit"]:hover,
 input[type="reset"]:hover,
 button:hover,
 .button:hover {
-    color: #fff;
-    background: #ef8376;
+    font-weight: 600;
+    color: black;
+    background: #ffffff;
 }
 
 input[type="button"].alt,
@@ -3132,6 +3137,9 @@ button.alt:hover,
 .button.alt:hover {
     background: #3B353C;
 }
+
+
+/* 김규리 - making.html 에서 album_name_input 부분 추가 */
 
 #album_name_input {
     width: 500px;
@@ -3202,7 +3210,5 @@ svg {
     }
 }
 
-
-/* 끝 */
 
 /* 끝 */
