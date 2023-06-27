@@ -70,10 +70,17 @@ class ChallengeOne(APIView):
     def get(self, request, pk):
         
         print("ChallengeONE - GET")
+        try:
+            nickname = request.session['nickname']
+            user = User.objects.filter(nickname=nickname).first()
+        except KeyError:
+            nickname = None
+            user = None
         score = Score.objects.filter(ref_id=pk)
         ref_video=Ref_Video.objects.get(id=pk)
         context = {'score' : score,
-                   'ref' : ref_video}
+                   'ref' : ref_video,
+                   'user' : user}
         return render(request, "challenge/ch1.html", context)
     def post(self, request, pk):
         print("ChallengeOne - POST")
