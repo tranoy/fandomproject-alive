@@ -29,8 +29,13 @@ class ChallengeMain(APIView):
         print(data_count)
         ref_unique_ref_ids = Ref_Video.objects.values_list('id', flat=True)
         score_unique_ref_ids = Score.objects.values_list('ref_id', flat=True).distinct()  # 
-        nickname = request.session['nickname']
-        user = User.objects.filter(nickname=nickname).first()
+        
+        try:
+            nickname = request.session['nickname']
+            user = User.objects.filter(nickname=nickname).first()
+        except KeyError:
+            nickname = None
+            user = None
         # socre에는 없는 ref_id찾기
         missing_ref_ids = set(ref_unique_ref_ids) - set(score_unique_ref_ids)
         print("missing_ref_ids=", missing_ref_ids)
