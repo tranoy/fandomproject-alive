@@ -14,7 +14,7 @@ cursor.execute("UPDATE challenge_ref_video SET img = ? WHERE id = 2", (value2,))
 cursor.execute("UPDATE challenge_ref_video SET img = ? WHERE id = 3", (value3,))
 cursor.execute("UPDATE challenge_ref_video SET img = ? WHERE id = 4", (value4,))
 cursor.execute("UPDATE challenge_ref_video SET img = ? WHERE id = 5", (value5,))
-#cursor.execute("DELETE FROM challenge_score WHERE id = 6")
+# cursor.execute("DELETE FROM challenge_score WHERE id = 1")
 
 conn.commit()
 conn.close()
