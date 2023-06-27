@@ -51,6 +51,7 @@
 
     <!-- Discography Section Begin -->
     <section class="discography spad">
+      <div id="check" style="display: block">{{ user.nickname }}</div>
       <div class="container">
         <div class="row">
           <div
@@ -73,7 +74,7 @@
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="discography__item">
               <div class="discography__item__pic">
-                <a href="{% url 'challenge:one' item.id %}">
+                <a href="{% url 'challenge:one' item.id %}" class="entrance_1">
                   <div class="image-container">
                     <img src="{{ item.img }}" alt="" />
                     <div class="image-info">

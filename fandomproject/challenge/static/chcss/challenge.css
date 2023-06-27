@@ -1223,7 +1223,8 @@ ol {
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 /* 배준오 */
-.entrance_1{
+.discography__item > div:nth-child(2) > a {
+	/* 스타일을 적용할 CSS 속성들 */
     position: relative;
     display: inline-block;
     padding: 25px 30px;
@@ -1237,7 +1238,7 @@ ol {
     margin-right: 50px;
 
 }
-.entrance_1:hover{
+.discography__item > div:nth-child(2) > a:hover{
     background: #ee1e31;
     color: #050801;
     box-shadow: 0 0 5px #ee1e31,
@@ -1248,16 +1249,16 @@ ol {
 }
 
 
-.entrance_1:nth-child(2){
+.discography__item > div:nth-child(2) > a:nth-child(2){
 	filter: hue-rotate(110deg);
 }
 
-.entrance_1 span{
+.discography__item > div:nth-child(2) > a span{
 	position: absolute;
 	display: block;
 }
 
-.entrance_1 span:nth-child(1){
+.discography__item > div:nth-child(2) > a span:nth-child(1){
 	top: 0;
     left: 0;
     width: 100%;
@@ -1275,7 +1276,7 @@ ol {
     }
 } */
 
-.entrance_1 span:nth-child(2){
+.discography__item > div:nth-child(2) > a span:nth-child(2){
     top: -100%;
     right: 0;
     width: 2px;
@@ -1294,7 +1295,7 @@ ol {
     }
 }
 
-.entrance_1 span:nth-child(3){
+.discography__item > div:nth-child(2) > a span:nth-child(3){
     bottom: 0;
     right: 0;
     width: 100%;
@@ -1313,7 +1314,7 @@ ol {
     }
 }
 
-.entrance_1 span:nth-child(4){
+.discography__item > div:nth-child(2) > a span:nth-child(4){
     bottom: -100%;
     left: 0;
     width: 2px;
