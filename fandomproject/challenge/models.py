@@ -22,6 +22,7 @@ class Ref_Video(models.Model):
     title = models.CharField(max_length=20)
     singer = models.CharField(max_length=10, default=None)
     video_file = models.FileField(upload_to='ref_video/', default=0)
+    img = models.CharField(max_length=255,default=0)
     
 class Score(models.Model):
     nickname = models.CharField(max_length=255)

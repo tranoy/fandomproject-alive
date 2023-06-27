@@ -75,7 +75,7 @@
               <div class="discography__item__pic">
                 <a href="{% url 'challenge:one' item.id %}">
                   <div class="image-container">
-                    <img src="/media/flower2.jpg" alt="" />
+                    <img src="{{ item.img }}" alt="" />
                     <div class="image-info">
                       <span style="color: white"
                         >[{{ item.singer }} - {{ item.title }}]</span
