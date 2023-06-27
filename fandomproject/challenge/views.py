@@ -10,6 +10,7 @@ from .models import *
 from django.db.models import Max, Count
 from .forms import VideoForm
 from accounts.models import User
+from django.core.paginator import Paginator
 # Create your views here.
 
 # /videogallery 경로 인식 후 index함수가 호출 됨 index함순s html을 렌더링 context포함해서
@@ -25,6 +26,7 @@ class ChallengeMain(APIView):
                              title=models.Subquery(videos.filter(id=models.OuterRef('ref_id')).values('title')[:1]),
                              singer=models.Subquery(videos.filter(id=models.OuterRef('ref_id')).values('singer')[:1]),
                              img=models.Subquery(videos.filter(id=models.OuterRef('ref_id')).values('img')[:1]))
+
         print(data)
         print(data_count)
         ref_unique_ref_ids = Ref_Video.objects.values_list('id', flat=True)
@@ -55,10 +57,15 @@ class ChallengeMain(APIView):
 
             # 기존 data와 missing_data 병합
             data = list(data) + missing_data
+        paginator = Paginator(data_count, 6)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         #####################################################
-        combined_data = zip(data, data_count)
+        combined_data = zip(data, data_count,page_obj)
+
         context = {'combined_data' : combined_data,
-                   'user' : user}
+                   'user' : user,
+                   'page_obj':page_obj}
                    #'score_count' : data_count}
         return render(request, "challenge/challenge.html", context)
     

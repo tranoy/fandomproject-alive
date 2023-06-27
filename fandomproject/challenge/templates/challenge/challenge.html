@@ -70,7 +70,7 @@
           </div>
         </div>
         <div class="row">
-          {% for item, c in combined_data %}
+          {% for item, c, p in combined_data %}
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="discography__item">
               <div class="discography__item__pic">
@@ -105,6 +105,24 @@
         </div>
       </div>
     </section>
+    <div
+      class="pagination"
+      style="background-color: white; width: 100%; height: 100px"
+    >
+      <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current-page">{{ page_obj.number }}</span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
     <footer class="footer spad set-bg" data-setbg="">
       <div class="container">
         <div class="row">
