@@ -11,9 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import os
-
-import datetime
+import os,json
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-evpx!i3a=h$v=_t1r13r2#hbb(bnw=1=l=zprfy+5su!@l81b-"
+# SECRET_KEY = "django-insecure-evpx!i3a=h$v=_t1r13r2#hbb(bnw=1=l=zprfy+5su!@l81b-"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -146,3 +145,54 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # 커스텀 유저 모델 사용
 AUTH_USER_MODEL = 'accounts.User'
+
+## 앱 비밀번호 eftu clvq prgr rnzk
+############################################################################# 이메일 세팅 추가 부분
+
+# 시크릿 키 부분
+secret_file = os.path.join(BASE_DIR, 'secrets.json')
+
+with open(secret_file, encoding='utf-8') as f:
+    secrets = json.loads(f.read())
+
+def get_secret(setting, secrets=secrets):
+    """비밀 변수를 가져오거나 명시적 예외를 반환한다."""
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+SECRET_KEY = get_secret("SECRET_KEY")
+
+
+
+DEBUG = True
+ALLOWED_HOSTS = []
+
+
+# Email 전송
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# 메일을 호스트하는 서버
+EMAIL_HOST = 'smtp.gmail.com'
+
+# gmail과의 통신하는 포트
+EMAIL_PORT = '587'
+
+# 발신할 이메일
+# EMAIL_HOST_USER = '구글아이디@gmail.com'
+EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
+
+# 발신할 메일의 비밀번호
+# EMAIL_HOST_PASSWORD = '구글비밀번호'
+EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
+
+# TLS 보안 방법
+EMAIL_USE_TLS = True
+
+# 사이트와 관련한 자동응답을 받을 이메일 주소
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+#추가
+EMAIL_USE_SSL = False

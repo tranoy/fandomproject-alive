@@ -3,7 +3,7 @@ from django.urls import path, include
 from .views import Main,LogOut,Policy,Privacy
 
 
-
+from accounts.views import CompletePasswordReset, RequestPasswordResetEmail
 
 
 urlpatterns = [
@@ -17,6 +17,9 @@ urlpatterns = [
     path("privacy", Privacy.as_view()),
     path("policy", Policy.as_view()),
     path("admin/", admin.site.urls),
+    #### 추가 부분
+    path('/set-new-password/<uidb64>/<token>', CompletePasswordReset.as_view(), name='reset-user-password'),
+    path('/request-reset-link', RequestPasswordResetEmail.as_view(), name="request-password"),
 ]
 
 from django.conf import settings
