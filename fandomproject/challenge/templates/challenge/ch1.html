@@ -29,7 +29,15 @@
                                 <li><a href="/making">MAKING</a></li>
                                 <li><a href="/ranking">RANKING</a></li>
                                 <li><a href="/board">BOARD</a></li>
-                                <li><a href="/login">LOGIN</a></li>
+                                {% if user.nickname %}
+                                <li>
+                                <a href="/logout">LOGOUT</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                <a href="/login">LOGIN</a>
+                                </li>
+                                {% endif%}
                             </ul>
                         </nav>
                     </div>

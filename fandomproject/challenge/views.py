@@ -9,6 +9,7 @@ from dance_30 import compare_video
 from .models import *
 from django.db.models import Max, Count
 from .forms import VideoForm
+from accounts.models import User
 # Create your views here.
 
 # /videogallery 경로 인식 후 index함수가 호출 됨 index함순s html을 렌더링 context포함해서
@@ -28,7 +29,8 @@ class ChallengeMain(APIView):
         print(data_count)
         ref_unique_ref_ids = Ref_Video.objects.values_list('id', flat=True)
         score_unique_ref_ids = Score.objects.values_list('ref_id', flat=True).distinct()  # 
-        
+        nickname = request.session['nickname']
+        user = User.objects.filter(nickname=nickname).first()
         # socre에는 없는 ref_id찾기
         missing_ref_ids = set(ref_unique_ref_ids) - set(score_unique_ref_ids)
         print("missing_ref_ids=", missing_ref_ids)
@@ -50,7 +52,8 @@ class ChallengeMain(APIView):
             data = list(data) + missing_data
         #####################################################
         combined_data = zip(data, data_count)
-        context = {'combined_data' : combined_data}
+        context = {'combined_data' : combined_data,
+                   'user' : user}
                    #'score_count' : data_count}
         return render(request, "challenge/challenge.html", context)
     
@@ -64,7 +67,6 @@ class ChallengeOne(APIView):
         print("ChallengeONE - GET")
         score = Score.objects.filter(ref_id=pk)
         ref_video=Ref_Video.objects.get(id=pk)
-        
         context = {'score' : score,
                    'ref' : ref_video}
         return render(request, "challenge/ch1.html", context)
