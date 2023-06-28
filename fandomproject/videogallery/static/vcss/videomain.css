@@ -1003,6 +1003,20 @@ ol {
 	}
 }
 
+#summonerNameInput{
+	width: 240px;
+	height: 40px;
+	padding: 0px 12px 0px 40px;
+	border-radius: 4px;
+	background-color:#ebeef1;
+	background-image: url(https://s-lol-web.op.gg/images/icon/icon-search.svg);
+	background-repeat: no-repeat;
+	background-position: left 8px center;
+	font-size: 12px;
+	box-sizing: border-box;
+
+}
+
 .icon_li{
 	margin: 8px;
 }
