@@ -63,3 +63,9 @@ class GalleryMain(APIView):
 
 
 
+class GalleryMore(APIView):
+    def get(self,request,pk):
+        score = Score.objects.filter(id=pk)
+        context = {'score' : score}
+        print(score)
+        return render(request, "videogallery/more.html",context)

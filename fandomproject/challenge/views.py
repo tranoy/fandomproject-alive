@@ -62,7 +62,7 @@ class ChallengeMain(APIView):
         page_obj = paginator.get_page(page_number)
         #####################################################
         combined_data = zip(data, data_count,page_obj)
-
+        print(combined_data,page_obj,data,data_count)
         context = {'combined_data' : combined_data,
                    'user' : user,
                    'page_obj':page_obj}
