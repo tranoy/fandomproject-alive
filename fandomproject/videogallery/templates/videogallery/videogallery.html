@@ -61,7 +61,7 @@
               align-items: center;
             "
           >
-            <div style="width: 250px; height: 30px"></div>
+            <div style="width: 115px; height: 30px"></div>
             <div class="section-title center-title">
               <h2 style="color: white">Video Board</h2>
             </div>
@@ -100,6 +100,12 @@
                 </button>
                 <button class="delete-button" onclick="deleteRow({{ res.0 }})">
                   Delete
+                </button>
+                <button
+                  class="more-button"
+                  onclick="location.href='/videogallery/{{ res.0 }}'"
+                >
+                  More
                 </button>
               </div>
             </div>

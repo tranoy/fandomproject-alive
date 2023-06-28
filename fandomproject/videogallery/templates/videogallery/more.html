@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<div>
+{% for sco in score %}
+  <h1>Text: {{sco.text}}<span id="text"></span></h1>
+  <h2>Accuracy: {{sco.score}}<span id="accuracy"></span></h2>
+  <h3>User: {{sco.nickname}}<span id="username"></span></h3>
+{% endfor %}
+</div>
