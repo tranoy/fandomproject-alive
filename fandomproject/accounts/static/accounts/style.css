@@ -34,7 +34,6 @@
 html,
 
 body {
-	height: 100%;
 	font-family: "Now Regular";
 	-webkit-font-smoothing: antialiased;
 	background-color: black;
@@ -619,6 +618,7 @@ ol {
 
 
 .footer {
+	margin-top: 70px;
 	height: 400px;
 }
 
