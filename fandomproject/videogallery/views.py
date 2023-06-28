@@ -66,6 +66,12 @@ class GalleryMain(APIView):
 class GalleryMore(APIView):
     def get(self,request,pk):
         score = Score.objects.filter(id=pk)
-        context = {'score' : score}
-        print(score)
+        try:
+            nickname = request.session['nickname']
+            user = User.objects.filter(nickname=nickname).first()
+        except KeyError:
+            nickname = None
+            user = None
+        context = {'score' : score,
+                   'user' : user}
         return render(request, "videogallery/more.html",context)
