@@ -18,8 +18,9 @@ class GalleryMain(APIView):
             scores = Score.objects.filter(Q(nickname__icontains=query)).all()
         else:
             scores = Score.objects.all()
-            
+
         result = []
+        print(scores)
         for score in scores:
             try:
                 # 세션 데이터 가져오기

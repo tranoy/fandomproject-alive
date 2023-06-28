@@ -29,4 +29,5 @@ class Score(models.Model):
     score = models.IntegerField()
     video_file = models.FileField(upload_to='output/', default = 0)
     ref_id = models.IntegerField(default=0)
+    text = models.TextField(default='-')
     create_at = models.DateTimeField(auto_now_add=True)
