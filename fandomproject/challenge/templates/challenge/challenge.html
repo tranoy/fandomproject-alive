@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'chcss/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'chcss/challenge.css' %}" />
+    <link rel="stylesheet" href="{% static 'chcss/slicknav.min.css' %}" />
     <title>Gallery</title>
   </head>
   <body>
@@ -105,21 +106,24 @@
         </div>
       </div>
     </section>
-    <div
-      class="pagination"
-      style="background-color: white; width: 100%; height: 100px"
-    >
+    <div class="pagination">
       <span class="step-links">
         {% if page_obj.has_previous %}
-        <a href="?page=1">&laquo; first</a>
-        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        <a href="?page=1" class="page-select">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-select"
+          >previous</a
+        >
         {% endif %}
 
         <span class="current-page">{{ page_obj.number }}</span>
 
         {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">next</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        <a href="?page={{ page_obj.next_page_number }}" class="page-select"
+          >next</a
+        >
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="page-select"
+          >last &raquo;</a
+        >
         {% endif %}
       </span>
     </div>
@@ -221,5 +225,6 @@
     <script src="{% static 'chjs/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'chjs/bootstrap.min.js' %}"></script>
     <script src="{% static 'chjs/main.js' %}"></script>
+    <script src="{% static 'chjs/jquery.slicknav.js' %}"></script>
   </body>
 </html>
