@@ -25,20 +25,11 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li><a href="/">HOME</a></li>
-                                <li><a href ="/challenge">CHALLENGE</a></li>
+                                <li class="active"><a href="/">HOME</a></li>
                                 <li><a href="/making">MAKING</a></li>
                                 <li><a href="/ranking">RANKING</a></li>
-                                <li><a href="/board">BOARD</a></li>
-                                {% if user.nickname %}
-                                <li>
-                                <a href="/logout">LOGOUT</a>
-                                </li>
-                                {% else %}
-                                <li>
-                                <a href="/login">LOGIN</a>
-                                </li>
-                                {% endif%}
+                                <li><a href="/videogallery">BOARD</a></li>
+                                <li><a href="/login">LOGIN</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -68,13 +59,15 @@
                             <!--<img src="/media/20230424_002724.png" alt="">-->
                             {% load static %}
                             <video width="350" height="700" controls>
-                                <source src="{% static "../media/ref_video/c_video_audio_output.mp4" %}" type="video/mp4">
+                                <source src="/media/{{ s.video_file }}" type="video/mp4">
                             </video>
                         </div>
                         <div class="discography__item__text" style="background-color: white;">
                             <span>Title : {{ ref.title }}</span>
                             <h4>UserName : {{ s.nickname }}</h4>
-                            <h4>Accuracy : {{ s.score }}</h4>
+                            <h4>Accuracy : {{ s.score|floatformat:2 }}%</h4>
+                            <h4>=====================</h4>
+                            <h6>{{ s.text }}</h6>
                         </div>
                     </div>
                 </div>

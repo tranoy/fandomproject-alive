@@ -2,13 +2,15 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import GalleryMain,GalleryMore
+from .views import *
 
 app_name = 'videogallery'
 
 urlpatterns = [
-    path('', GalleryMain.as_view(), name='index'),
+    path('', GalleryMain, name='index'),
     path('/<int:pk>',GalleryMore.as_view(),name='more'),
+    path('/edit', Edit, name='edit'),
+    # path('/update', BoardUpdate, name='update'),
 ]
 
 if settings.DEBUG:
