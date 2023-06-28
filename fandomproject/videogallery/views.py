@@ -18,7 +18,13 @@ class GalleryMain(APIView):
             scores = Score.objects.filter(Q(nickname__icontains=query)).all()
         else:
             scores = Score.objects.all()
-
+        try:
+            nickname = request.session['nickname']
+            user = User.objects.filter(nickname=nickname).first()
+        except KeyError:
+            nickname = None
+            user = None
+            
         result = []
         print(scores)
         for score in scores:
@@ -36,7 +42,8 @@ class GalleryMain(APIView):
         
         context = {
             'result' : result,
-            'query' : query
+            'query' : query,
+            'user' : user
         }
         return render(request, "videogallery/videogallery.html", context)
     def post(self, request):
