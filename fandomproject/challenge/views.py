@@ -69,11 +69,13 @@ class ChallengeMain(APIView):
             data = list(data) + missing_data
             
         paginator = Paginator(data_count, 6)
+        print(data,"===============")
+        print(data_count,"============")
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         #####################################################
         combined_data = zip(data, data_count,page_obj)
-        print(combined_data,page_obj,data,data_count)
+        print(combined_data)
         context = {'combined_data' : combined_data,
                    'user' : user,
                    'page_obj':page_obj}
