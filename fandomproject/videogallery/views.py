@@ -43,12 +43,14 @@ def GalleryMain(request):
     
     if request.method == 'POST':
         text = request.POST.get('text')  # 게시글 내용 가져오기
+        video_file = request.POST.get('output_path')
+        print(video_file)
         print('-' * 300, text)
         nickname = request.session['nickname']
         score = Score.objects.filter(nickname=nickname).order_by('-id').first()
         ref_video = Ref_Video.objects.get(id=score.ref_id)
         ref_video.title = ref_video.title.replace(' ', '_')
-        video_file = f"output/{nickname}_{ref_video.title}_output.mp4"  # 동영상 파일 업데이트
+        # video_file = f"output/{nickname}_{ref_video.title}_output.mp4"  # 동영상 파일 업데이트
         # video_file = request.FILES.get('video')  # 업로드된 동영상 파일 가져오기
 
         score = Score.objects.filter(nickname=nickname, ref_id=score.ref_id).order_by('-id').first()

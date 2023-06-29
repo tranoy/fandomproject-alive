@@ -162,7 +162,7 @@ class ChallengeCompareResult(APIView):
         nickname = request.session['nickname']
         challenge.title = challenge.title.replace(' ', '_')
         score, output_path = compare_video(ref_path, video_path,nickname,challenge.title)
-        
+        print(output_path)
         score_instance = Score(nickname=nickname, score=score, ref_id=pk)
         score_instance.save()
         
