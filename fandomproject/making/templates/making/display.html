@@ -62,17 +62,6 @@
                   <use xlink:href="#s-text" class="text-copy"></use>
                 </g>
               </svg>
-              <form
-                id="upload-form"
-                action="{% url 'making:transform' %}"
-                method="post"
-                enctype="multipart/form-data"
-              >
-                {% csrf_token %}
-                <input type="file" id="chooseImage" name="image" />
-                <button type="submit">Upload</button>
-              </form>
-              <div id="drop-file">Or drag and drop files here</div>
               <div id="transformed-image-container" style="text-align: center">
                 {% if transformed_image_url %}
                 <h2>Transformed Image</h2>
@@ -89,6 +78,31 @@
                 >
                   Download
                 </button>
+                <script>
+                  function handleClick() {
+                    // Execute your function here
+                    const button = document.getElementById("post-btn");
+                    const url = button.dataset.url;
+                    const scrfToken = button.dataset.csrfToken;
+                    postImage("{{ nickname }}", "{{ transformed_image_url }}");
+                    // Redirect to another HTML file
+                    //window.location.href = '{% url 'main_index' %}'
+                  }
+                </script>
+                <button
+                  id="post-btn"
+                  onclick="handleClick()"
+                  data-url="{% url 'making:post_image' %}"
+                  data-csrf-token="{{ csrf_token }}"
+                >
+                  Post
+                </button>
+                <button
+                  id="goto-index"
+                  onclick="window.location.href='{% url 'main_index' %}'"
+                >
+                  Home
+                </button>
                 {% else %}
                 <p>No transformed image available.</p>
                 {% endif %}
@@ -98,7 +112,6 @@
         </div>
       </div>
     </div>
-
     <!-- Js Plugins -->
     <script src="{% static 'mkjs/jquery-3.3.1.min.js'%}"></script>
     <script src="{% static 'mkjs/bootstrap.min.js'%}"></script>
@@ -108,37 +121,6 @@
     <script src="{% static 'mkjs/jquery.countdown.min.js'%}"></script>
     <script src="{% static 'mkjs/jquery.slicknav.js'%}"></script>
     <script>
-      function uploadImage(event) {
-        event.preventDefault();
-
-        const uploadForm = document.getElementById("upload-form");
-        const formData = new FormData(uploadForm);
-
-        fetch(uploadForm.action, {
-          method: "POST",
-          body: formData,
-          headers: {
-            "X-CSRFToken": document.querySelector(
-              "[name='csrfmiddlewaretoken']"
-            ).value,
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.success) {
-              const transformedImageContainer = document.getElementById(
-                "transformed-image-container"
-              );
-              transformedImageContainer.innerHTML = `<h2>Transformed Image</h2><img id="transformed-image" src="${data.url}" alt="Transformed Image"><br><input type="text" id="filename" placeholder="Enter filename"><button id="download-btn" onclick="downloadImage('${data.download_url}')">Download</button>`;
-            } else if (data.error) {
-              alert(data.error);
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      }
-
       function downloadImage(imageUrl) {
         const link = document.createElement("a");
         const filenameInput = document.getElementById("filename");
@@ -148,33 +130,35 @@
         link.click();
       }
 
-      const uploadForm = document.getElementById("upload-form");
-      uploadForm.addEventListener("submit", uploadImage);
-
-      const dropFile = document.getElementById("drop-file");
-      dropFile.addEventListener("dragover", function (event) {
-        event.preventDefault();
-        dropFile.classList.add("dragover");
-      });
-
-      dropFile.addEventListener("dragleave", function () {
-        dropFile.classList.remove("dragover");
-      });
-
-      dropFile.addEventListener("drop", function (event) {
-        event.preventDefault();
-        dropFile.classList.remove("dragover");
-        handleFiles(event.dataTransfer.files);
-      });
-
-      const fileInput = document.getElementById("chooseImage");
-      fileInput.addEventListener("change", function (event) {
-        handleFiles(event.target.files);
-      });
-
-      function handleFiles(files) {
-        const fileInput = document.getElementById("chooseImage");
-        fileInput.files = files;
+      function postImage(nickname, imageUrl) {
+        fetch("{% url 'making:post_image' %}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}",
+          },
+          body: JSON.stringify({
+            nickname: nickname,
+            image_url: imageUrl,
+          }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data.success) {
+              alert("글이 게시되었습니다.");
+            } else {
+              alert("이미지 게시 중 오류가 발생했습니다.");
+            }
+          })
+          .catch((error) => {
+            alert("이미지 게시 중 오류가 발생했습니다.");
+            console.error("Error:", error);
+          });
       }
     </script>
   </body>

@@ -7,7 +7,7 @@ from accounts.views import CompletePasswordReset, RequestPasswordResetEmail
 
 
 urlpatterns = [
-    path('',Main.as_view()),
+    path('',Main.as_view(), name='main_index'),
     path('logout',LogOut.as_view()),
     path('challenge',include('challenge.urls')),
     path('login',include('accounts.urls')),

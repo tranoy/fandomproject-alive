@@ -1,23 +1,24 @@
-from django.core.files.base import ContentFile
-from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.files.base import ContentFile
 from django.urls import reverse
-from .models import TransformedImage
-from .cartoongan_pytorch_main.network.Transformer import Transformer
-from .cartoongan_pytorch_main.network.Transformer_aivle import Transformer_aivle
-import io
-import os
-import torch
-import json
-import numpy as np
 from PIL import Image
 from torchvision import transforms
-from torchvision.transforms.functional import to_pil_image
-from django.shortcuts import get_object_or_404
+import numpy as np
+import torch
+import os
+import io
+import json
+from .models import TransformedImage, TransformedLog
+from .cartoongan_pytorch_main.network.Transformer import Transformer
+from .cartoongan_pytorch_main.network.Transformer_aivle import Transformer_aivle
+from accounts.models import User
+from django.utils import timezone
+
 
 model_path = 'making/cartoongan_pytorch_main/pretrained_model/'
 styles = ['Hayao', 'Hosoda', 'Shinkai', 'Paprika', 'spongebob', 'simpson', 'anime']
+
 
 def index(request):
     transform_url = reverse('making:transform')
@@ -63,18 +64,13 @@ def transform(request):
         model = model.to(device)
         input_image = input_image.to(device)
 
-        # 순전파
         with torch.no_grad():
             output_image = model(input_image)
         output_image = output_image[0]
         # BGR에서 RGB로 변경
-        output_image = output_image.permute(1, 2, 0).cpu().float()
-        output_image = (output_image * 0.5 + 0.5).clamp(0, 1)  # 색상 반전 방지 및 범위 제한
-
-        # 넘파이 배열을 PIL 이미지로 변환
-        output_image = Image.fromarray((output_image * 255).byte().cpu().numpy())
-
-        # 이미지를 저장할 임시 파일 생성
+        output_image = output_image.permute(1, 2, 0).cpu().numpy() # Convert the tensor to numpy array
+        output_image = ((output_image * 0.5 + 0.5) * 255).astype(np.uint8) # Scale it back to 0-255 and convert to uint8
+        output_image = Image.fromarray(output_image) # Convert the numpy array back to PIL image
         temp_image_buffer = io.BytesIO()
         output_image.save(temp_image_buffer, format='JPEG')
 
@@ -97,16 +93,51 @@ def transform(request):
 
 def display(request):
     transformed_image_id = request.session.get('transformed_image_id')
-    if transformed_image_id is not None:
-        transformed_image = get_object_or_404(TransformedImage, id=transformed_image_id)
-        context = {
-            'transformed_image_url': transformed_image.image.url,
-            'style': transformed_image.style
-        }
-        return render(request, 'making/display.html', context)
-    else:
+
+    if transformed_image_id is None:
         return JsonResponse({'error': '변환된 이미지가 없습니다.'}, status=404)
 
+    transformed_image = get_object_or_404(TransformedImage, id=transformed_image_id)
+    transformitem = TransformedImage.objects.all()
+    transformed_logs = TransformedLog.objects.all()  # TransformedLog 데이터 가져오기
+    print(transformed_image)
+    print(transformitem)
+    try:
+        nickname = request.session['nickname']
+        user = User.objects.filter(nickname=nickname).first()
+        transformed_image.nickname = nickname
+        transformed_image.save()
+    except KeyError:
+        nickname = None
+
+    post_image_url = reverse('making:post_image')
+
+    context = {
+        'transformitem': transformitem,
+        'transformed_image_url': transformed_image.image.url,
+        'nickname': nickname,
+        'user': user,
+        'post_image_url': post_image_url,
+        'transformed_logs': transformed_logs,  # TransformedLog 데이터를 context에 추가
+    }
+
+    return render(request, 'making/display.html', context)
+
+
+def post_image(request):
+    if request.method == 'POST':
+        print(1)
+        data = json.loads(request.body)
+        nickname = data.get('nickname')
+        image_url = data.get('image_url')
+        print(nickname, image_url)
+        # TransformedLog 모델에 데이터 저장 로직 작성
+        transformed_log = TransformedLog(nickname=nickname, image_url=image_url, date=timezone.now())
+        transformed_log.save()
+
+        return JsonResponse({'success': True})
+    
+    return JsonResponse({'success': False})
 
 def download(request):
     transformed_image_id = request.session.get('transformed_image_id')
@@ -117,3 +148,7 @@ def download(request):
         return response
     else:
         return HttpResponse('Image not found.', status=404)
+    
+# def BackIndex(request):
+    
+#     return render(request, 'mysite/templates/index.html')
