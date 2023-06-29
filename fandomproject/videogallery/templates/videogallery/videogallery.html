@@ -83,29 +83,32 @@
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="discography__item">
               <div class="discography__item__pic">
-                <img src="/media/20230424_002724.png" alt="" />
+                <a href="{% url 'videogallery:more' res.0 %}">
+                  <div class="image-container">
+                    {% if res.6%}
+                    <img src="{{ res.6 }}" alt="" width="350" height="228" />
+                    {% else %}
+                    <img
+                      src="/media/20230424_002724.png"
+                      alt=""
+                      style="width: 350 height: 228"
+                    />
+                    {% endif %}
+                  </div>
+                </a>
               </div>
               <div
                 class="discography__item__text"
                 style="background-color: white"
               >
-                <span>[{{ res.5 }} - {{ res.4 }}]</span>
+                <h4>[{{ res.5 }} - {{ res.4 }}]</h4>
+                {% comment %}
                 <h4>accuracy - {{ res.2 }}</h4>
+                {% endcomment %}
                 <h4>유저이름 - {{ res.1 }}</h4>
+                {% comment %}
                 <h4>text - {{ res.3 }}</h4>
-
-                <button class="edit-button" onclick="editRow({{ res.0 }})">
-                  Edit
-                </button>
-                <button class="delete-button" onclick="deleteRow({{ res.0 }})">
-                  Delete
-                </button>
-                <button
-                  class="more-button"
-                  onclick="location.href='/videogallery/{{ res.0 }}'"
-                >
-                  More
-                </button>
+                {% endcomment %}
               </div>
             </div>
           </div>

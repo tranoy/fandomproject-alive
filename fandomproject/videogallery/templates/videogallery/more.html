@@ -56,17 +56,75 @@
         </div>
         <div class="row">
           <div class="card mb-4" style="width: 100%">
-            <div class="card-header">
-              <a class="btn btn-primary float-end" href="register">
-                <!-- <i class="fas fa-table me-1"></i> -->
-                <i class="fas fa-edit"></i> 글 작성
-              </a>
+            <div
+              class="card-header"
+              style="display: flex; justify-content: space-between"
+            >
+              <div></div>
+
+              <div style="display: flex">
+                {% for res in result %}
+                <button class="btn btn-primary" onclick="editRow({{ res.0 }})">
+                  Edit
+                </button>
+                {% comment %}
+                <form
+                  method="POST"
+                  action="{% url 'videogallery:update' res.0 %}"
+                >
+                  {% csrf_token %}
+                  <button class="edit-button" onclick="editRow({{ res.0 }})">
+                    Edit
+                  </button>
+                </form>
+                {% endcomment %}
+                <form
+                  method="POST"
+                  action="{% url 'videogallery:delete' res.0 %}"
+                >
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                {% endfor %}
+              </div>
+              <script>
+                function editRow(id) {
+                  var new_text = prompt("Enter new text:");
+                  if (new_text !== null && new_text.trim() !== "") {
+                    var formData = new FormData();
+                    formData.append("id", id);
+                    formData.append("text", new_text);
+                    formData.append("action", "update");
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/videogallery", true);
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+
+                    xhr.onreadystatechange = function () {
+                      if (
+                        xhr.readyState === XMLHttpRequest.DONE &&
+                        xhr.status === 200
+                      ) {
+                        // Handle the response or perform any necessary actions
+                        // For example, you can update the UI dynamically
+                        console.log("Row updated successfully");
+                      }
+                    };
+
+                    xhr.send(formData);
+                    location.href = "/videogallery/" + id;
+                  }
+                }
+                //location.href='/';
+              </script>
             </div>
             <div class="card-body">
               <table class="table table-hover table-striped">
                 <thead>
                   <tr>
                     <th>글번호</th>
+                    <th>노래</th>
+                    <th>가수</th>
                     <th>점수</th>
                     <th>닉네임</th>
                     <th>리뷰</th>
@@ -75,20 +133,22 @@
                 </thead>
                 <tbody>
                   <tr>
-                    {% for sco in score %}
-                    <td>{{sco.id}}</td>
-                    <td>{{sco.score}}</td>
-                    <td>{{sco.nickname}}</td>
-                    <td>{{sco.text}}</td>
-                    <td>{{sco.create_at}}</td>
+                    {% for res in result %}
+                    <td>{{ res.0 }}</td>
+                    <td>{{ res.6 }}</td>
+                    <td>{{ res.7 }}</td>
+                    <td>{{ res.2 }}</td>
+                    <td>{{ res.1 }}</td>
+                    <td>{{ res.3 }}</td>
+                    <td>{{ res.4 }}</td>
                     {% endfor %}
                   </tr>
                 </tbody>
               </table>
               <div style="display: flex; justify-content: center">
-                {% for sco in score %}
+                {% for res in result %}
                 <video width="100%" height="640" controls autoplay>
-                  <source src="/media/{{sco.video_file }}" type="video/mp4" />
+                  <source src="/media/{{ res.5 }}" type="video/mp4" />
                 </video>
                 {% endfor %}
               </div>
