@@ -99,6 +99,7 @@ class ChallengeOne(APIView):
             
         
         score = Score.objects.filter(ref_id=pk)
+        print(score)
         ref_video=Ref_Video.objects.get(id=pk)
         
         reversed_score = reversed(score)
@@ -170,7 +171,7 @@ class ChallengeCompareResult(APIView):
         context = {
             'score': score,
             'challenge': challenge,
-            'output_path' : output_path[8:],
+            'output_path' : output_path[1:],
             'res' : res
         }
         

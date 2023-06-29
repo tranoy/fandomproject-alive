@@ -85,13 +85,11 @@
                   </tr>
                 </tbody>
               </table>
-              <div style="display: flex; justify-content: center">
-                {% for sco in score %}
-                <video width="100%" height="640" controls autoplay>
-                  <source src="/media/{{sco.video_file }}" type="video/mp4" />
-                </video>
-                {% endfor %}
-              </div>
+              {% for sco in score %}
+              <video width="540" height="640" controls autoplay>
+                <source src="/media/{{sco.video_file }}" type="video/mp4" />
+              </video>
+              {% endfor %}
             </div>
           </div>
         </div>

@@ -52,26 +52,30 @@
                 </div>
             </div>
             <div class="row">
-                {% for s in score %}
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="discography__item">
-                        <div class="discography__item__pic">
-                            <!--<img src="/media/20230424_002724.png" alt="">-->
-                            {% load static %}
-                            <video width="350" height="700" controls>
-                                <source src="/media/{{ s.video_file }}" type="video/mp4">
-                            </video>
+                {% if score %}
+                    {% for s in score %}
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="discography__item">
+                                <div class="discography__item__pic">
+                                    <!--<img src="/media/20230424_002724.png" alt="">-->
+                                    {% load static %}
+                                    <video width="350" height="700" controls>
+                                        <source src="{{ s.video_file }}" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="discography__item__text">
+                                    <span>Title : {{ ref.title }}</span>
+                                    <h4>UserName : {{ s.nickname }}</h4>
+                                    <h4>Accuracy : {{ s.score|floatformat:2 }}%</h4>
+                                    <h4>=====================</h4>
+                                    <h6>{{ s.text }}</h6>
+                                </div>
+                            </div>
                         </div>
-                        <div class="discography__item__text">
-                            <span>Title : {{ ref.title }}</span>
-                            <h4>UserName : {{ s.nickname }}</h4>
-                            <h4>Accuracy : {{ s.score|floatformat:2 }}%</h4>
-                            <h4>=====================</h4>
-                            <h6>{{ s.text }}</h6>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <h3 style="color: white;">게시물이 없습니다.</h3>
+                {% endif %}
             </div>
             <div class="row">
                 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
