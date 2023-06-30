@@ -49,6 +49,9 @@
             <div class="Contents">
                 <div class="upload-box">
                     <svg viewBox="0 0 2500 400">
+                        <symbol id="s-text">
+                            <text text-anchor="middle" x="50%" y="80%">Create your Album Art</text>
+                        </symbol>
                         <g class="g-ants">
                             <use xlink:href="#s-text" class="text-copy"></use>
                             <use xlink:href="#s-text" class="text-copy"></use>
@@ -58,19 +61,22 @@
                         </g>
                     </svg>
                     <hr style="color:white;">
-                    <div>
-                        <input type="text" id="album_name_input" placeholder="Album Art Name">
-                    </div>
                     <form id="upload-form" method="post" action="{% url 'making:transform' %}" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div id="drop-file" class="drag-file">
-                            <img src="/making/static/mkimg/file-earmark-image.svg" class="image">
+                            <img src="/making/static/mkimg/files.png" class="image">
                             <p class="drag_message">이미지를 드래그하여 업로드하세요.</p>
                             <img src="" alt="Preview" class="preview" id="previewImage">
                             <div id="image-preview-container"></div> <!-- 이미지 미리보기 컨테이너 추가 -->
                         </div>
                         <ul style="list-style: none;">
                             <li style="margin:20px 0; text-align:center;">
+                                <select name="style">
+                                    {% for style in styles %}
+                                        <option value="{{ style }}">{{ style }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button type="submit" id="create-album-art-button">앨범 아트 생성</button>
                                 <!-- 파일 업로드 버튼 -->
                                 <label class="image-upload" for="chooseImage">이미지 선택</label>
                                 <br>
@@ -79,12 +85,8 @@
                                 <input class="file" id="chooseImage" type="file" onchange="handleFiles(this.files)" name="image" accept="image/png, image/jpeg, image/gif">
                             </li>
                         </ul>
-                        <select name="style">
-                            {% for style in styles %}
-                                <option value="{{ style }}">{{ style }}</option>
-                            {% endfor %}
-                        </select>
-                        <button type="submit" id="create-album-art-button">앨범 아트 생성</button>
+                        
+                        
                     </form>
 
 
@@ -107,13 +109,18 @@
 <script src="{% static 'mkjs/jquery.nicescroll.min.js'%}"></script>
 <script src="{% static 'mkjs/jquery.countdown.min.js'%}"></script>
 <script src="{% static 'mkjs/jquery.slicknav.js'%}"></script>
+<script src="{% static 'mkjs/DragNdrop.js'%}"></script>
 <script>
     function handleFiles(files) {
+        const dragMessage = document.querySelector(".drag_message");
+        const imageIcon = document.querySelector(".image");
         const imagePreviewContainer = document.getElementById("image-preview-container");
         const previewImage = document.getElementById("previewImage");
 
         if (files.length === 0) {
-            imagePreviewContainer.innerHTML = "";  // 이미지 미리보기 컨테이너를 비웁니다.
+            imagePreviewContainer.innerHTML = ""; // 이미지 미리보기 컨테이너를 비웁니다.
+            dragMessage.style.display = "block"; // 문구 보이기
+            imageIcon.style.display = "block" //이미지 아이콘 보이게
             return;
         }
 
@@ -127,8 +134,11 @@
             // 선택한 이미지를 이미지 미리보기 컨테이너 안에도 표시할 수 있습니다. (선택사항)
             const imagePreview = document.createElement("img");
             imagePreview.src = imageUrl;
-            imagePreviewContainer.innerHTML = "";  // 추가하기 전에 컨테이너를 비웁니다.
+            imagePreviewContainer.innerHTML = ""; // 추가하기 전에 컨테이너를 비웁니다.
             imagePreviewContainer.appendChild(imagePreview);
+
+            dragMessage.style.display = "none"; // 문구 숨기기
+            imageIcon.style.display = "none"; // 이미지 아이콘 숨기기
         }
 
         reader.readAsDataURL(file);
@@ -149,21 +159,21 @@
         formData.append("style", document.querySelector("select[name='style']").value);
 
         fetch("{% url 'making:transform' %}", {
-            method: "POST",
-            body: formData,
-            headers: {
-                "X-CSRFToken": document.querySelector("[name='csrfmiddlewaretoken']").value
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            // 이미지 저장 및 출력 처리
-            sessionStorage.setItem('transformedImage', data.transformed_image);
-            window.location.href = "{% url 'making:display' %}";
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRFToken": document.querySelector("[name='csrfmiddlewaretoken']").value
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 이미지 저장 및 출력 처리
+                sessionStorage.setItem('transformedImage', data.transformed_image);
+                window.location.href = "{% url 'making:display' %}";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
     }
 
     const createAlbumArtButton = document.getElementById("create-album-art-button");

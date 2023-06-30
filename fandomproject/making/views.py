@@ -41,7 +41,7 @@ def transform(request):
             pil_image = pil_image.convert('RGB')
 
         input_image = np.asarray(pil_image)
-        input_image = input_image[:, :, [0, 1, 2]]  # RGB에서 BGR로 변경
+        # input_image = input_image[:, :, [0, 1, 2]]  # RGB에서 BGR로 변경
         input_image = transforms.ToTensor()(input_image).unsqueeze(0)
         input_image = input_image * 2 - 1  # 전처리, (-1, 1)
 

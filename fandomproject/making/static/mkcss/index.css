@@ -1047,10 +1047,7 @@ ol {
 -----------------------*/
 
 .footer {
-    padding-top: 300px;
-    padding-bottom: 60px;
-    margin-top: -547px;
-    height: 549px;
+    height: 400px;
 }
 
 .footer.footer--normal {
@@ -1063,9 +1060,8 @@ ol {
 
 .footer__address ul li {
     list-style: none;
-    padding-left: 70px;
+    font-size: 15px;
     position: relative;
-    margin-bottom: 30px;
 }
 
 .footer__address ul li:last-child {
@@ -2752,7 +2748,6 @@ ol {
         padding-bottom: 776px;
     }
     .footer {
-        margin-top: -740px;
         background-position: top 0 left 19%;
     }
 }
@@ -2902,7 +2897,6 @@ ol {
         padding-bottom: 940px;
     }
     .footer {
-        margin-top: -940px;
         background-position: top 0 left 19%;
     }
 }
@@ -2979,7 +2973,7 @@ ol {
         padding-bottom: 980px;
     }
     .footer {
-        margin-top: -970px;
+        /* margin-top: -970px; */
         background-position: top 0 left 19%;
     }
 }
@@ -3018,7 +3012,7 @@ ol {
     justify-content: center;
     align-items: center;
     border: 3px outset #dbdbdb;
-    border-radius: 25px;
+    border-radius: 27px;
     background-color: #000000;
 }
 
@@ -3035,6 +3029,7 @@ ol {
     color: black;
     font-weight: 600;
     transition: background-color 0.35s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+    border: 2px solid black;
 }
 
 .upload-box .drag-file .drag_message {
@@ -3052,17 +3047,20 @@ ol {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 25px;
 }
 
 .image-upload {
     margin-top: 10px;
     margin-bottom: 10px;
-    background-color: #EE1E31;
+    background-color: #000000;
     color: #fff;
     text-align: center;
     padding: 15px 15px;
     border-radius: 25px;
     cursor: pointer;
+    font-size: 15px;
+    border: 2px solid white;
 }
 
 .Image_result {
@@ -3120,6 +3118,8 @@ button:hover,
     font-weight: 600;
     color: black;
     background: #ffffff;
+    display: inline-block;
+    padding: 10px;
 }
 
 input[type="button"].alt,
@@ -3208,6 +3208,33 @@ svg {
     100% {
         stroke-dashoffset: -35%;
     }
+}
+
+#create-album-art-button {
+    text-align: center;
+    margin-left: 35px;
+    margin: 10px 15px;
+    height: 55px;
+    width: 200px;
+    font-size: 15px;
+    text-align: center;
+    border: 2px solid white;
+}
+
+#create-album-art-button:hover {
+    transition: background-color 0.85s ease-in-out, color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+    border: 2px solid black;
+}
+
+select {
+    margin: 20px 10px 20px 1px;
+    height: 30px;
+}
+
+#image-preview-container {
+    /* max-width: 100%; */
+    overflow: hidden;
+    border-radius: 25px;
 }
 
 

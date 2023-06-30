@@ -79,7 +79,7 @@
           </div>
         </div>
         <div class="row">
-          {% if result %} {% for res in result %}
+          {% for res in result %}
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="discography__item">
               <div class="discography__item__pic">
@@ -112,9 +112,7 @@
               </div>
             </div>
           </div>
-          {% endfor %} {% else %}
-          <h3 style="color: white">게시물이 없습니다.</h3>
-          {% endif %}
+          {% endfor %}
           <script>
             function editRow(id) {
               var new_text = prompt("Enter new text:");
