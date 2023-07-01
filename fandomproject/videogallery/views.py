@@ -20,6 +20,12 @@ def Main(request):
             scores = Score.objects.all()
             
         result = []
+        try:
+            nickname = request.session['nickname']
+            user = User.objects.filter(nickname=nickname).first()
+        except KeyError:
+            nickname = None
+            user = None
         for score in scores:
             try:
                 mk_image = TransformedLog.objects.filter(nickname=score.nickname).order_by('-date').first()
@@ -39,7 +45,8 @@ def Main(request):
         page_obj = paginator.get_page(page_number)
         context = {
             'result' : page_obj,
-            'query' : query
+            'query' : query,
+            'user' : user,
         }
         return context
     
