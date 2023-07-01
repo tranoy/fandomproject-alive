@@ -1490,6 +1490,10 @@ ol {
 }
 
 .score-time{
-	content: "•";
 	margin-left: 7px;
+}
+
+.score-content > .score-time::before{
+	content: "•";
+	margin-right: 0.5rem;
 }
