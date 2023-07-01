@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from challenge.models import Score, Ref_Video
 from django.db.models import Count
+from accounts.models import User
 # Create your views here.
 
 
@@ -11,7 +12,12 @@ class RankingMain(APIView):
     def get(self,request):
         score_count = Score.objects.count()
         scores = Score.objects.order_by('-score')
-        
+        try:
+            nickname = request.session['nickname']
+            user = User.objects.filter(nickname=nickname).first()
+        except KeyError:
+            nickname = None
+            user = None
         result = []
         for score in scores:
             try:
@@ -20,5 +26,6 @@ class RankingMain(APIView):
             except Ref_Video.DoesNotExist:
                 pass
         context = {'score_count' : score_count,
-                   'result' : result}
+                   'result' : result,
+                   'user' : user,}
         return render(request, 'ranking/ranking.html', context)
