@@ -67,7 +67,7 @@
                                     <h5 style="color:#A8A8A8">{{ s.nickname }}</h4>
                                     <div class="score-content"style="display:flex">
                                     <h5 style="color:#A8A8A8">점수 {{ s.score|floatformat:2 }}점</h5>
-                                    <h5 class="score-time" style="color:#A8A8A8;">{{s.create_at}}</h5>
+                                    <h5 class="score-time" style="color:#A8A8A8;">{{s.create_at | timesince}} 전</h5>
                                     </div>
                                 </div>
                             </div>
