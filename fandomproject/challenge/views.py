@@ -67,17 +67,19 @@ class ChallengeMain(APIView):
             # 기존 data와 missing_data 병합
             data = list(data) + missing_data
             
-        paginator = Paginator(data_count, 6)
-        print(data,"===============")
-        print(data_count,"============")
+        paginator = Paginator(data, 6)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
+
         #####################################################
-        combined_data = zip(data, data_count,page_obj)
-        print(combined_data)
-        context = {'combined_data' : combined_data,
+        # 다음 페이지로 넘어갈 때 첫 번째 게시물 설정
+        print(page_obj)
+        print(data_count)
+
+        context = {'page_obj':page_obj,
                    'user' : user,
-                   'page_obj':page_obj}
+                   }
+        
                    #'score_count' : data_count}
         return render(request, "challenge/challenge.html", context)
     
