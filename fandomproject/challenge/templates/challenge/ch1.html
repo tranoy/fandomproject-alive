@@ -65,6 +65,7 @@
                 </div>
             </div>
             <div class="row">
+                {% if score %}
                     {% for s in score %}
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="discography__item">
@@ -84,6 +85,9 @@
                             </div>
                         </div>
                     {% endfor %}
+                {% else %}
+                <div style="color:white; position:absolute; left:43%;">게시물이 존재하지 않습니다.</div>
+                {% endif %}
             </div>
             <div id="upload-modal" class="modal-box">
                 <div class="modal-contents">
