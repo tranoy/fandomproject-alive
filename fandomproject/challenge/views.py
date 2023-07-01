@@ -109,6 +109,12 @@ class ChallengeOne(APIView):
         return render(request, "challenge/ch1.html", context)
     
     def post(self, request, pk):
+        try:
+            nickname = request.session['nickname']
+            user = User.objects.filter(nickname=nickname).first()
+        except KeyError:
+            nickname = None
+            user = None
         print("ChallengeOne - POST")
         score = Score.objects.all()
         challenge = Ref_Video.objects.get(id=pk)
@@ -124,7 +130,8 @@ class ChallengeOne(APIView):
                 context = { 
                     'form': form,
                     'challenge': challenge,
-                    'score': score
+                    'score': score,
+                    'user' : user
                 }
                 return render(request, "challenge/success.html", context)
             else:
