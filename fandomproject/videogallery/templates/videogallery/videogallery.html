@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'vcss/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vcss/videomain.css' %}" />
+    <title>Gallery</title>
+  </head>
+  <body>
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2 col-md-2">
+            <div class="header__logo">
+              <a href="/"><img src="/static/img/logo.png" alt="" /></a>
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-10">
+            <div class="header__nav">
+              <nav class="header__menu mobile-menu">
+                <ul>
+                  <li><a href="/">HOME</a></li>
+                  <li><a href="/challenge">CHALLENGE</a></li>
+                  {% if user.nickname %}
+                  <li><a href="/making">MAKING</a></li>
+                  {% endif %}
+                  <li><a href="/ranking">RANKING</a></li>
+                  <li class="active"><a href="">BOARD</a></li>
+                  {% if user.nickname %}
+                  <li>
+                    <a href="/logout">LOGOUT</a>
+                  </li>
+                  {% else %}
+                  <li>
+                    <a href="/login">LOGIN</a>
+                  </li>
+                  {% endif%}
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+      </div>
+    </header>
+
+    <!-- Discography Section Begin -->
+    <section class="discography spad">
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-lg-12"
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <div style="width: 262px; height: 30px"></div>
+            <div class="section-title center-title">
+              <h2 style="color: white">Video Board</h2>
+            </div>
+            <div>
+              <form method="GET" action="">
+                <input
+                  id="summonerNameInput"
+                  name="query"
+                  value="{{ query }}"
+                  type="text"
+                  placeholder="Search NickName"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          {% for res in result %}
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="discography__item">
+              <div class="discography__item__pic">
+                <a href="{% url 'videogallery:more' res.0 %}">
+                  <div class="image-container">
+                    {% if res.6%}
+                    <img src="{{ res.6 }}" alt="" width="350" height="228" />
+                    {% else %}
+                    <img
+                      src="/media/20230424_002724.png"
+                      alt=""
+                      style="width: 350 height: 228"
+                    />
+                    {% endif %}
+                  </div>
+                </a>
+              </div>
+              <div
+                class="discography__item__text"
+                style="background-color: white"
+              >
+                <h4>[{{ res.5 }} - {{ res.4 }}]</h4>
+                {% comment %}
+                <h4>accuracy - {{ res.2 }}</h4>
+                {% endcomment %}
+                <h4>유저이름 - {{ res.1 }}</h4>
+                {% comment %}
+                <h4>text - {{ res.3 }}</h4>
+                {% endcomment %}
+              </div>
+            </div>
+          </div>
+          {% endfor %} {% comment %}
+          <script>
+            function editRow(id) {
+              var new_text = prompt("Enter new text:");
+              if (new_text !== null && new_text.trim() !== "") {
+                var formData = new FormData();
+                formData.append("id", id);
+                formData.append("text", new_text);
+                formData.append("action", "update");
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "", true);
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+
+                xhr.onreadystatechange = function () {
+                  if (
+                    xhr.readyState === XMLHttpRequest.DONE &&
+                    xhr.status === 200
+                  ) {
+                    // Handle the response or perform any necessary actions
+                    // For example, you can update the UI dynamically
+                    console.log("Row updated successfully");
+                  }
+                };
+
+                xhr.send(formData);
+              }
+            }
+
+            function deleteRow(id) {
+              if (confirm("Are you sure you want to delete this row?")) {
+                var formData = new FormData();
+                formData.append("id", id);
+                formData.append("action", "delete");
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "", true);
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+
+                xhr.onreadystatechange = function () {
+                  if (
+                    xhr.readyState === XMLHttpRequest.DONE &&
+                    xhr.status === 200
+                  ) {
+                    // Handle the response or perform any necessary actions
+                    // For example, you can update the UI dynamically
+                    console.log("Row deleted successfully");
+                  }
+                };
+
+                xhr.send(formData);
+              }
+            }
+          </script>
+          {% endcomment %}
+        </div>
+      </div>
+    </section>
+    <footer class="footer spad set-bg" data-setbg="">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="footer__address">
+              <ul>
+                <li>
+                  <a href="/policy" target="_blank" style="color: white"
+                    >이용약관</a
+                  >
+                </li>
+                <li>
+                  <a href="/privacy" target="_blank" style="color: white"
+                    >개인정보 처리방침</a
+                  >
+                </li>
+                <li>
+                  <h2 style="color: white">ALIVE</h2>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4 offset-lg-1 col-md-6">
+            <div class="footer__social">
+              <div class="footer__social__links">
+                <p>주소 부분</p>
+                <p style="color: white">
+                  광주광역시 북구 신안동 무등로202번길 15<br />KT신안빌딩
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="footer__address" style="margin-left: 90px">
+              <ul style="display: flex">
+                <li class="icon_li">
+                  <a
+                    href="https://www.youtube.com/watch?v=oSfiSswjiBQ&list=PL_WCuvyChN3g7tC-_q1UexhM61t51yPM_"
+                    target="_blank"
+                    style="color: white"
+                  >
+                    <img
+                      src="/static/img/youtube.png"
+                      alt=""
+                      style="width: 50px"
+                    />
+                  </a>
+                </li>
+                <li class="icon_li">
+                  <a
+                    href="https://github.com/Junobee25/ai-33-project/tree/develop"
+                    target="_blank"
+                    style="color: white"
+                  >
+                    <img
+                      src="/static/img/github.png"
+                      alt=""
+                      style="width: 50px"
+                    />
+                  </a>
+                </li>
+                <li class="icon_li">
+                  <a
+                    href="https://www.instagram.com/aivlestory/"
+                    target="_blank"
+                    style="color: white"
+                  >
+                    <img
+                      src="/static/img/instagram.png"
+                      alt=""
+                      style="width: 50px"
+                    />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        <div class="footer__copyright__text">
+          <p>
+            Copyright &copy; 카피라이트 부분
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            All rights reserved | This template is made with
+            <i class="fa fa-heart" aria-hidden="true"></i> by
+            <a href="https://colorlib.com" target="_blank">링크</a>
+          </p>
+        </div>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+      </div>
+    </footer>
+
+    {% block content %} {% endblock %}
+    <script src="{% static 'vjs/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'vjs/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vjs/main.js' %}"></script>
+  </body>
+</html>

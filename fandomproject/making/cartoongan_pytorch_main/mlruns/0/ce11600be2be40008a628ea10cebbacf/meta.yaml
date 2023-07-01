@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ccg70/OneDrive/desktop/Big_project/cartoongan-pytorch-main/mlruns/0/ce11600be2be40008a628ea10cebbacf/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ce11600be2be40008a628ea10cebbacf
+run_name: amazing-bug-302
+run_uuid: ce11600be2be40008a628ea10cebbacf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1687186599948
+status: 1
+tags: []
+user_id: ccg70

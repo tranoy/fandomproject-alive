@@ -1,0 +1,165 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alive_Album</title>
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'mkcss/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'mkcss/rockville.css'%}" />
+    <link rel="stylesheet" href="{% static 'mkcss/slicknav.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'mkcss/index.css'%}" />
+  </head>
+  <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2 col-md-2">
+            <div class="header__logo">
+              <a href="/"><img src="/static/img/logo.png" alt="" /></a>
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-10">
+            <div class="header__nav">
+              <nav class="header__menu mobile-menu">
+                <ul>
+                  <li class="active"><a href="/">HOME</a></li>
+                  <li><a href="/making">MAKING</a></li>
+                  <li><a href="/ranking">RANKING</a></li>
+                  <li><a href="/board">BOARD</a></li>
+                  <li><a href="/login">LOGIN</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+      </div>
+    </header>
+    <!-- Main -->
+    <div class="wrapper style1">
+      <div class="container">
+        <div id="root">
+          <div class="Contents">
+            <div class="upload-box">
+              <svg viewBox="0 0 2500 400">
+                <symbol id="s-text">
+                  <text text-anchor="middle" x="50%" y="80%">
+                    Create your Album Art
+                  </text>
+                </symbol>
+                <g class="g-ants">
+                  <use xlink:href="#s-text" class="text-copy"></use>
+                  <use xlink:href="#s-text" class="text-copy"></use>
+                  <use xlink:href="#s-text" class="text-copy"></use>
+                  <use xlink:href="#s-text" class="text-copy"></use>
+                  <use xlink:href="#s-text" class="text-copy"></use>
+                </g>
+              </svg>
+              <div id="drop-file" style="text-align: center">
+                {% if transformed_image_url %}
+                <h2>Transformed Image</h2>
+                <img
+                  id="transformed-image"
+                  src="{{ transformed_image_url }}"
+                  alt="Transformed Image"
+                />
+                <br />
+                <input type="text" id="filename" placeholder="Enter filename" />
+                <button
+                  id="download-btn"
+                  onclick="downloadImage('{{ transformed_image_url }}')"
+                >
+                  Download
+                </button>
+                <script>
+                  function handleClick() {
+                    // Execute your function here
+                    const button = document.getElementById("post-btn");
+                    const url = button.dataset.url;
+                    const scrfToken = button.dataset.csrfToken;
+                    postImage("{{ nickname }}", "{{ transformed_image_url }}");
+                    // Redirect to another HTML file
+                    //window.location.href = '{% url 'main_index' %}'
+                  }
+                </script>
+                <button
+                  id="post-btn"
+                  onclick="handleClick()"
+                  data-url="{% url 'making:post_image' %}"
+                  data-csrf-token="{{ csrf_token }}"
+                >
+                  Post
+                </button>
+                <button
+                  id="goto-index"
+                  onclick="window.location.href='{% url 'main_index' %}'"
+                >
+                  Home
+                </button>
+                {% else %}
+                <p>No transformed image available.</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Js Plugins -->
+    <script src="{% static 'mkjs/jquery-3.3.1.min.js'%}"></script>
+    <script src="{% static 'mkjs/bootstrap.min.js'%}"></script>
+    <script src="{% static 'mkjs/main.js'%}"></script>
+    <script src="{% static 'mkjs/jquery.magnific-popup.min.js'%}"></script>
+    <script src="{% static 'mkjs/jquery.nicescroll.min.js'%}"></script>
+    <script src="{% static 'mkjs/jquery.countdown.min.js'%}"></script>
+    <script src="{% static 'mkjs/jquery.slicknav.js'%}"></script>
+    <script>
+      function downloadImage(imageUrl) {
+        const link = document.createElement("a");
+        const filenameInput = document.getElementById("filename");
+        const filename = filenameInput.value || "download.jpg";
+        link.href = imageUrl;
+        link.download = filename;
+        link.click();
+      }
+
+      function postImage(nickname, imageUrl) {
+        fetch("{% url 'making:post_image' %}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}",
+          },
+          body: JSON.stringify({
+            nickname: nickname,
+            image_url: imageUrl,
+          }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data.success) {
+              alert("글이 게시되었습니다.");
+            } else {
+              alert("이미지 게시 중 오류가 발생했습니다.");
+            }
+          })
+          .catch((error) => {
+            alert("이미지 게시 중 오류가 발생했습니다.");
+            console.error("Error:", error);
+          });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+<!-- upload.html -->
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% comment %} <label for="video-file">비디오 파일:</label>
+  <input type="file" id="video-file" accept="video/*" required> {% endcomment %}
+  <button type="submit">업로드</button>
+</form>
+
+{% comment %} <a href="{% url 'challenge:upload' challenge.id %}"></a> {% endcomment %}

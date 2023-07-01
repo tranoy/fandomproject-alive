@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'accounts/bootstrap.min1.css'%}">
+    <link rel="stylesheet" href="{% static 'accounts/style.css'%}">
+    <link rel="stylesheet" href="{% static 'accounts/join.css'%}">
+    <link rel="stylesheet" href="{% static 'accounts/font-awesome.min.css'%}">
+    <title>Document</title>
+</head>
+<body>
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                    <div class="header__logo">
+                        <a href="/"><img src="/static/img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-md-10">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="/">HOME</a></li>
+                                <li class=><a href="/challenge">Challenge</a></li>
+                                <li><a href="/making">MAKING</a></li>
+                                <li><a href="/ranking">RANKING</a></li>
+                                <li><a href="/videogallery">BOARD</a></li>
+                                {% if user.username %}
+                                <li>
+                                    <a href="/logout">LOGOUT</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a href="/login">LOGIN</a>
+                                </li>
+                                {% endif%}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="main_section">
+    <section class="login-form">
+        <h1>JOIN</h1>
+            {% csrf_token %}
+            <div class="int-area">
+                <div>
+                <input type="text" name="nickname" id="nick"
+                autocomplete="false" required>
+                <label for="id">ID</label>
+                </div>
+                {% comment %} <div style="padding-left:10px; color:red;" > This ID is already taken
+                </div> {% endcomment %}
+            </div>
+            <div class="int-area">
+                <div>
+                <input type="password" name="password1" id="pw1"
+                autocomplete="false" required>
+                <label for="pw1">PASSWORD</label>
+                </div>
+            </div>
+            <div class="int-area">
+                <div>
+                <input type="password" name="password2" id="pw2"
+                autocomplete="false" required>
+                <label for="pw2">PASSWORD CHECK</label>
+                </div>
+            </div>
+            <div class="int-area">
+                <div>
+                <input type="email" name="email" id="email"
+                autocomplete="false" required>
+                <label for="email">EMAIL</label>
+                </div>
+            </div>
+            <div class="int-area">
+                <div>
+                <input type="text" name="username" id="id"
+                autocomplete="false" required>
+                <label for="id">NAME</label>
+                </div>
+            </div>
+            <div class="btn-area">
+                <button id="join_btn"
+                type="submit" value="Join">JOIN</button>
+            </div>
+        </section>
+        </div>
+        <footer class="footer spad set-bg" data-setbg="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer__address">
+                            <ul>
+                                <li>
+                                    <a href="/policy" target='_blank' style="color: white;">이용약관</a>
+                                </li>
+                                <li>
+                                    <a href="/privacy" target='_blank' style="color: white;">개인정보 처리방침</a>
+                                </li>
+                                <li>
+                                    <h2 style="color: white;">ALIVE</h2>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 offset-lg-1 col-md-6">
+                        <div class="footer__social">
+                            <div class="footer__social__links">
+                                <p>주소 부분</p>
+                                <p style="color:white;">광주광역시 북구 신안동 무등로202번길 15<br>KT신안빌딩</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer__address" style="margin-left: 90px;">
+                            <ul style="display: flex;">
+                                <li class="icon_li">
+                                    <a href="https://www.youtube.com/watch?v=oSfiSswjiBQ&list=PL_WCuvyChN3g7tC-_q1UexhM61t51yPM_" target='_blank' style="color: white;">
+                                        <img src="/static/img/youtube.png" alt="" style="width: 50px;">
+                                    </a>
+                                </li>
+                                <li class="icon_li">
+                                    <a href="https://github.com/Junobee25/ai-33-project/tree/develop" target='_blank' style="color: white;">
+                                        <img src="/static/img/github.png" alt="" style="width: 50px;">
+                                    </a>
+                                </li>
+                                <li class="icon_li">
+                                    <a href="https://www.instagram.com/aivlestory/" target='_blank' style="color: white;">
+                                        <img src="/static/img/instagram.png" alt="" style="width: 50px;">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                <div class="footer__copyright__text">
+                    <p>Copyright &copy; 카피라이트 부분
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> 
+                        All rights reserved | This template is made with 
+                        <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">링크</a></p>
+                </div>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </div>
+        </footer>
+    <script src="{% static 'accjs/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'accjs/join.js' %}"></script>
+    <script src="{% static 'accjs/main.js' %}"></script>
+</body>
+</html>

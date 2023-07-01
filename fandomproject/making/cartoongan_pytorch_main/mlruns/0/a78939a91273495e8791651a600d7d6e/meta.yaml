@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ccg70/OneDrive/desktop/Big_project/cartoongan-pytorch-main/mlruns/0/a78939a91273495e8791651a600d7d6e/artifacts
+end_time: 1687331865451
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a78939a91273495e8791651a600d7d6e
+run_name: unequaled-ray-90
+run_uuid: a78939a91273495e8791651a600d7d6e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1687331863826
+status: 3
+tags: []
+user_id: ccg

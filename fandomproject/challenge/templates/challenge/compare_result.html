@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'chcss/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'chcss/challenge.css' %}" />
+    <title>Result</title>
+  </head>
+  <body>
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2 col-md-2">
+            <div class="header__logo">
+              <a href="/"><img src="/static/img/logo.png" alt="" /></a>
+            </div>
+          </div>
+          <div class="col-lg-10 col-md-10">
+            <div class="header__nav">
+              <nav class="header__menu mobile-menu">
+                <ul>
+                  <li><a href="/">HOME</a></li>
+                  <li class="active"><a href="/challenge">CHALLENGE</a></li>
+                  {% if user.nickname %}
+                  <li><a href="/making">MAKING</a></li>
+                  {% endif %}
+                  <li><a href="/ranking">RANKING</a></li>
+                  <li><a href="/videogallery">BOARD</a></li>
+                  {% if user.nickname %}
+                  <li>
+                    <a href="/logout">LOGOUT</a>
+                  </li>
+                  {% else %}
+                  <li>
+                    <a href="/login">LOGIN</a>
+                  </li>
+                  {% endif%}
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+      </div>
+    </header>
+    <section class="discography spad">
+      <div class="container">
+        <div
+          class="row"
+          style="display: flex; justify-content: center; margin-top: 100px"
+        >
+          <h2 style="color: white">
+            Your score is {{ score | floatformat:2}}%
+          </h2>
+        </div>
+        <div class="row" style="display: flex; justify-content: center">
+          <video width="540" height="640" controls autoplay>
+            <source src="{{ output_path }}" type="video/mp4" />
+          </video>
+        </div>
+        <div
+          class="row"
+          style="
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 200px;
+          "
+        >
+          <form
+            action="{% url 'videogallery:index'%}"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            {% csrf_token %}
+            <div class="text-button">
+              <label for="exampleFormControlSelect2" style="color: white"
+                >Please leave a message</label
+              >
+              <textarea
+                class="form-control"
+                style="margin-bottom: 30px; width: 540px"
+                id="exampleFormControlSelect2"
+                rows="4"
+                cols="50"
+                name="text"
+              ></textarea>
+              <input
+                type="hidden"
+                name="output_path"
+                value="{{ output_path }}"
+              />
+              <input
+                type="submit"
+                class="form-inputarea"
+                value="Upload to Bulletin Board"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <script src="{% static 'chjs/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'chjs/bootstrap.min.js' %}"></script>
+    <script src="{% static 'chjs/modal.js' %}"></script>
+    <script src="{% static 'chjs/main.js' %}"></script>
+  </body>
+</html>

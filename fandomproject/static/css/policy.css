@@ -1,0 +1,33 @@
+ol,
+li {
+    list-style: none;
+    margin: 10px 0;
+}
+
+.tit {
+    font-weight: 600;
+    font-size: 1em;
+}
+
+body {
+    margin: 10px 50px;
+    background-color: black;
+}
+
+.hd {
+    margin-left: 80px;
+}
+
+.container_apply {
+    width: 90%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    padding-right: 60px;
+}
+
+.header__logo {
+    color: white;
+    font-weight: 800;
+    font-size: 2em;
+}
