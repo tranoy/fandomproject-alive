@@ -7,9 +7,6 @@
 <!-- Css Styles -->
 <link rel="stylesheet" href="{% static 'rkcss/bootstrap.min.css' %}" />
 <link rel="stylesheet" href="{% static 'rkcss/rockville.css'%}" />
-<link rel="stylesheet" href="{% static 'rkcss/magnific-popup.min.css'%}" />
-<link rel="stylesheet" href="{% static 'rkcss/owl-carousel.min.css'%}" />
-<link rel="stylesheet" href="{% static 'rkcss/slicknav.min.css'%}" />
 <link rel="stylesheet" href="{% static 'rkcss/ranking.css'%}" />
 {% endblock %}
 <body style="background-color: white">
@@ -92,12 +89,14 @@
             <img src="/media/medal2.png" class="medal-img" />
             {% elif forloop.counter == 3 %}
             <img src="/media/medal3.png" class="medal-img" />
-            {% else %} {{ forloop.counter }} {% endif %}
+            {% else %}
+            <div style="padding-left: 7px">{{ forloop.counter }}</div>
+            {% endif %}
           </div>
           <div class="col">{{ res.0 }}</div>
           <div class="col">{{ res.3 }}</div>
           <div class="col">{{ res.2 }}</div>
-          <div class="col">{{ res.1 }} Points</div>
+          <div class="col">{{ res.1 | floatformat:2 }} Points</div>
         </div>
         {% endfor %}
       </div>
