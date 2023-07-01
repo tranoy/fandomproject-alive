@@ -31,12 +31,14 @@ $('#upload-button').click(function (){
 var closeButton = document.getElementsByClassName("close")[0];
 closeButton.addEventListener("click", function() {
   modal.style.display = "none";
+  document.body.style.overflow = "visible";
 });
 
 // 모달 창 외부 클릭 시 모달 창 닫기
 window.addEventListener("click", function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    document.body.style.overflow = "visible";
   }
 });
 

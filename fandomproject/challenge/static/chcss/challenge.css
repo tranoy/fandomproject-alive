@@ -1320,6 +1320,7 @@ ol {
 	-webkit-backdrop-filter: blur(1.5px);
 	align-items: center;
     justify-content: center;
+	overflow: hidden;
 
 }
 .modal-header{
