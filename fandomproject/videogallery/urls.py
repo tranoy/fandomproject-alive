@@ -7,11 +7,11 @@ from .views import GalleryMain, GalleryMore
 app_name = 'videogallery'
 
 urlpatterns = [
-    path('', GalleryMain.as_view(), name='index'),
+    path('', views.GalleryMain, name='index'),
+    path('/<int:pk>/update', views.Edit, name='update'),
     path('/<int:pk>', GalleryMore.as_view(), name='more'),
-    path('/<int:pk>/Edit', views.GoUpdate, name='goto_update'),
+    #path('/<int:pk>/Edit', views.GoUpdate, name='goto_update'),
     #path('/<int:pk>/update', views.Edit, name='update'),
-    path('/<int:pk>/update', GalleryMain.as_view(), name='update'),
     path('/<int:pk>/delete', views.delete, name='delete')
     #path('videogallery/', views.update_or_delete_row, name='videogallery'),
 ]
