@@ -1488,3 +1488,8 @@ ol {
 .page-select:hover{
 	color: #ee1e31;
 }
+
+.score-time{
+	content: "•";
+	margin-left: 7px;
+}

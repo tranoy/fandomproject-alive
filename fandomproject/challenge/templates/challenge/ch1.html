@@ -52,23 +52,22 @@
                 </div>
             </div>
             <div class="row">
-
                     {% for s in score %}
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="discography__item">
                                 <div class="discography__item__pic">
-                                    <!--<img src="/media/20230424_002724.png" alt="">-->
-                                    {% load static %}
-                                    <video width="350" height="700" controls>
+                                    <video width="350" height="350" controls>
                                         <source src="{{ s.video_file }}" type="video/mp4">
                                     </video>
                                 </div>
                                 <div class="discography__item__text">
-                                    <span>Title : {{ ref.title }}</span>
-                                    <h4>UserName : {{ s.nickname }}</h4>
-                                    <h4>Accuracy : {{ s.score|floatformat:2 }}%</h4>
-                                    <h4>=====================</h4>
-                                    <h6>{{ s.text }}</h6>
+                                    <h3 style="color:white; font-size:1.6rem; line-height: ">{{ ref.title }}</h3>
+                                    <h5 style="color:#A8A8A8">{{ s.nickname }}</h4>
+                                    <div style="display:flex">
+                                    <h5 style="color:#A8A8A8">점수 {{ s.score|floatformat:2 }}점</h5>
+                                    <li class="score-time" style="color:#A8A8A8;"></li>
+                                    <h5></h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>
