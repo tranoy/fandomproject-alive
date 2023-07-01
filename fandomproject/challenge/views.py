@@ -103,9 +103,11 @@ class ChallengeOne(APIView):
         print(score)
         ref_video=Ref_Video.objects.get(id=pk)
         
-        reversed_score = reversed(score)
-        
-        context = {'score' : reversed_score,
+        score = list(reversed(score))
+        paginator = Paginator(score, 6)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context = {'score' : page_obj,
                    'ref' : ref_video,
                    'user' : user}
         return render(request, "challenge/ch1.html", context)

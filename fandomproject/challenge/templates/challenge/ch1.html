@@ -118,6 +118,27 @@
             </div>
             </div>
 </section>
+<div class="pagination">
+    <span class="step-links">
+      {% if score.has_previous %}
+      <a href="?page=1" class="page-select">&laquo; first</a>
+      <a href="?page={{ score.previous_page_number }}" class="page-select"
+        >previous</a
+      >
+      {% endif %}
+
+      <span class="current-page">{{ score.number }}</span>
+
+      {% if score.has_next %}
+      <a href="?page={{ score.next_page_number }}" class="page-select"
+        >next</a
+      >
+      <a href="?page={{ score.paginator.num_pages }}" class="page-select"
+        >last &raquo;</a
+      >
+      {% endif %}
+    </span>
+  </div>
 <footer class="footer spad set-bg" data-setbg="">
     <div class="container">
         <div class="row">
