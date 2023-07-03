@@ -34,7 +34,6 @@ class Join(APIView):
         return render(request, "accounts/join.html")
     
     def post(self,request):
-        
         nickname = request.data.get('nickname',None)
         username = request.data.get('username',None)
         password1 = request.data.get('password1',None)
@@ -42,7 +41,12 @@ class Join(APIView):
         email = request.data.get('email','')
         print("post")
         exists = User.objects.filter(email=email).exists()
-        print(exists)
+        nick_exists = User.objects.filter(nickname=nickname).exists()
+        print("nickname",nick_exists)
+        if nick_exists:
+            id_data = {'id_exists':nick_exists}
+            return JsonResponse(id_data)
+        print("email",exists)
         if exists:
             print("post호출")
             data = {'exists':exists}

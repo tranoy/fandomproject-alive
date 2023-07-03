@@ -41,65 +41,50 @@ let email = $('#email');
 
 
 
-// $(document).ready(function() {
-//     // 아이디 중복 검사
-//     $('#id').on('blur', function() {
-//         var username = $(this).val();
-      
-//         $.ajax({
-//         url: '/login/join',  // 아이디 중복 검사를 처리하는 URL
-//         method: 'POST',
-//         data: {
-//             username: username
-//         },
-//         success: function(response) {
-//             if (response.exists) {
-//             // 아이디가 이미 존재하는 경우 오류 메시지 표시
-//             $('#id').next('label').addClass('warning').text('This ID is already taken');
-//             } else {
-//             // 아이디가 존재하지 않는 경우 오류 메시지 제거
-//             $('#id').next('label').removeClass('warning').text('ID');
-//             }
-//         },
-//     });
-//     });
-// });
-// $(document).ready(function() {
-//     // 아이디 중복 검사
-//     $('#nick').on('blur', function() {
-//       let nickname = $(this).val();
-//       let username = $('#username').val();  // username 필드 값 가져오기
-//       let password1 = $('#pw1').val();  // password1 필드 값 가져오기
-//       let password2 = $('#pw2').val();  // password2 필드 값 가져오기
-//       let email = $('#email').val();  // email 필드 값 가져오기
-  
-//       // Ajax 요청
-//       $.ajax({
-//         url: '/login/join',  // 서버의 URL 주소
-//         method: 'POST',
-//         headers: { 'X-CSRFToken': '{{ csrf_token }}' },
-//         data: { nickname: nickname,
-//             username: username,
-//             password1: password1,
-//             password2: password2,
-//             email: email },  // 전송할 데이터
-  
-//         success: function(response) {
-//           if (response.exists) {
-//             // 아이디가 이미 존재하는 경우 오류 메시지 표시
-//             $('#nick').next('label').addClass('warning').text('This ID is already taken');
-//           } else {
-//             // 아이디가 존재하지 않는 경우 오류 메시지 제거
-//             $('#nick').next('label').removeClass('warning').text('ID');
-//           }
-//         },
-  
-//         error: function(request, status, error) {
-//           console.log('An error occurred during username check:', error);
-//         }
-//       });
-//     });
-//   });
+
+let checkBtn = $('#join-id-check')
+// join버튼 조건에 bool값 추가
+// id check 버튼을 먼저 누르고 유효성 맞아야지 true로 바껴서 join이 될 수 있도록
+var checkBool = false
+$(checkBtn).on('click', function() {
+    let nickname = $('#nick').val();
+    let idRegex = /^[a-z0-9]{6,}$/; // 영소문자와 숫자로 구성된 6글자 이상
+
+    if (nickname === ''){
+        return
+    }
+    if (!idRegex.test(nickname)) {
+        $('#nick').next('label').addClass('warning').text('영소문자와 숫자로 구성된 6글자 이상으로 작성해주세요');
+        checkBool = false
+    }
+    else{
+        $('#nick').next('label').removeClass('warning').text('ID');
+        $.ajax({
+            url : "/login/join",
+            data : {
+                nickname : nickname
+            },
+            method : "POST",
+            success : function (id_data) {
+                if (id_data.id_exists) {
+                // 이메일 이미 존재하는 경우 오류 메시지 표시
+                $('#nick').next('label').addClass('warning').text('이미 존재하는 아이디 입니다.');
+                }else{
+                $('#nick').next('label').removeClass('warning').text('ID');
+                checkBool = true
+                }
+            },
+            error : function (request, status, error){
+                console.log("에러");
+            },
+            complete : function () {
+                console.log("완료");
+                
+            },
+        })
+    }
+})
+
 
 
 $(document).ready(function() {
@@ -114,9 +99,15 @@ $(document).ready(function() {
     } else {
       // 비밀번호가 일치하는 경우 오류 메시지 제거
       $('#pw2').next('label').removeClass('warning').text('PASSWORD CHECK');
+
     }
   })
 })
+
+
+
+
+
 
 // post 방식 비동기 처리 ==> account views.py class
 $('#join_btn').click(function () {
@@ -126,7 +117,8 @@ $('#join_btn').click(function () {
     let password1 = $('#pw1').val();
     let password2 = $('#pw2').val();
     let email = $('#email').val();
-    if (username && nickname && password1 && password2 && email) {
+    if (username && nickname && password1 && password2 && email && checkBool) {
+
     // ajax 통신
     $.ajax({
         url : "/login/join",
@@ -141,10 +133,10 @@ $('#join_btn').click(function () {
         // 회원가입 성공시 로그인 페이지로
         success : function (data) {
             if (data.exists) {
-            // 아이디가 이미 존재하는 경우 오류 메시지 표시
-            $('#email').next('label').addClass('warning').text('This EMAIL is already taken');
+            // 이메일 이미 존재하는 경우 오류 메시지 표시
+            $('#email').next('label').addClass('warning').text('이미 존재하는 이메일 입니다');
             } else {
-            // 아이디가 존재하지 않는 경우 오류 메시지 제거
+            // 이메일 존재하지 않는 경우 오류 메시지 제거
             $('#email').next('label').removeClass('warning').text('ID');
             console.log("성공");
             alert("회원가입 성공했습니다. 로그인 해주세요.")

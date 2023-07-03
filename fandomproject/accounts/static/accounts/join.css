@@ -101,3 +101,22 @@ body::-webkit-scrollbar-track {
     font-weight: bolder;
     text-decoration: none;
 }
+
+.join-id-btn{
+    position: absolute;
+    left: 80%;
+    top: 28%;
+}
+
+#join-id-check{
+    width: 80px;
+    background-color: #166cea;
+    color: #fff;
+    font-size: 15px;
+    border: none;
+}
+
+#nick {
+    z-index: 2;
+}
+
