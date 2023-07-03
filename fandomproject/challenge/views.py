@@ -202,10 +202,12 @@ class ChallengeCompareResult(APIView):
         latest_video_id = Video.objects.all().aggregate(Max('id'))['id__max']
         video = Video.objects.get(id=latest_video_id)
         video_path = f"./media/{video.video_file}"
-        
-        
-        
-        nickname = request.session['nickname']
+        try:
+            nickname = request.session['nickname']
+            user = User.objects.filter(nickname=nickname).first()
+        except KeyError:
+            messages.warning(request, '로그인 후에 페이지를 사용하실 수 있습니다.')
+            return redirect('/login')  # 로그인 페이지로 리디렉션
         challenge.title = challenge.title.replace(' ', '_')
         score, output_path = compare_video(ref_path, video_path,nickname,challenge.title)
         print(output_path)
@@ -220,7 +222,6 @@ class ChallengeCompareResult(APIView):
             'output_path' : output_path[1:],
             'res' : res
         }
-        
         return render(request, "challenge/compare_result.html", context)
     
 
