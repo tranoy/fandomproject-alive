@@ -1,7 +1,8 @@
 from django.db import models
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from rest_framework.views import APIView
 from .forms import VideoForm
+from django.contrib import messages
 from rest_framework.response import Response
 from rest_framework import status
 from django.views import View
@@ -130,8 +131,8 @@ class ChallengeOne(APIView):
             nickname = request.session['nickname']
             user = User.objects.filter(nickname=nickname).first()
         except KeyError:
-            nickname = None
-            user = None
+            messages.warning(request, '로그인 후에 페이지를 사용하실 수 있습니다.')
+            return redirect('/login')  # 로그인 페이지로 리디렉션
             
         
         score = Score.objects.filter(ref_id=pk)
@@ -152,8 +153,8 @@ class ChallengeOne(APIView):
             nickname = request.session['nickname']
             user = User.objects.filter(nickname=nickname).first()
         except KeyError:
-            nickname = None
-            user = None
+            messages.warning(request, '로그인 후에 페이지를 사용하실 수 있습니다.')
+            return redirect('/login')  # 로그인 페이지로 리디렉션
         print("ChallengeOne - POST")
         score = Score.objects.all()
         challenge = Ref_Video.objects.get(id=pk)

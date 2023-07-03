@@ -178,20 +178,19 @@ from accounts.models import User
 from django.utils import timezone
 
 
+
 model_path = 'making/cartoongan_pytorch_main/pretrained_model/'
 styles = ['Hayao', 'Hosoda', 'Shinkai', 'Paprika', 'spongebob', 'simpson', 'anime']
 
 def index(request):
     transform_url = reverse('making:transform')
     try:
+        print("asdfoijaseiofj")
         nickname = request.session['nickname']
-        if nickname == '':
-            messages.warning(request, '로그인이 필요한 페이지입니다.')
-            return redirect('/login')
         user = User.objects.filter(nickname=nickname).first()
     except KeyError:
-        nickname = None
-        user = None
+        messages.warning(request, '로그인 후에 페이지를 사용하실 수 있습니다.')
+        return redirect('/login')  # 로그인 페이지로 리디렉션
     context = {'transform_url': transform_url,
                'styles': styles,
                'user': user}
@@ -281,8 +280,8 @@ def display(request):
         transformed_image.nickname = nickname
         transformed_image.save()
     except KeyError:
-        nickname = None
-        user = None 
+        messages.warning(request, '로그인 후에 페이지를 사용하실 수 있습니다.')
+        return redirect('/login')  # 로그인 페이지로 리디렉션
 
     post_image_url = reverse('making:post_image')
 
