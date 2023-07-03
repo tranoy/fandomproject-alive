@@ -68,19 +68,19 @@ class Transformer_aivle(nn.Module):
 
 
 def postprocess(tensor, reduce_color=False, upscale_factor=1.0):
-    img_size = tensor.shape[2]  # Get the image size
-    tensor = tensor.clone().detach().numpy()
-    tensor = tensor.reshape(tensor.shape[0], 3, img_size, img_size)
-    tensor = tensor.transpose(0, 2, 3, 1)
-    tensor = (tensor + 1) * 127.5
-    tensor = tensor.clip(0, 255).astype("uint8")
+    tensor = tensor.squeeze().cpu().detach().numpy()  # Remove unnecessary dimensions and move tensor to CPU
+    tensor = tensor.transpose((1, 2, 0))  # Change from channel first to channel last
+    tensor = (tensor + 1) / 2.0  # Normalize from [-1, 1] to [0, 1]
+    tensor = tensor.clip(0, 1)  # Clip values to [0, 1]
     
     if reduce_color:
-        tensor = np.mean(tensor, axis=3, keepdims=True).repeat(3, axis=3).astype("uint8")
+        tensor = np.mean(tensor, axis=2, keepdims=True).repeat(3, axis=2)  # Convert to grayscale and duplicate along color axis
+
+    tensor *= 255  # Scale from [0, 1] to [0, 255]
 
     if upscale_factor > 1.0:
-        tensor = torch.from_numpy(tensor).permute(0, 3, 1, 2)
-        tensor = F.interpolate(tensor, scale_factor=upscale_factor, mode='bilinear')
-        tensor = tensor.permute(0, 2, 3, 1).numpy().astype("uint8")
+        tensor = torch.from_numpy(tensor).permute(2, 0, 1).unsqueeze(0)  # Change back to channel first and add batch dimension
+        tensor = F.interpolate(tensor, scale_factor=upscale_factor, mode='bilinear')  # Resize
+        tensor = tensor.squeeze().permute(1, 2, 0).numpy()  # Remove unnecessary dimensions and change back to channel last
 
-    return tensor
+    return tensor.astype("uint8")  # Convert to uint8

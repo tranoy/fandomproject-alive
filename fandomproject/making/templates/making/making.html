@@ -1,190 +1,250 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alive_Album</title>
     <!-- Css Styles -->
-    <link rel="stylesheet" href="{% static 'mkcss/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'mkcss/rockville.css'%}">
-    <link rel="stylesheet" href="{% static 'mkcss/slicknav.min.css'%}">
-    <link rel="stylesheet" href="{% static 'mkcss/index.css'%}">
-</head>
-<body>
-<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
-<header class="header">
-    <div class="container">
+    <link rel="stylesheet" href="{% static 'mkcss/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'mkcss/rockville.css'%}" />
+    <link rel="stylesheet" href="{% static 'mkcss/slicknav.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'mkcss/index.css'%}" />
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+    <header class="header">
+      <div class="container">
         <div class="row">
-            <div class="col-lg-2 col-md-2">
-                <div class="header__logo">
-                    <a href="/"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FnuwrN%2Fbtsl1AGHVn5%2FW0ET9hk7cnZqIvuz4MdXV0%2Fimg.png" alt=""></a>
-                </div>
+          <div class="col-lg-2 col-md-2">
+            <div class="header__logo">
+              <a href="/"><img src="/static/img/logo.png" alt="" /></a>
             </div>
-            <div class="col-lg-10 col-md-10">
-                <div class="header__nav">
-                    <nav class="header__menu mobile-menu">
-                        <ul>
-                            <li class="active"><a href="/">HOME</a></li>
-                            <li><a href="/making">MAKING</a></li>
-                            <li><a href="/ranking">RANKING</a></li>
-                            <li><a href="/videogallery">BOARD</a></li>
-                            <li><a href="/login">LOGIN</a></li>
-                        </ul>
-                    </nav>
-                </div>
+          </div>
+          <div class="col-lg-10 col-md-10">
+            <div class="header__nav">
+              <nav class="header__menu mobile-menu">
+                <ul>
+                  <li class="active"><a href="/">HOME</a></li>
+                  <li><a href="/making">MAKING</a></li>
+                  <li><a href="/ranking">RANKING</a></li>
+                  <li><a href="/board">BOARD</a></li>
+                  <li><a href="/login">LOGIN</a></li>
+                </ul>
+              </nav>
             </div>
+          </div>
         </div>
         <div id="mobile-menu-wrap"></div>
-    </div>
-</header>
+      </div>
+    </header>
 
-<!-- Main -->
-<div class="wrapper style1">
-    <div class="container">
+    <!-- Main -->
+    <div class="wrapper style1">
+      <div class="container">
         <div id="root">
-            <div class="Contents">
-                <div class="upload-box">
-                    <svg viewBox="0 0 2500 400">
-                        <symbol id="s-text">
-                            <text text-anchor="middle" x="50%" y="80%">Create your Album Art</text>
-                        </symbol>
-                        <g class="g-ants">
-                            <use xlink:href="#s-text" class="text-copy"></use>
-                            <use xlink:href="#s-text" class="text-copy"></use>
-                            <use xlink:href="#s-text" class="text-copy"></use>
-                            <use xlink:href="#s-text" class="text-copy"></use>
-                            <use xlink:href="#s-text" class="text-copy"></use>
-                        </g>
-                    </svg>
-                    <hr style="color:white;">
-                    <form id="upload-form" method="post" action="{% url 'making:transform' %}" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div id="drop-file" class="drag-file">
-                            <img src="/making/static/mkimg/files.png" class="image">
-                            <p class="drag_message">이미지를 드래그하여 업로드하세요.</p>
-                            <img src="" alt="Preview" class="preview" id="previewImage">
-                            <div id="image-preview-container"></div> <!-- 이미지 미리보기 컨테이너 추가 -->
-                        </div>
-                        <ul style="list-style: none;">
-                            <li style="margin:20px 0; text-align:center;">
-                                <select name="style">
-                                    {% for style in styles %}
-                                        <option value="{{ style }}">{{ style }}</option>
-                                    {% endfor %}
-                                </select>
-                                <button type="submit" id="create-album-art-button">앨범 아트 생성</button>
-                                <!-- 파일 업로드 버튼 -->
-                                <label class="image-upload" for="chooseImage">이미지 선택</label>
-                                <br>
-                                <!-- 파일 업로드 버튼 -->
-                                <!-- input type="file"을 스타일링하기 위해 input과 label을 함께 사용합니다. -->
-                                <input class="file" id="chooseImage" type="file" onchange="handleFiles(this.files)" name="image" accept="image/png, image/jpeg, image/gif">
-                            </li>
-                        </ul>
-                        
-                        
-                    </form>
-
-
-                </form>
-                    {% if transformed_image %}
-                        <h2>변환된 이미지</h2>
-                        <img src="data:image/jpeg;base64,{{ transformed_image }}" alt="Transformed Image" id="transformedImage">
-                    {% endif %}
+          <div class="Contents">
+            <div class="upload-box">
+              <svg viewBox="0 0 2500 400" style="width: 100%">
+                <symbol id="s-text">
+                  <text text-anchor="middle" x="50%" y="80%">
+                    Create your Album Art
+                  </text>
+                </symbol>
+                <g class="g-ants">
+                  <use xlink:href="#s-text" class="text-copy"></use>
+                  <use xlink:href="#s-text" class="text-copy"></use>
+                  <use xlink:href="#s-text" class="text-copy"></use>
+                  <use xlink:href="#s-text" class="text-copy"></use>
+                  <use xlink:href="#s-text" class="text-copy"></use>
+                </g>
+              </svg>
+              <hr style="color: white" />
+              <form
+                id="upload-form"
+                method="post"
+                action="{% url 'making:transform' %}"
+                enctype="multipart/form-data"
+              >
+                {% csrf_token %}
+                <div
+                  id="drop-file"
+                  class="drag-file"
+                  ondrop="handleDrop(event)"
+                  ondragover="handleDragOver(event)"
+                >
+                  <!-- 이미지 드롭 영역 -->
+                  <p class="drag_message">이미지를 드래그하여 업로드하세요.</p>
+                  <img src="" alt="Preview" class="preview" id="previewImage" />
+                  <div id="image-preview-container"></div>
+                  <!-- 이미지 미리보기 컨테이너 추가 -->
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+                <ul style="list-style: none">
+                  <li style="margin: 20px 0; text-align: center">
+                    <select name="style">
+                      {% for style in styles %}
+                      <option value="{{ style }}">{{ style }}</option>
+                      {% endfor %}
+                    </select>
+                    <button type="submit" id="create-album-art-button">
+                      앨범 아트 생성
+                    </button>
+                    <!-- 파일 업로드 버튼 -->
+                    <label class="image-upload" for="chooseImage"
+                      >이미지 선택</label
+                    >
+                    <br />
+                    <!-- 파일 업로드 버튼 -->
+                    <!-- input type="file"을 스타일링하기 위해 input과 label을 함께 사용합니다. -->
+                    <input
+                      class="file"
+                      id="chooseImage"
+                      type="file"
+                      onchange="handleFiles(this.files)"
+                      name="image"
+                      accept="image/png, image/jpeg, image/gif"
+                    />
+                  </li>
+                </ul>
+              </form>
 
-<!-- Js Plugins -->
-<script src="{% static 'mkjs/jquery-3.3.1.min.js'%}"></script>
-<script src="{% static 'mkjs/bootstrap.min.js'%}"></script>
-<script src="{% static 'mkjs/main.js'%}"></script>
-<script src="{% static 'mkjs/jquery.magnific-popup.min.js'%}"></script>
-<script src="{% static 'mkjs/jquery.nicescroll.min.js'%}"></script>
-<script src="{% static 'mkjs/jquery.countdown.min.js'%}"></script>
-<script src="{% static 'mkjs/jquery.slicknav.js'%}"></script>
-<script src="{% static 'mkjs/DragNdrop.js'%}"></script>
-<script>
-    function handleFiles(files) {
-        const dragMessage = document.querySelector(".drag_message");
-        const imageIcon = document.querySelector(".image");
-        const imagePreviewContainer = document.getElementById("image-preview-container");
+              {% if transformed_image %}
+              <h2>변환된 이미지</h2>
+              <img
+                src="data:image/jpeg;base64,{{ transformed_image }}"
+                alt="Transformed Image"
+                id="transformedImage"
+              />
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Js Plugins -->
+    <script src="{% static 'mkjs/jquery-3.3.1.min.js'%}"></script>
+    <script src="{% static 'mkjs/bootstrap.min.js'%}"></script>
+    <script src="{% static 'mkjs/main.js'%}"></script>
+    <script src="{% static 'mkjs/jquery.magnific-popup.min.js'%}"></script>
+    <script src="{% static 'mkjs/jquery.nicescroll.min.js'%}"></script>
+    <script src="{% static 'mkjs/jquery.countdown.min.js'%}"></script>
+    <script src="{% static 'mkjs/jquery.slicknav.js'%}"></script>
+    <script>
+      function handleDrop(event) {
+        event.preventDefault();
+        var file = event.dataTransfer.files[0];
+        var input = document.getElementById("chooseImage");
+        input.files = event.dataTransfer.files;
+        handleFiles(input.files);
+      }
+
+      function handleDragOver(event) {
+        event.preventDefault();
+        var file = event.dataTransfer.items[0].getAsFile();
+        var input = document.getElementById("chooseImage");
+        input.files = event.dataTransfer.files;
+        handleFiles(input.files);
+      }
+
+      function handleFiles(files) {
+        const imagePreviewContainer = document.getElementById(
+          "image-preview-container"
+        );
         const previewImage = document.getElementById("previewImage");
+        const dragMessage = document.querySelector("#drop-file .drag_message"); // 추가
 
         if (files.length === 0) {
-            imagePreviewContainer.innerHTML = ""; // 이미지 미리보기 컨테이너를 비웁니다.
-            dragMessage.style.display = "block"; // 문구 보이기
-            imageIcon.style.display = "block" //이미지 아이콘 보이게
-            return;
+          imagePreviewContainer.innerHTML = ""; // 이미지 미리보기 컨테이너를 비웁니다.
+          dragMessage.style.display = "block"; // 이미지가 없을 때는 메시지를 보이도록 설정
+          return;
         }
 
         const file = files[0];
         const reader = new FileReader();
 
-        reader.onload = function(event) {
-            const imageUrl = event.target.result;
-            previewImage.src = imageUrl;
+        reader.onload = function (event) {
+          const imageUrl = event.target.result;
+          previewImage.src = imageUrl;
+          dragMessage.style.display = "none"; // 이미지가 업로드되면 메시지를 숨김
 
-            // 선택한 이미지를 이미지 미리보기 컨테이너 안에도 표시할 수 있습니다. (선택사항)
-            const imagePreview = document.createElement("img");
-            imagePreview.src = imageUrl;
-            imagePreviewContainer.innerHTML = ""; // 추가하기 전에 컨테이너를 비웁니다.
-            imagePreviewContainer.appendChild(imagePreview);
-
-            dragMessage.style.display = "none"; // 문구 숨기기
-            imageIcon.style.display = "none"; // 이미지 아이콘 숨기기
-        }
+          // 선택한 이미지를 이미지 미리보기 컨테이너 안에도 표시할 수 있습니다. (선택사항)
+          const imagePreview = document.createElement("img");
+          imagePreview.src = imageUrl;
+          imagePreviewContainer.innerHTML = ""; // 추가하기 전에 컨테이너를 비웁니다.
+          imagePreviewContainer.appendChild(imagePreview);
+        };
 
         reader.readAsDataURL(file);
-    }
+      }
 
-    function uploadImage(event) {
+      function handleFile(file) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          var img = document.getElementById("previewImage");
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function uploadImage(event) {
         event.preventDefault();
 
         const fileInput = document.getElementById("chooseImage");
         const file = fileInput.files[0];
 
         if (!file) {
-            return;
+          return;
         }
 
         const formData = new FormData();
         formData.append("image", file);
-        formData.append("style", document.querySelector("select[name='style']").value);
+        formData.append(
+          "style",
+          document.querySelector("select[name='style']").value
+        );
 
         fetch("{% url 'making:transform' %}", {
-                method: "POST",
-                body: formData,
-                headers: {
-                    "X-CSRFToken": document.querySelector("[name='csrfmiddlewaretoken']").value
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // 이미지 저장 및 출력 처리
-                sessionStorage.setItem('transformedImage', data.transformed_image);
-                window.location.href = "{% url 'making:display' %}";
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
-    }
+          method: "POST",
+          body: formData,
+          headers: {
+            "X-CSRFToken": document.querySelector(
+              "[name='csrfmiddlewaretoken']"
+            ).value,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // 이미지 저장 및 출력 처리
+            sessionStorage.setItem("transformedImage", data.transformed_image);
+            window.location.href = "{% url 'making:display' %}";
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
 
-    const createAlbumArtButton = document.getElementById("create-album-art-button");
-    createAlbumArtButton.addEventListener("click", uploadImage);
+      const createAlbumArtButton = document.getElementById(
+        "create-album-art-button"
+      );
+      createAlbumArtButton.addEventListener("click", uploadImage);
 
-    const addImageButton = document.getElementById("add-image-button");
-    if (addImageButton) {
-        addImageButton.addEventListener("click", function() {
-            document.getElementById("chooseImage").click();
+      // 페이지 로드 시 이미지 미리보기 처리
+      window.addEventListener("DOMContentLoaded", function () {
+        var fileInput = document.getElementById("chooseImage");
+        fileInput.addEventListener("change", function () {
+          handleFiles(fileInput.files);
         });
-    }
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>
