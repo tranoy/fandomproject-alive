@@ -5,6 +5,11 @@ from accounts.models import User
 from making.models import TransformedLog
 from django.db.models import Max, Count,Subquery,OuterRef
 from challenge.models import *
+from datetime import datetime, timedelta
+from django.conf import settings
+from django.shortcuts import render
+
+
 
 # 메인화면
 class Main(APIView):
@@ -60,7 +65,8 @@ class Main(APIView):
         print(data)
         context = {'user': user,
                    'transformItem' : transformItem,
-                   'data':data}
+                   'data':data,
+                   }
         
         return render(request, 'index.html', context)
 
