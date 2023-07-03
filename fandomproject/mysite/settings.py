@@ -14,6 +14,7 @@ from pathlib import Path
 import os,json
 from django.core.exceptions import ImproperlyConfigured
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -120,7 +121,8 @@ USE_I18N = True
 USE_TZ = True
 
 # 세션 만료기한
-SESSION_COOKIE_AGE = 1200
+SESSION_COOKIE_AGE = 20 * 60  # 20분을 초로 변환
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # 로그인 성공 시 자동으로 이동할 URL
 LOGIN_REDIRECT_URL = '/'

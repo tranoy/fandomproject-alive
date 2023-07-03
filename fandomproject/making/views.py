@@ -170,7 +170,10 @@ import io
 import json
 from .models import TransformedImage, TransformedLog
 from .cartoongan_pytorch_main.network.Transformer import Transformer
+from django.contrib.auth.decorators import login_required
+
 from .cartoongan_pytorch_main.network.Transformer_aivle import Transformer_aivle,postprocess
+from django.contrib import messages
 from accounts.models import User
 from django.utils import timezone
 
@@ -178,11 +181,13 @@ from django.utils import timezone
 model_path = 'making/cartoongan_pytorch_main/pretrained_model/'
 styles = ['Hayao', 'Hosoda', 'Shinkai', 'Paprika', 'spongebob', 'simpson', 'anime']
 
-
 def index(request):
     transform_url = reverse('making:transform')
     try:
         nickname = request.session['nickname']
+        if nickname == '':
+            messages.warning(request, '로그인이 필요한 페이지입니다.')
+            return redirect('/login')
         user = User.objects.filter(nickname=nickname).first()
     except KeyError:
         nickname = None
