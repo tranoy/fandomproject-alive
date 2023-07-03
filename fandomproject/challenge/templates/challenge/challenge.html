@@ -79,28 +79,24 @@
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="discography__item">
               <div class="discography__item__pic">
-                <a href="{% url 'challenge:one' data.id %}" class="entrance_1">
+                <a href="{% url 'challenge:one' data.2 %}" class="entrance_1">
                   <div class="image-container">
-                    <img src="{{ data.img }}" alt="" />
+                    <img src="{{ data.5 }}" alt="" />
                     <div class="image-info">
                       <span style="color: white"
-                        >[{{ data.singer }} - {{ data.title }}]</span
+                        >[{{ data.4 }} - {{ data.3 }}]</span
                       >
 
-                      <h5 style="color: white">
-                        Participants - {{ data.count }}
-                      </h5>
+                      <h5 style="color: white">Participants - {{ data.6 }}</h5>
 
-                      <h5 style="color: white">
-                        Best User - {{ data.nickname }}
-                      </h5>
-                      <h5 style="color: white">Accuracy - {{ data.score }}%</h5>
+                      <h5 style="color: white">Best User - {{ data.0 }}</h5>
+                      <h5 style="color: white">Accuracy - {{ data.1 }}%</h5>
                     </div>
                   </div>
                 </a>
               </div>
               <div>
-                <a href="{% url 'challenge:one' data.id %}" class="entrance_1">
+                <a href="{% url 'challenge:one' data.2 %}" class="entrance_1">
                   <span></span>
                   <span></span>
                   <span></span>
@@ -114,11 +110,6 @@
         </div>
       </div>
     </section>
-    <div>
-      {% for p in page_obj %}
-      <h3 style="color: white">{{p}}</h3>
-      {% endfor %}
-    </div>
     <div class="pagination">
       <span class="step-links">
         {% if page_obj.has_previous %}

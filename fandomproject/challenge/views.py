@@ -67,10 +67,45 @@ class ChallengeMain(APIView):
             # 기존 data와 missing_data 병합
             data = list(data) + missing_data
             
-        paginator = Paginator(data, 6)
+        result = []
+        d_count = 0
+        for d in data:
+            try:
+                data_nickname = d['nickname']
+            except KeyError:
+                # Handle the case when TransformedLog object does not exist
+                data_nickname = None
+            try:
+                data_score = d['score']
+            except KeyError:
+                # Handle the case when Ref_Video object does not exist
+                data_score = None
+            try:
+                data_id = d['id']
+            except KeyError:
+                # Handle the case when Ref_Video object does not exist
+                data_id = None
+            try:
+                data_title = d['title']
+            except KeyError:
+                # Handle the case when Ref_Video object does not exist
+                data_title = None
+            try:
+                data_singer = d['singer']
+            except KeyError:
+                # Handle the case when Ref_Video object does not exist
+                data_singer = None
+            try:
+                data_img = d['img']
+            except KeyError:
+                # Handle the case when Ref_Video object does not exist
+                data_img = None
+            result.append([data_nickname, data_score, data_id, data_title, data_singer, data_img, data_count[d_count]['count']])
+            d_count += 1
+        print(result)
+        paginator = Paginator(result, 6)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-
         #####################################################
         # 다음 페이지로 넘어갈 때 첫 번째 게시물 설정
         print(page_obj)
