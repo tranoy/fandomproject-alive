@@ -86,8 +86,23 @@ $(checkBtn).on('click', function() {
     }
 })
 
+let passwordCheck = false
+$(document).ready(function(){
+    var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    $('#pw1').on('blur',function(){
+        let password1 = $('#pw1').val();
+        if(false === reg.test(password1)){
+            $('#pw1').next('label').addClass('warning').text('비밀번호는 8자리 이상이여야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
+            passwordCheck = false
+        }
+        else{
+            $('#pw1').next('label').removeClass('warning').text('PASSWORD');
+            passwordCheck = true
+        }
+    })
+})
 
-let emailCheck = false
+
 $(document).ready(function() {
   // 비밀번호 일치 여부 확인
   $('#pw2').on('blur', function() {
@@ -108,8 +123,6 @@ $(document).ready(function() {
 })
 
 
-
-
 // post 방식 비동기 처리 ==> account views.py class
 $('#join_btn').click(function () {
 
@@ -127,7 +140,7 @@ $('#join_btn').click(function () {
         $('#email').next('label').removeClass('warning').text('EMAIL');
         emailCheck = true
     }
-    if (username && nickname && password1 && password2 && email && checkBool && emailCheck) {
+    if (username && nickname && password1 && password2 && email && checkBool && emailCheck && passwordCheck) {
 
     // ajax 통신
     $.ajax({
