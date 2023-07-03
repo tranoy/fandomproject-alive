@@ -181,7 +181,15 @@ styles = ['Hayao', 'Hosoda', 'Shinkai', 'Paprika', 'spongebob', 'simpson', 'anim
 
 def index(request):
     transform_url = reverse('making:transform')
-    context = {'transform_url': transform_url, 'styles': styles}
+    try:
+        nickname = request.session['nickname']
+        user = User.objects.filter(nickname=nickname).first()
+    except KeyError:
+        nickname = None
+        user = None
+    context = {'transform_url': transform_url,
+               'styles': styles,
+               'user': user}
     return render(request, 'making/making.html', context)
 
 def transform(request):
