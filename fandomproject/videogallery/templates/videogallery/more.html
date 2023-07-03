@@ -90,7 +90,7 @@
                     formData.append("action", "update");
 
                     var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/videogallery", true);
+                    xhr.open("POST", "/videogallery/" + id + "/update", true);
                     xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
 
                     xhr.onreadystatechange = function () {

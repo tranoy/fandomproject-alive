@@ -43,7 +43,7 @@ class Join(APIView):
         # post 요청으로 id email 중복 검사
         exists = User.objects.filter(email=email).exists()
         nick_exists = User.objects.filter(nickname=nickname).exists()
-
+        print(nick_exists)
         if nick_exists:
             id_data = {'id_exists':nick_exists}
             return JsonResponse(id_data)
