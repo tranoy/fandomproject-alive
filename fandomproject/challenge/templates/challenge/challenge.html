@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="{% static 'chcss/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'chcss/challenge.css' %}" />
     <link rel="stylesheet" href="{% static 'chcss/slicknav.min.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cantata+One&display=swap"
+      rel="stylesheet"
+    />
     <title>Gallery</title>
   </head>
   <body>
@@ -29,20 +35,20 @@
             <div class="header__nav">
               <nav class="header__menu mobile-menu">
                 <ul>
-                  <li><a href="/">HOME</a></li>
-                  <li class="active"><a href="/challenge">CHALLENGE</a></li>
+                  <li><a href="/">Home</a></li>
+                  <li class="active"><a href="/challenge">Challenge</a></li>
                   {% if user.nickname %}
-                  <li><a href="/making">MAKING</a></li>
+                  <li><a href="/making">Making</a></li>
                   {% endif %}
-                  <li><a href="/ranking">RANKING</a></li>
-                  <li><a href="/videogallery">BOARD</a></li>
+                  <li><a href="/ranking">Ranking</a></li>
+                  <li><a href="/videogallery">Board</a></li>
                   {% if user.nickname %}
                   <li>
-                    <a href="/logout">LOGOUT</a>
+                    <a href="/logout">Logout</a>
                   </li>
                   {% else %}
                   <li>
-                    <a href="/login">LOGIN</a>
+                    <a href="/login">Login</a>
                   </li>
                   {% endif%}
                 </ul>
@@ -69,7 +75,7 @@
           >
             <div style="width: 115px; height: 30px"></div>
             <div class="section-title center-title">
-              <h2 style="color: white">Challenge</h2>
+              <h2 style="color: white; font-family: Cantata One">Challenge</h2>
             </div>
             <div style="width: 115px; height: 30px"></div>
           </div>

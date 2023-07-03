@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="/static/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/static/css/rockville.css">
     <link rel="stylesheet" href="/static/css/slicknav.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cantata+One&display=swap" rel="stylesheet">
 
 </head>
 
@@ -33,20 +36,20 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="/">HOME</a></li>
+                                <li class="active"><a href="/">Home</a></li>
                                 <li class=><a href="/challenge">Challenge</a></li>
                                 {% if user.nickname %}
-                                <li><a href="/making">MAKING</a></li>
+                                <li><a href="/making">Making</a></li>
                                 {% endif %}
-                                <li><a href="/ranking">RANKING</a></li>
-                                <li><a href="/videogallery">BOARD</a></li>
+                                <li><a href="/ranking">Ranking</a></li>
+                                <li><a href="/videogallery">Board</a></li>
                                 {% if user.username %}
                                 <li>
-                                    <a href="/logout">LOGOUT</a>
+                                    <a href="/logout">Logout</a>
                                 </li>
                                 {% else %}
                                 <li>
-                                    <a href="/login">LOGIN</a>
+                                    <a href="/login">Login</a>
                                 </li>
                                 {% endif%}
                             </ul>
@@ -59,9 +62,9 @@
                     </video>
                     <div class="text-overlay">
                         {% if user.nickname %}
-                        <h2 style="color: white;" id="changetext">Welcome {{ user.nickname }}</h2>
+                        <h2 style="color: white; font-family:Cantata One" id="changetext">Welcome {{ user.nickname }}</h2>
                         {% else %}
-                        <h2 style="color: white;" id="changetext">Make Something People Love?</h2>
+                        <h2 style="color: white; font-family:Cantata One" id="changetext">Make Something People Love?</h2>
                         {% endif %}
                     </div>
                 </div> 
@@ -84,7 +87,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2 style="color: white;">Challenge</h2>
+                        <h2 style="color: white; font-family:Cantata One">Challenge</h2>
                     </div>
                 </div>
             </div>
@@ -100,11 +103,11 @@
                             </div>
                             {% if item.nickname == None %}
                             <div class="event__item__text">
-                                <h4 style="color: white;">참가자 없음</h4>
+                                <h4 style="color: white; font-family:Cantata One">참가자 없음</h4>
                             </div>
                             {% else %}
                             <div class="event__item__text">
-                                <h4 style="color: white;">BEST USER - {{ item.nickname }}</h4>
+                                <h4 style="color: white; font-family:Cantata One">BEST USER - {{ item.nickname }}</h4>
                             </div>
                             {% endif %}
                         </div>
@@ -119,7 +122,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2 style="color: white;">Album JARKET</h2>
+                        <h2 style="color: white; font-family:Cantata One">Album JARKET</h2>
                     </div>
                 </div>
             </div>
@@ -134,7 +137,7 @@
                                 </div>
                             </div>
                             <div class="event__item__text">
-                                <h4 style="color: white;">제작자 : {{ item.nickname }}</h4>
+                                <h4 style="color: white; font-family:Cantata One">제작자 : {{ item.nickname }}</h4>
                             </div>
                         </div>
                     </div>
