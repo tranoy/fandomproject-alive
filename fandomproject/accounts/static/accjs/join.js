@@ -91,8 +91,11 @@ $(document).ready(function(){
     var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
     $('#pw1').on('blur',function(){
         let password1 = $('#pw1').val();
+        if (password1 === ''){
+            return
+        }
         if(false === reg.test(password1)){
-            $('#pw1').next('label').addClass('warning').text('비밀번호는 8자리 이상이여야 하며, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.');
+            $('#pw1').next('label').addClass('warning').text('비밀번호는 8자리 이상, 숫자/대문자/소문자/특수문자를 모두 포함');
             passwordCheck = false
         }
         else{
