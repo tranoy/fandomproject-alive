@@ -136,9 +136,7 @@ class ChallengeOne(APIView):
             
         
         score = Score.objects.filter(ref_id=pk)
-        print(score)
         ref_video=Ref_Video.objects.get(id=pk)
-        
         score = list(reversed(score))
         paginator = Paginator(score, 6)
         page_number = request.GET.get('page')

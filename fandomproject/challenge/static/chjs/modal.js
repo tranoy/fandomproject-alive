@@ -4,7 +4,6 @@
 var modal = document.getElementById("upload-modal");
 var submitBtn = document.getElementById("submit-btn");
 
-
 // 스크롤바 없애기
 
 // 업로드 버튼 클릭 시 모달 창 열기

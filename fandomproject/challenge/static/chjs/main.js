@@ -47,3 +47,23 @@ for (let i = 0; i < entranceElements.length; i++) {
     }
   });
 }
+
+
+$('#ref-video').click(function (){
+  var rowVideo = $('#row-video');
+  if (rowVideo.css('opacity')==='0'){
+    $(rowVideo).css({
+      position: 'static',
+      opacity: 1,
+      visibility: 'visible',
+      transition: 'visibility 0s, opacity 0.5s ease'
+    });
+  }
+  else {
+    $(rowVideo).css({
+    visibility: 'hidden',
+    position: 'absolute',
+    opacity: 0,
+  });
+  }
+});

@@ -51,18 +51,23 @@
             <div id="mobile-menu-wrap"></div>
         </div>
     </header>
-
+    
     <!-- Discography Section Begin -->
     <section class="discography spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12" style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="width: 115px; height: 30px;"></div>
+                    <div><button id="ref-video">참고 영상</button></div>
                     <div class="section-title center-title">
                         <h2 style="color: white;">Video Board</h2>
                     </div>
                     <div><button id="upload-button">Upload Video</button></div>
                 </div>
+            </div>
+            <div class="row" id ="row-video">
+                <video height="600" width="1140" controls>
+                    <source src="/media/{{ref.video_file}}">
+                </video>
             </div>
             <div class="row">
                 {% if score %}
@@ -117,10 +122,9 @@
                                 </div>
                             </div>
                         </form>
-
                 </div> 
             </div>
-            </div>
+        </div>
 </section>
 <div class="pagination">
     <span class="step-links">

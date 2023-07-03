@@ -1317,6 +1317,27 @@ ol {
 }
 
 
+#ref-video{
+	width: 100px;
+	height: 50px;
+	background-color:#ee1e31;
+    color: white;
+    border:none;
+    border-radius:50px;
+}
+
+#ref-video:hover{
+	background-color: white;
+	color: black;
+	border-radius:50px;
+	transition: all .5s cubic-bezier(.6,0,0,1);
+}
+
+#row-video{
+	visibility: hidden;
+	position: absolute;
+	opacity: 0;
+}
 
 /* 유튜브 모달 */
 /* 배준오 */
@@ -1337,6 +1358,7 @@ ol {
 	overflow: hidden;
 
 }
+
 .modal-header{
 	font-size: 20px;
 }
@@ -1347,6 +1369,7 @@ ol {
 	align-items: center;
 	justify-content: center;
 }
+
 
 #upload-button{
 	width: 100px;
