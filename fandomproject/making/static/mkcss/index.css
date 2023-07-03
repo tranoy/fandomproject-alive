@@ -3079,7 +3079,7 @@ button,
     text-align: center;
     border-radius: 25px;
     text-decoration: none;
-    padding: 0.65em 3em 0.65em 3em;
+    /* padding: 0.65em 3em 0.65em 3em; */
     border: 0;
     cursor: pointer;
     outline: 0;
@@ -3099,7 +3099,7 @@ button:hover,
     color: black;
     background: #ffffff;
     display: inline-block;
-    padding: 10px;
+
 }
 
 input[type="button"].alt,
