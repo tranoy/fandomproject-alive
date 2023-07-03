@@ -47,6 +47,7 @@ let checkBtn = $('#join-id-check')
 // id check 버튼을 먼저 누르고 유효성 맞아야지 true로 바껴서 join이 될 수 있도록
 var checkBool = false
 $(checkBtn).on('click', function() {
+    console.log(checkBool)
     let nickname = $('#nick').val();
     let idRegex = /^[a-z0-9]{6,}$/; // 영소문자와 숫자로 구성된 6글자 이상
 
@@ -86,7 +87,7 @@ $(checkBtn).on('click', function() {
 })
 
 
-
+let emailCheck = false
 $(document).ready(function() {
   // 비밀번호 일치 여부 확인
   $('#pw2').on('blur', function() {
@@ -102,9 +103,9 @@ $(document).ready(function() {
 
     }
   })
+
+
 })
-
-
 
 
 
@@ -117,7 +118,16 @@ $('#join_btn').click(function () {
     let password1 = $('#pw1').val();
     let password2 = $('#pw2').val();
     let email = $('#email').val();
-    if (username && nickname && password1 && password2 && email && checkBool) {
+
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)){
+        $('#email').next('label').addClass('warning').text('유효한 이메일 형식으로 작성해주세요');
+        emailCheck = false;
+    }else{
+        $('#email').next('label').removeClass('warning').text('EMAIL');
+        emailCheck = true
+    }
+    if (username && nickname && password1 && password2 && email && checkBool && emailCheck) {
 
     // ajax 통신
     $.ajax({

@@ -39,14 +39,15 @@ class Join(APIView):
         password1 = request.data.get('password1',None)
         password2 = request.data.get('password2',)
         email = request.data.get('email','')
-        print("post")
+        print(password1)
+        # post 요청으로 id email 중복 검사
         exists = User.objects.filter(email=email).exists()
         nick_exists = User.objects.filter(nickname=nickname).exists()
-        print("nickname",nick_exists)
+
         if nick_exists:
             id_data = {'id_exists':nick_exists}
             return JsonResponse(id_data)
-        print("email",exists)
+
         if exists:
             print("post호출")
             data = {'exists':exists}
