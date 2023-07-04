@@ -75,7 +75,7 @@
               <div></div>
 
               <div style="display: flex">
-                {% for res in result %}
+                {% for res in result %} {% if res.1 == user.nickname %}
                 <button class="btn btn-primary" onclick="editRow({{ res.0 }})">
                   Edit
                 </button>
@@ -86,7 +86,7 @@
                   {% csrf_token %}
                   <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
-                {% endfor %}
+                {% endif %} {% endfor %}
               </div>
               <script>
                 function editRow(id) {

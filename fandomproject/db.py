@@ -14,7 +14,8 @@ cursor = conn.cursor()
 # cursor.execute("UPDATE challenge_ref_video SET img = ? WHERE id = 3", (value3,))
 # cursor.execute("UPDATE challenge_ref_video SET img = ? WHERE id = 4", (value4,))
 # cursor.execute("UPDATE challenge_ref_video SET img = ? WHERE id = 5", (value5,))
-cursor.execute("DELETE FROM challenge_score WHERE id = 21")
+# for i in range(1,12):
+#     cursor.execute(f"DELETE FROM making_transformedlog WHERE id = {i}")
 
 conn.commit()
 conn.close()

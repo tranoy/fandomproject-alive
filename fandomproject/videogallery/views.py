@@ -25,8 +25,8 @@ def Main(request):
             nickname = request.session['nickname']
             user = User.objects.filter(nickname=nickname).first()
         except KeyError:
-            messages.warning(request, '로그인 후에 페이지를 사용하실 수 있습니다.')
-            return redirect('/login')  # 로그인 페이지로 리디렉션
+            nickname = None
+            user = None
         for score in scores:
             try:
                 mk_image = TransformedLog.objects.filter(nickname=score.nickname).order_by('-date').first()
