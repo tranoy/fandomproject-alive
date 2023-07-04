@@ -218,7 +218,8 @@ class ChallengeCompareResult(APIView):
             'score': score,
             'challenge': challenge,
             'output_path' : output_path[1:],
-            'res' : res
+            'res' : res,
+            'user': user
         }
         return render(request, "challenge/compare_result.html", context)
     

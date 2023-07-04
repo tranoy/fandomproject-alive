@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from .models import Gallery
 from challenge.models import Score, Ref_Video
+from django.contrib import messages
 from accounts.models import User
 from django.db.models import Q
 from django.http import JsonResponse
@@ -24,8 +25,8 @@ def Main(request):
             nickname = request.session['nickname']
             user = User.objects.filter(nickname=nickname).first()
         except KeyError:
-            nickname = None
-            user = None
+            messages.warning(request, '로그인 후에 페이지를 사용하실 수 있습니다.')
+            return redirect('/login')  # 로그인 페이지로 리디렉션
         for score in scores:
             try:
                 mk_image = TransformedLog.objects.filter(nickname=score.nickname).order_by('-date').first()
@@ -78,6 +79,12 @@ class GalleryMore(APIView):
     def get(self, request, pk):
         scores = Score.objects.filter(id=pk)
         result = []
+        try:
+            nickname = request.session['nickname']
+            user = User.objects.filter(nickname=nickname).first()
+        except KeyError:
+            messages.warning(request, '로그인 후에 페이지를 사용하실 수 있습니다.')
+            return redirect('/login')  # 로그인 페이지로 리디렉션
         for score in scores:
             try:
                 ref_video = Ref_Video.objects.get(id=score.ref_id)
@@ -85,7 +92,8 @@ class GalleryMore(APIView):
                 print(result)
             except Ref_Video.DoesNotExist:
                 pass
-        context = {'result': result }
+        context = {'result': result,
+                   'user':user}
         print(score)
         return render(request, "videogallery/more.html", context)
 

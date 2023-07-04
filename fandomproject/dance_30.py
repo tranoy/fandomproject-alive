@@ -74,7 +74,8 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
     def difference(xy1, xy2, frames1, frames2, landmarks1, landmarks): # x and y positions of joints | frames | landmarks - info including z
         # all the joints we are using
         # ref: https://mediapipe.dev/images/mobile/pose_tracking_full_body_landmarks.png
-        connections = [(16, 14), (14, 12), (12, 11), (11, 13), (13, 15), (12, 24), (11, 23), (24, 23), (24, 26), (23, 25), (26, 28), (25, 27)]
+        # connections = [(16, 14), (14, 12), (12, 11), (11, 13), (13, 15), (12, 24), (11, 23), (24, 23), (24, 26), (23, 25), (26, 28), (25, 27)]
+        connections = [(16, 14), (14, 12), (12, 11), (11, 13), (13, 15), (24, 23), (24, 26), (23, 25), (26, 28), (25, 27)]  # 어깨와 골반 이음 제거
 
         # keep track of current number of out of sync frames (OFS)
         out_of_sync_frames = 0
