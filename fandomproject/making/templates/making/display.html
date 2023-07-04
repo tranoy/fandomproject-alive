@@ -239,12 +239,10 @@
     <script>
       function downloadImage(imageUrl) {
         const link = document.createElement("a");
-        const filenameInput = document.getElementById("filename");
-        const filename = filenameInput.value || "download.jpg";
         link.href = imageUrl;
-        link.download = filename;
+        link.download = "download.jpg";
         link.click();
-      }
+    }
 
       function postImage(nickname, imageUrl) {
         fetch("{% url 'making:post_image' %}", {
