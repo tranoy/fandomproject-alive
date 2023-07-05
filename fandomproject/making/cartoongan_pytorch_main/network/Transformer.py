@@ -6,10 +6,13 @@ import torch.nn.functional as F
 class Transformer(nn.Module):
     def __init__(self):
         super(Transformer, self).__init__()
-        
+        # 입력 이미지 테두리 미러링
         self.refpad01_1 = nn.ReflectionPad2d(3)
+        # 2차원 Convolutional Layer (입력 채널 수: 3, 출력 채널 수: 64, 커널 크기: 7)
         self.conv01_1 = nn.Conv2d(3, 64, 7)
+        # 배치 정규화의 변형: 각 샘플과 채널에 대해 독립적으로 정규화를 수행
         self.in01_1 = InstanceNormalization(64)
+        
         # relu
         self.conv02_1 = nn.Conv2d(64, 128, 3, 2, 1)
         self.conv02_2 = nn.Conv2d(128, 128, 3, 1, 1)
@@ -20,7 +23,9 @@ class Transformer(nn.Module):
         self.in03_1 = InstanceNormalization(256)
         # relu
 
-        ## res block 1
+        # Residual Block 1
+        # Reflection padding을 사용하며, Convolutional Layer를 통해 출력하고, 그 결과를 정규화
+        # 활성화 함수를 통과시키고, 이전 출력값과 합산
         self.refpad04_1 = nn.ReflectionPad2d(1)
         self.conv04_1 = nn.Conv2d(256, 256, 3)
         self.in04_1 = InstanceNormalization(256)
@@ -99,7 +104,9 @@ class Transformer(nn.Module):
         self.conv11_2 = nn.Conv2d(256, 256, 3)
         self.in11_2 = InstanceNormalization(256)
         # + input
-
+        
+        # Deconvolution Layer 설정 부분
+        # 이미지의 크기를 늘리는데 사용
         ##------------------------------------##
         self.deconv01_1 = nn.ConvTranspose2d(256, 128, 3, 2, 1, 1)
         self.deconv01_2 = nn.Conv2d(128, 128, 3, 1, 1)
@@ -114,6 +121,11 @@ class Transformer(nn.Module):
         # tanh
 
     def forward(self, x):
+        # 각 레이어를 통해 입력 x를 변환하는 과정을 순서대로 정의
+        # Convolutional Layer를 통과한 후 정규화 및 활성화 함수를 통과
+        # Residual Block에서는 이전 출력값과 현재 결과를 합산
+        # Deconvolution Layer를 통과한 후 다시 정규화 및 활성화 함수를 통과
+        # 최종적으로 tanh 활성화 함수를 통과시킨 결과를 반환     
         y = F.relu(self.in01_1(self.conv01_1(self.refpad01_1(x))))
         y = F.relu(self.in02_1(self.conv02_2(self.conv02_1(y))))
         t04 = F.relu(self.in03_1(self.conv03_2(self.conv03_1(y))))
@@ -153,6 +165,7 @@ class Transformer(nn.Module):
 
 class InstanceNormalization(nn.Module):
     def __init__(self, dim, eps=1e-9):
+         # 각 샘플과 채널에 대해 독립적으로 정규화를 수행        
         super(InstanceNormalization, self).__init__()
         self.scale = nn.Parameter(torch.FloatTensor(dim))
         self.shift = nn.Parameter(torch.FloatTensor(dim))

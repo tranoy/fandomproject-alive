@@ -26,7 +26,6 @@ styles = ['Hayao', 'Hosoda', 'Shinkai', 'Paprika', 'spongebob', 'simpson', 'anim
 def index(request):
     transform_url = reverse('making:transform')
     try:
-        print("asdfoijaseiofj")
         nickname = request.session['nickname']
         user = User.objects.filter(nickname=nickname).first()
     except KeyError:
@@ -37,6 +36,8 @@ def index(request):
                'user': user}
     return render(request, 'making/making.html', context)
 
+
+# 사용자로부터 이미지와 스타일을 입력 받고, 해당 스타일로 이미지를 변환
 def transform(request):
     if request.method == 'POST':
         if 'image' not in request.FILES:
@@ -45,20 +46,20 @@ def transform(request):
         image = request.FILES['image']
         style = request.POST.get('style')
 
-        # 이미지 전처리
+        # PIL 라이브러리를 사용하여 이미지를 RGB로 변환하고, 텐서로 변환
         pil_image = Image.open(image)
-
-        # RGB로 변환
         if pil_image.mode != 'RGB':
             pil_image = pil_image.convert('RGB')
 
+
+        # 또한 픽셀 값을 [-1, 1]로 정규화
         input_image = np.asarray(pil_image)
         input_image = transforms.ToTensor()(input_image).unsqueeze(0)
         input_image = input_image * 2 - 1  # 전처리, (-1, 1)
 
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-        # 사전 학습된 모델 불러오기
+        # 스타일에 따라 서로 다른 사전 학습된 모델을 불러옴
         if style in ['Hayao', 'Hosoda', 'Shinkai', 'Paprika']:
             model = Transformer()
             state_dict = torch.load(os.path.join(model_path, style + '_net_G_float.pth'), map_location=device)
@@ -70,10 +71,10 @@ def transform(request):
         else:
             return JsonResponse({'error': '지원되지 않는 스타일입니다.'}, status=400)
 
-        # 모델을 GPU로 이동
+        # 모델을 이용해 이미지를 변환
         model = model.to(device)
         input_image = input_image.to(device)
-
+        
         with torch.no_grad():
             output_image = model(input_image)
 
@@ -85,6 +86,8 @@ def transform(request):
 
         output_image = Image.fromarray(output_image.astype(np.uint8))
 
+
+        # 변환된 이미지를 후처리하여 PIL 이미지로 바꾸고 JPEG 형식의 바이트로 저장
         temp_image_buffer = io.BytesIO()
         output_image.save(temp_image_buffer, format='JPEG')
 
@@ -104,17 +107,20 @@ def transform(request):
     else:
         return JsonResponse({'error': '잘못된 요청 메서드입니다.'}, status=405)
 
+
+# 세션에서 변환된 이미지 ID를 가져와서 이미지를 표시
 def display(request):
     transformed_image_id = request.session.get('transformed_image_id')
 
     if transformed_image_id is None:
         return JsonResponse({'error': '변환된 이미지가 없습니다.'}, status=404)
 
+
     transformed_image = get_object_or_404(TransformedImage, id=transformed_image_id)
     transformitem = TransformedImage.objects.all()
     transformed_logs = TransformedLog.objects.all()  # TransformedLog 데이터 가져오기
-    print(transformed_image)
-    print(transformitem)
+
+    # 변환된 이미지 정보를 세션에 저장
     try:
         nickname = request.session['nickname']
         user = User.objects.filter(nickname=nickname).first()
@@ -124,6 +130,7 @@ def display(request):
         messages.warning(request, '로그인 후에 페이지를 사용하실 수 있습니다.')
         return redirect('/login')  # 로그인 페이지로 리디렉션
 
+    # 사용자의 닉네임을 가져와서 변환된 이미지와 연결
     post_image_url = reverse('making:post_image')
 
     context = {
@@ -137,10 +144,9 @@ def display(request):
 
     return render(request, 'making/display.html', context)
 
-
+# 사용자의 닉네임과 이미지 URL을 받아서 데이터베이스에 저장
 def post_image(request):
     if request.method == 'POST':
-        print(1)
         data = json.loads(request.body)
         nickname = data.get('nickname')
         image_url = data.get('image_url')
@@ -153,6 +159,7 @@ def post_image(request):
     
     return JsonResponse({'success': False})
 
+# 세션에서 변환된 이미지 ID를 가져와서 이미지를 다운로드합니다.
 def download(request):
     transformed_image_id = request.session.get('transformed_image_id')
     if transformed_image_id is not None:

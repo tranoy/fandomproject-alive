@@ -11,12 +11,15 @@ import numpy as np
 class ResidualBlock(nn.Module):
     def __init__(self):
         super(ResidualBlock, self).__init__()
+        # 컨볼루션 레이어를 통해 입력과 동일한 차원으로 유지하면서 피처를 추출
         self.conv_1 = nn.Conv2d(in_channels=256, out_channels=256, kernel_size=3, stride=1, padding=1)
         self.conv_2 = nn.Conv2d(in_channels=256, out_channels=256, kernel_size=3, stride=1, padding=1)
+        # 배치 정규화 레이어를 통해 학습 속도를 높이고, 일반화 성능을 향상시키며, 오버피팅을 방지
         self.norm_1 = nn.BatchNorm2d(256)
         self.norm_2 = nn.BatchNorm2d(256)
 
     def forward(self, x):
+        # 컨볼루션과 배치 정규화, 비선형 활성화 함수(ReLU)를 거치고, 입력 x를 더해서 출력
         output = F.relu(self.norm_2(self.conv_2(F.relu(self.norm_1(self.conv_1(x))))))
         return output + x
 
@@ -26,7 +29,7 @@ class Transformer_aivle(nn.Module):
         self.conv_1 = nn.Conv2d(in_channels=3, out_channels=64, kernel_size=7, stride=1, padding=3)
         self.norm_1 = nn.BatchNorm2d(64)
         
-        # down-convolution #
+        # 이미지의 차원을 줄이는 동시에 피처를 추출
         self.conv_2 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, stride=2, padding=1)
         self.conv_3 = nn.Conv2d(in_channels=128, out_channels=128, kernel_size=3, stride=1, padding=1)
         self.norm_2 = nn.BatchNorm2d(128)
@@ -35,13 +38,15 @@ class Transformer_aivle(nn.Module):
         self.conv_5 = nn.Conv2d(in_channels=256, out_channels=256, kernel_size=3, stride=1, padding=1)
         self.norm_3 = nn.BatchNorm2d(256)
         
-        # residual blocks #
+        # residual blocks #        
+        # ResidualBlock을 사용해 피처를 추출하고, 이를 원본 입력에 더함으로써 원본 정보를 보존
         residualBlocks = []
         for l in range(8):
             residualBlocks.append(ResidualBlock())
         self.res = nn.Sequential(*residualBlocks)
         
-        # up-convolution #
+        # up-convolution #        
+         #역컨볼루션을 사용해 이미지의 차원을 늘리면서 피처를 복원
         self.conv_6 = nn.ConvTranspose2d(in_channels=256, out_channels=128, kernel_size=3, stride=2, padding=1, output_padding=1)
         self.conv_7 = nn.ConvTranspose2d(in_channels=128, out_channels=128, kernel_size=3, stride=1, padding=1)
         self.norm_4 = nn.BatchNorm2d(128)
@@ -53,6 +58,7 @@ class Transformer_aivle(nn.Module):
         self.conv_10 = nn.Conv2d(in_channels=64, out_channels=3, kernel_size=7, stride=1, padding=3)
 
     def forward(self, x):
+        # 피처를 추출하고 변환
         x = F.relu(self.norm_1(self.conv_1(x)))
         
         x = F.relu(self.norm_2(self.conv_3(self.conv_2(x))))
