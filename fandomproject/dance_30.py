@@ -8,19 +8,41 @@ import mediapipe as mp
 from statistics import mean
 import numpy as np
 
-OUTPUT_DIR="./media/output"  # "challenge/static/output"
+OUTPUT_DIR="./media/output"
 UPLOAD_DIR="./media/challenge_upload"
-EXIST_FLAG="-y" # ignore existing file, change to -y to always overwrite
-PRAAT_PATH="./Praat.exe"  # "/Applications/Praat.app/Contents/MacOS/Praat"
+EXIST_FLAG="-y" # 파일이 존재해도 무시, overwrite 허용하지 않으려면 -n
+PRAAT_PATH="./Praat.exe"
 SEARCH_INTERVAL = 30 # in secs
-CURRENT_DIR = os.getcwd()  # 현재 폴더 위치 가져옴
-# CROSSCORRELATE_FILE = 'C:/Users/User/Desktop/big_git/fandomproject/challenge/crosscorrelate.praat'
+CURRENT_DIR = os.getcwd()  # 현재 폴더 위치
+
 
 def compare_video(ref_clip, comparison_clip, nickname, title):
+    """
+    두 영상을 비교해 score와 최종 결과 영상의 경로를 반환
+    Args:
+        ref_clip: 비교 영상
+        comparison_clip: 사용자 영상
+        nickname: 사용자 ID
+        title: 댄스 챌린지 노래 제목
+
+    Return:
+        score: 사용자 댄스 영상의 평균 점수
+        output_path: 결과 영상이 저장된 경로
+
+    """
+
+
     # --------------------------------------------------------- VIDEO PROCESSING --------------------------------------------------------------------------------------
 
 
-    def get_duration(filename): # returns the duration of a clip
+    def get_duration(filename): 
+        """
+        영상의 길이 구하기
+        Arg:
+            filename: 영상
+
+        Return: 영상의 길이(초)
+        """
         captured_video = cv2.VideoCapture(filename)
 
         fps = captured_video.get(cv2.CAP_PROP_FPS) # frame rate
@@ -30,7 +52,15 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
         return duration
 
 
-    def get_frame_count(filename): #returns the number of frames in a clip
+    def get_frame_count(filename):
+        """
+        영상의 frame개수를 측정
+        Arg:
+            filename: 영상
+        Returns:
+            captured_video: 튜플 형태의 (catured video, 프레임 개수)
+            frame_count: 영상의 프레임 개수
+        """
         "return tuple of (captured video, frame count)"
         captured_video = cv2.VideoCapture(filename)
 
@@ -42,6 +72,15 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
     mpPose = mp.solutions.pose
 
     def landmarks(video):
+        """
+        비디오의 각 프레임에서 랜드마크를 추출
+        Arg:
+            video: 동영상
+        Returns:
+            xy_landmard_coords: 각 프레임에서 추출된 랜드마크의 x및 y좌표를 저장한 리스트
+            frames: 비디오의 각 프레임 이미지를 저장한 리스트 
+            landmarks: 각 프레임에서 추출된 랜드마크 데이터를 저장한 리스트
+        """
         pose = mpPose.Pose() # initialise pose object
 
         xy_landmard_coords = [] # we only care about x and y coords, NOT z
@@ -53,7 +92,7 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
 
         # process video
         for i in range(frame_count): 
-            success, image = captured_video.read() # read frames one by one
+            success, image = captured_video.read() # 각 프레임을 읽어옴
             frames.append(image)
             imgRGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) # formatting
 
@@ -62,8 +101,7 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
             landmarks.append(landmarks_in_frame)
             # print(f"landmarks={landmarks[0]}")
 
-            # information about the joint positions
-            # xy_landmard_coords.append([(lm.x, lm.y) for lm in landmarks_in_frame.pose_landmarks.landmark])  # 원본
+            # 관절 위치에 관한 정보
             if landmarks_in_frame.pose_landmarks is not None:
                 xy_landmard_coords.append([(lm.x, lm.y) for lm in landmarks_in_frame.pose_landmarks.landmark])
 
@@ -72,12 +110,26 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
 
 
     def difference(xy1, xy2, frames1, frames2, landmarks1, landmarks): # x and y positions of joints | frames | landmarks - info including z
-        # all the joints we are using
+        """
+        주어진 두 개의 랜드마크(x, y 좌표), 프레임 이미지 및 랜드마크 데이터를 비교하여 차이를 분석
+        Args:
+            xy1: 참조 영상의 랜드마크 x, y좌표를 저장하는 리스트
+            xy2: 비교 영상의 랜드마크 x, y좌표를 저장하는 리스트
+            frames1: 참조 영상의 프레임 이미지를 저장하는 리스트
+            frames2: 비교 영상의 프레임 이미지를 저장하는 리스트
+            landmarks1: 참조 영상의 랜드마크 데이터를 저장하는 리스트
+            landmarks: 비교 영상의 랜드마크 데이터를 저장하는 리스트
+
+        Returns:
+            score: 비디오의 프레임별 분석 결과를 기반으로 계산된 점수
+            output_path: 분석 결과를 포함한 비디오 파일의 경로
+        """
+
+        # 사용하는 모든 관절
         # ref: https://mediapipe.dev/images/mobile/pose_tracking_full_body_landmarks.png
-        # connections = [(16, 14), (14, 12), (12, 11), (11, 13), (13, 15), (12, 24), (11, 23), (24, 23), (24, 26), (23, 25), (26, 28), (25, 27)]
         connections = [(16, 14), (14, 12), (12, 11), (11, 13), (13, 15), (24, 23), (24, 26), (23, 25), (26, 28), (25, 27)]  # 어깨와 골반 이음 제거
 
-        # keep track of current number of out of sync frames (OFS)
+        # 동기화되지 않은 현재 프레임(OFS) 수 추적
         out_of_sync_frames = 0
         score = 100
 
@@ -144,28 +196,28 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
 
 
     def extract_clip_name(path):
-        "extract file name from the path, excluding file extension"
-        return path.split('/')[-1].split(".")[0]
-
-    # _cut.mp4에서 fps=30으로 맞춰서 생성하는 걸로 한번에 해결!!
-    def convert_to_same_framerate(clip):
-        "convert to 30p and return path to clip with 30fps"
-        clip_30 = f"{OUTPUT_DIR}/{extract_clip_name(clip) + '_30'}.mp4"
-        os.system(f"ffmpeg {EXIST_FLAG} -i {clip} -filter:v fps=30 {clip_30}")
-        return clip_30
+        """
+        비디오의 경로로부터 파일 확장자를 제외한 영상의 이름을 추출
+        Arg:
+            path: 비디오 경로
         
-    
+        Return: 
+            path.split('/')[-1].split(".")[0]: 비디오 경로에서 추출한 파일 이름
+        """
+        
+        return path.split('/')[-1].split(".")[0]
+      
 
     def validate_reference_clip(ref_clip, comparison_clip):
-        "validate reference clip is longer than comparison clip"
-        ########### 원본 ###########
-        # _, ref_clip_frame_count = get_frame_count(ref_clip)
-        # _, comparision_clip_frame_count = get_frame_count(comparison_clip)
-        # if not (ref_clip_frame_count > comparision_clip_frame_count): 
-        #     print(f"Reference clip {ref_clip} has to be longer than comparision clip {comparison_clip}")
-        #     sys.exit(-1)
+        """
+        참조 영상 유효성 검사
+        참조 영상이 비교 영상보다 길어야 함
+        그렇지 않으면 안내 문구 출력 후 시스템 비정상 종료
+        Args:
+            ref_clip: 참조 영상
+            comparison_clip: 비교 영상, 즉 사용자 입력 영상
+        """
         
-        #### 프레임 수가 아니라 영상의 길이 비교로 수정 ####
         ref_clip_duration = get_duration(ref_clip)
         comparision_clip_duration = get_duration(comparison_clip)
         if not (ref_clip_duration <= comparision_clip_duration): 
@@ -174,7 +226,13 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
 
 
     def convert_to_wav(clip):
-        "returns path to wav file of clip"
+        """
+        오디오 분석을 위해 wav파일 형식으로 변환
+        Arg:
+            clip: 영상
+        Return:
+            clip_wav: 영상에서 오디오만 추출한 파일 경로
+        """
 
         clip_wav = f"{OUTPUT_DIR}/{extract_clip_name(clip)}.wav"
         command = f"ffmpeg {EXIST_FLAG} -i {clip} {clip_wav}"
@@ -184,96 +242,67 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
 
 
 
-    # IMPORTANT: The input clips might be difference lengths
-    # -> trim clips so only compare when dancers are doing the same amount / section of the choreo
+    # 중요: 입력 클립의 길이가 다를 수 있음
+    # -> trim clips은 댄서들이 같은 양의 안무/섹션을 하고 있을 때만 비교
     def find_sound_offset(ref_wav, comparison_wav):
-        # find offset between: ref.wav and clip_name.wav
+        """
+        두 오디오 파일간의 오디오 오프셋 찾기
+        Args:
+            ref_wav: 참조 영상의 오디오 파일
+            comparison_wav: 비교 영상의 오디오 파일
+
+        Return:
+            offset: 오디오 오프셋(두 영상 오디오의 동일한 부분의 시작점)
+        """
         start_position = 0
-        # command = f"{PRAAT_PATH} --run 'crosscorrelate.praat' {ref_wav} {comparison_wav} {start_position} {SEARCH_INTERVAL}"
+        # 참고: 별도의 praat 파일 실행 코드
         command = f'"{PRAAT_PATH}" --run "crosscorrelate.praat" {ref_wav} {comparison_wav} {start_position} {SEARCH_INTERVAL}'
-        # note: code in separate praat file
         offset= subprocess.check_output(command, shell=True)
         offset = offset.decode('utf-8').replace('\x00', '')
         offset = offset.replace('-', '').strip()
-        # print('=' * 1000)
+        # print('=' * 100)
         # print(f"OFFSET={offset}")
-        # start_offset, end_offset = map(str, offset.split('\n'))
-        # start_offset = start_offset.strip()
-        # end_offset = end_offset.strip()
-        # (did some formatting here to get the offset from b'0.23464366914074475\n' to 0.23464366914074475)
-        # print(f"OFFSET={offset}")
-        # offset이 사용되는 곳이 command 라인으로 사용되므로 굳이 float형일 필요없이 문자열로 변환해서 반환
-        
-        # start_offset = start_offset.decode('utf-8').replace('\x00', '')  # bytes타입을 str로 형변환 후 정규식 사용하여 null문자('\x00') 제거
-        # start_offset = start_offset.replace('-', '').strip()  # '-'와 문자열의 앞뒤 공백 제거
-        
-        # end_offset = end_offset.decode('utf-8').replace('\x00', '')
-        # end_offset = end_offset.replace('-', '').strip()
-        
-            # offset_str = str(offset)
-        # print(f"start_offset={start_offset}")
-            # trimmed_output = re.sub(r'\x00', '', offset_str)
-            # trimmed_output = trimmed_output.replace('-', '')
-            # trimmed_output = trimmed_output.strip()
-        print('=' * 60)
-            # print(f"trimmed_output={offset_str}")
-        # print(f"start_offset={len(start_offset)}")
-            # print(f"offset_str의 길이는 {len(offset_str)}")
-        
-        # ascii = [ord(s) for s in trimmed_output]
-        # print(ascii)
-        
-            # for i, s in enumerate(offset_str):
-            #     print(s)
-            #     if s == None:
-            #         print(f"trimmed_output의 {i}번째가 null값 입니다.")
-            #         sys.exit(-1)
-        print('=' * 60)
-        # return abs(float(str(offset)[2:-3]))  # 원본
-        # return 4.921131467462978 #4.921130702033572
-        
-        # if offset_str[0] == '-':
-        #     offset_str = offset_str[1:]
-        # return start_offset, end_offset
+        # print('=' * 100)
         return offset
 
     # --------------------------------------------------------- COMPUTE SYNC ------------------------------------------------------------------------
 
     # to make sure both clips are same length before comparison
     def trim_clips(ref_clip, comparison_clip, offset):
+        """
+        두 영상을 주어진 offset을 기준으로 자름
+        Args:
+            ref_clip: 참조 영상
+            comparison_clip: 비교 영상
+            offset: 두 영상 오디오의 오프셋
+
+        Returns:
+            ref_cut: offset을 기준으로 자른 참조 영상
+            comparison_cut: offset을 기준으로 자른 비교 영상
+        """
         # duration in secs 
         duration = get_duration(comparison_clip)
 
         ref_cut = f"{OUTPUT_DIR}/{extract_clip_name(ref_clip) + '_cut.mp4'}"
         comparison_cut = f"{OUTPUT_DIR}/{extract_clip_name(comparison_clip) + '_cut.mp4'}"
 
-        # command = f"ffmpeg {EXIST_FLAG} -i {ref_clip} -ss {offset} -t {duration} {ref_cut}"  # 원본
         command = f"ffmpeg {EXIST_FLAG} -i {ref_clip} -ss 0 -t {duration} -filter:v fps=30 {ref_cut}"
-        # command = f"ffmpeg {EXIST_FLAG} -i {ref_clip} -ss 0 -to {end_offset} {ref_cut}"
-        # print(f"COMMAND={command}")
         os.system(command)
-        # command = f"ffmpeg {EXIST_FLAG} -i {comparison_clip} -ss 0 -t {duration} {comparison_cut}"  # 원본
+        
         command = f"ffmpeg {EXIST_FLAG} -i {comparison_clip} -ss {offset} -t {duration} -filter:v fps=30 {comparison_cut}"
-        # command = f"ffmpeg {EXIST_FLAG} -i {comparison_clip} -ss {start_offset} -to {end_offset} {comparison_cut}"
-
         os.system(command)
 
         return ref_cut, comparison_cut
-    
-    # 오디오 겹치는 부분만 추출
-    # def trim_audio(ref_clip_wav, start_offset, end_offset):
-    #     audio_clip = f"{OUTPUT_DIR}/audio_clip.wav"
-    #     command = f"ffmpeg {EXIST_FLAG} -i {ref_clip_wav} -ss {start_offset} -to {end_offset} {audio_clip}"
-    #     return audio_clip
 
 
     def remove_final_videos():
+        """
+        영상을 비교하며 생긴 부가 파일들 제거
+        """
         os.chdir(OUTPUT_DIR)
         
         command = "del *cut.mp4"
         os.system(command)
-        # command = "del *30.mp4"
-        # os.system(command)
         command = "del output.mp4"
         os.system(command)
         command = "del *.wav"
@@ -290,6 +319,15 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
         
         
     def combine_audio_video(video, audio):
+        """
+        분석 결과를 포함한 비디오 파일(오디오 없음)과 오디오 결합하여 오디오 있는 비디오 파일 생성
+        Args:
+            video: 분석 결과를 포함한 비디오 파일(오디오 없음)
+            audio: 참조 영상의 오디오 파일(.wav)
+
+        Return:
+            outputV: 오디오가 있는 분석 결과를 포함한 비디오 파일
+        """
         outputV = f"{OUTPUT_DIR}/{nickname}_{title}_output.mp4"
         command = f"ffmpeg {EXIST_FLAG} -i {video} -i {audio} -c:v copy -c:a aac -strict experimental {outputV}"
         os.system(command)  # 오디오있는 output video 생성
@@ -300,21 +338,23 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
     import sys
     # Launch with these arguments
     # python dance_30.py video/cyves.mov video/chuu.mov
-    # python dance_30.py video/knock_step.mov video/knock1.mov
 
-    #create output dir
+    # output경로 생성
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    print(CURRENT_DIR)
+    # print(CURRENT_DIR)
     
-    # if len(sys.argv) < 3:
-    #     print(f"Usage:\n {sys.argv[0]} <ref_clip> <comparison_clip>")
-    #     sys.exit(-1)
-
-    # ref_clip = sys.argv[1]
-    # comparison_clip = sys.argv[2]
+   
     
-    # 동영상 규격 확인
     def get_video_dimensions(video_path):
+        """
+        동영상 규격 확인
+        Args:
+            video_path: 사용자 입력 영상
+
+        Returns: 
+            width: 사용자 입력 영상 프레임의 너비
+            height: 사용자 입력 영상 프레임의 높이
+        """
         cap = cv2.VideoCapture(video_path)
         width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -322,7 +362,16 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
         return width, height
     
     def video_resize(comparison_clip, comparison_width, comparison_height):
-        # 동영상 규격(720 * 1280) 리사이즈
+        """
+        사용자 입력 영상 규격을 (720 * 1280)으로 리사이즈
+        Args:
+            comparison_clip: 사용자 입력 영상
+            comparison_width: 사용자 입력 영상 프레임의 너비
+            comparison_height: 사용자 입력 영상 프레임의 높이
+        
+        Return:
+            comparison_clip: 프레임의 너비와 높이가 720 * 1280으로 리사이즈된 사용자 입력 영상
+        """
         if comparison_width != 720 and comparison_height != 1280:
             end_idx = comparison_clip.find('.mp4')
             input_video = comparison_clip[:end_idx]
@@ -336,41 +385,32 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
             return comparison_clip
     
     
-    comparison_width, comparison_height = get_video_dimensions(comparison_clip)
-    print('-'*300, f"comparison_width={comparison_width}")
-    print('-'*300, f"comparison_height={comparison_height}")
-    comparison_clip = video_resize(comparison_clip, comparison_width, comparison_height)
+    comparison_width, comparison_height = get_video_dimensions(comparison_clip)  # 동영상 규격 확인
+    # print('-'*300, f"comparison_width={comparison_width}")
+    # print('-'*300, f"comparison_height={comparison_height}")
+    comparison_clip = video_resize(comparison_clip, comparison_width, comparison_height) # 사용자 입력 영상 규격(720 * 1280)으로 리사이즈
 
-    # FULL COMPARE
-    # if not (len(sys.argv)>3 and sys.argv[3] == '--compare-only'):
+    # 영상 비교
     if not (ref_clip == None and comparison_clip == None):
         print(f"intial clips {ref_clip} {comparison_clip}")
-        # ref_clip_30, comparison_clip_30 = convert_to_same_framerate(ref_clip), convert_to_same_framerate(comparison_clip)
 
-        # validate reference clip
+        # 참조 영상 유효성 검사
         print(f'this is the ref: {ref_clip} and comp: {comparison_clip}')
         validate_reference_clip(ref_clip, comparison_clip)
 
 
-        # # convert to wav for audio analysis
+        # 오디오 분석을 위해 wav파일 형식으로 변환
         ref_clip_wav, comparison_clip_wav = convert_to_wav(ref_clip), convert_to_wav(comparison_clip)
 
+        # 두 영상의 오디오 오프셋 찾기
         offset = find_sound_offset(ref_clip_wav, comparison_clip_wav)
-        # start_offset, end_offset = find_sound_offset(ref_clip_wav, comparison_clip_wav)
-        # gets no. secs the comp clip is ahead of the ref clip
 
-        # ref_cut, comparison_cut = trim_clips(ref_clip_30, comparison_clip_30, offset)
+        # offset을 기준으로 두 영상 자르기
         ref_cut, comparison_cut = trim_clips(ref_clip, comparison_clip, offset)
-        
-        # audio_clip = trim_audio(ref_clip_wav, start_offset, end_offset)
-        print(ref_cut, comparison_cut)
-    # # --------------------------------------------------------- MAIN --------------------------------------------------------------------------------------
+        # print(ref_cut, comparison_cut)
+
+    # --------------------------------------------------------- MAIN --------------------------------------------------------------------------------------
     else:
-    #     ### 원본 ###
-    #     # ref_cut = sys.argv[1]
-    #     # comparison_cut = sys.argv[2]
-        
-        ### 수정 ###
         ref_cut = ref_clip
         comparison_cut = comparison_clip
 
@@ -380,12 +420,16 @@ def compare_video(ref_clip, comparison_clip, nickname, title):
     xy_dancer1, dancer1_frames, dancer1_landmarks = landmarks(ref_cut)
     xy_dancer2, dancer2_frames, dancer2_landmarks = landmarks(comparison_cut)
 
+    # 두 영상을 비교한 점수와 결과 영상 생성
     score, output_path = difference(xy_dancer1, xy_dancer2, dancer1_frames, dancer2_frames, dancer1_landmarks, dancer2_landmarks)
-    print(f"======={comparison_clip_wav}=======")
+
+    # 두 영상을 비교한 결과 영상과 참조 영상의 오디오 파일을 결합
     output_path = combine_audio_video(output_path, ref_clip_wav)
+
     print(f"\n You are {score:.2f} % in sync with your model dancer!")
     print('IN fandomproject/dance_30.py')
 
+    # 영상을 비교하며 생긴 부가파일들 제거
     remove_final_videos()
     
     return score, output_path
