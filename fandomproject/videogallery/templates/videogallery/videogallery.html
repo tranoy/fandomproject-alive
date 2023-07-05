@@ -15,9 +15,11 @@
     <title>Gallery</title>
   </head>
   <body>
+    <!-- preloader -->
     <div id="preloder">
       <div class="loader"></div>
     </div>
+    <!--header 영역 -->
     <header class="header">
       <div class="container">
         <div class="row">
@@ -58,8 +60,7 @@
         <div id="mobile-menu-wrap"></div>
       </div>
     </header>
-
-    <!-- Discography Section Begin -->
+    <!-- section 영역 -->
     <section class="discography spad">
       <div class="container">
         <div class="row">
@@ -113,13 +114,7 @@
                 <h3 style="color: white; font-size: 1.6rem">
                   {{ res.5 }} - {{ res.4 }}
                 </h3>
-                {% comment %}
-                <h4>accuracy - {{ res.2 }}</h4>
-                {% endcomment %}
                 <h5 style="color: #a8a8a8">{{ res.1 }}</h5>
-                {% comment %}
-                <h4>text - {{ res.3 }}</h4>
-                {% endcomment %}
               </div>
             </div>
           </div>
@@ -148,6 +143,7 @@
         {% endif %}
       </span>
     </div>
+    <!-- footer 영역 -->
     <footer class="footer spad set-bg" data-setbg="">
       <div class="container">
         <div class="row">
