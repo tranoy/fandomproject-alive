@@ -16,9 +16,11 @@
     <title>Challenge</title>
   </head>
   <body>
+    <!-- preloader -->
     <div id="preloder">
       <div class="loader"></div>
     </div>
+    <!-- header 영역 -->
     <header class="header">
       <div class="container">
         <div class="row">
@@ -59,8 +61,7 @@
         <div id="mobile-menu-wrap"></div>
       </div>
     </header>
-
-    <!-- Discography Section Begin -->
+    <!-- section 영역 -->
     <section class="discography spad">
       <div id="check" style="display: block">{{ user.nickname }}</div>
       <div class="container">
@@ -92,9 +93,7 @@
                       <span style="color: white"
                         >[{{ data.4 }} - {{ data.3 }}]</span
                       >
-
                       <h5 style="color: white">Participants - {{ data.6 }}</h5>
-
                       <h5 style="color: white">Best User - {{ data.0 }}</h5>
                       <h5 style="color: white">Accuracy - {{ data.1 }}%</h5>
                     </div>
@@ -137,6 +136,7 @@
         {% endif %}
       </span>
     </div>
+    <!-- Footer 영역 -->
     <footer class="footer spad set-bg" data-setbg="">
       <div class="container">
         <div class="row">
