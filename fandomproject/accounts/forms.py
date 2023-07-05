@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-
 from .models import User
 
+# admin페이지 유저 추가 form
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(
@@ -24,7 +24,8 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-    
+
+# admin페이지 유저 수정 form
 class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
