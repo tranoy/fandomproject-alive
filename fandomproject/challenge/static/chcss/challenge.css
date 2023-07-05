@@ -1,5 +1,3 @@
-
-
 html,
 
 body {
@@ -148,37 +146,6 @@ ol {
 .text-white li,
 .text-white a {
 	color: #fff;
-}
-
-/* buttons */
-
-.primary-btn {
-	display: inline-block;
-	font-size: 15px;
-	text-transform: uppercase;
-	padding: 14px 25px 12px;
-	color: #ffffff;
-	background: #5c00ce;
-	letter-spacing: 2px;
-}
-
-.primary-btn.border-btn {
-	background: transparent;
-	border: 2px solid #5c00ce;
-	color: #111111;
-}
-
-.site-btn {
-	font-size: 15px;
-	color: #ffffff;
-	background: #5c00ce;
-	font-weight: 700;
-	letter-spacing: 2px;
-	border: none;
-	text-transform: uppercase;
-	display: inline-block;
-	padding: 14px 30px;
-	width: 100%;
 }
 
 /* Preloder */
@@ -364,121 +331,6 @@ ol {
 	opacity: 0;
 }
 
-.header__right__social {
-	display: inline-block;
-}
-
-.header__right__social a {
-	display: inline-block;
-	font-size: 16px;
-	color: #ffffff;
-	margin-right: 16px;
-}
-
-.header__right__social a:last-child {
-	margin-right: 0;
-}
-
-.slicknav_menu {
-	display: none;
-}
-
-/*---------------------
-  Hero
------------------------*/
-
-.hero {
-	padding-top: 400px;
-	padding-bottom: 295px;
-	position: relative;
-}
-
-.hero__text {
-	text-align: center;
-}
-
-.hero__text span {
-	color: #ffffff;
-	text-transform: uppercase;
-	letter-spacing: 6px;
-}
-
-.hero__text h1 {
-	font-size: 110px;
-	font-family: "Rockville Solid Regular";
-	color: #ffffff;
-	margin-bottom: 20px;
-	margin-top: 22px;
-}
-
-.hero__text p {
-	color: #ffffff;
-	margin-bottom: 20px;
-}
-
-.hero__text .play-btn {
-	font-size: 26px;
-	color: #5c00ce;
-	height: 90px;
-	width: 90px;
-	border-radius: 50%;
-	background: rgba(255, 255, 255, 0.3);
-	display: inline-block;
-	line-height: 90px;
-	text-align: center;
-	position: relative;
-	z-index: 1;
-}
-
-.hero__text .play-btn i {
-	position: relative;
-	top: 2px;
-	left: 2px;
-}
-
-.hero__text .play-btn:after {
-	position: absolute;
-	left: 15px;
-	top: 15px;
-	height: 60px;
-	width: 60px;
-	background: #ffffff;
-	border-radius: 50%;
-	content: "";
-	z-index: -1;
-}
-
-.linear__icon {
-	position: absolute;
-	left: 50%;
-	bottom: 0;
-	margin-left: -16px;
-	-webkit-animation: mymove 0.5s infinite alternate;
-	animation: mymove 0.5s infinite alternate;
-}
-
-.linear__icon i {
-	font-size: 50px;
-	color: #5c00ce;
-}
-
-@-webkit-keyframes mymove {
-	0% {
-		bottom: 0;
-	}
-	100% {
-		bottom: -10px;
-	}
-}
-
-@keyframes mymove {
-	0% {
-		bottom: 0;
-	}
-	100% {
-		bottom: -10px;
-	}
-}
 
 /*---------------------
   Events
