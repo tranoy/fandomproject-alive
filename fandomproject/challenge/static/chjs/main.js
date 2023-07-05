@@ -1,15 +1,3 @@
-/*  ---------------------------------------------------
-  Template Name: DJoz
-  Description:  DJoz Music HTML Template
-  Author: Colorlib
-  Author URI: https://colorlib.com
-  Version: 1.0
-  Created: Colorlib
----------------------------------------------------------  */
-
-
-
-
 'use strict';
 
 (function ($) {
@@ -22,26 +10,38 @@
         $("#preloder").delay(200).fadeOut("slow");
     });
 
-    /*------------------
-		Navigation
-	--------------------*/
 
 })(jQuery);
 
 
-  
+// 파일 업로드 avi mp4 제한
+const form = document.getElementById('upload-form');
+const fileInput = document.getElementById('video_file');
+form.addEventListener('submit', function (event) {
+    const fileName = fileInput.value;
+    const allowedExtensions = /(\.mp4|\.avi)$/i;
+
+    if (!allowedExtensions.exec(fileName)) {
+        event.preventDefault(); // Prevent form submission
+
+        const confirmUpload = confirm('Only MP4 and AVI files are allowed.');
+
+        if (!confirmUpload) {
+            return;
+        }
+    }
+});
 
 
+// 챌린지 START 페이지 로그인 된 사용자만 입장 제한
 let entranceElements = document.getElementsByClassName('entrance_1');
 
 for (let i = 0; i < entranceElements.length; i++) {
   entranceElements[i].addEventListener('click', function(event) {
-    console.log("발동1");
     let sessionData = document.getElementById('check').textContent;
     console.log(sessionData);
     if (sessionData == '') {
       event.preventDefault();
-      console.log("발동2");
       alert("로그인 후 사용하세요");
       window.location.href = '/login';
     }
@@ -49,6 +49,7 @@ for (let i = 0; i < entranceElements.length; i++) {
 }
 
 
+// 참고 영상 클릭 이벤트 추가
 $('#ref-video').click(function (){
   var rowVideo = $('#row-video');
   if (rowVideo.css('opacity')==='0'){

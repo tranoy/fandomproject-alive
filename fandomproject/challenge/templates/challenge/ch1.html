@@ -15,9 +15,13 @@
     <title>Gallery</title>
 </head>
 <body>
+
+    <!-- preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
+
+    <!-- header 영역 -->
     <header class="header">
         <div class="container">
             <div class="row">
@@ -55,7 +59,7 @@
         </div>
     </header>
     
-    <!-- Discography Section Begin -->
+    <!-- section 영역 -->
     <section class="discography spad">
         <div class="container">
             <div class="row">
@@ -125,97 +129,82 @@
                                 </div>
                             </div>
                         </form>
-                        <script>
-                            const form = document.getElementById('upload-form');
-                            const fileInput = document.getElementById('video_file');
-                            form.addEventListener('submit', function (event) {
-                                const fileName = fileInput.value;
-                                const allowedExtensions = /(\.mp4|\.avi)$/i;
-                        
-                                if (!allowedExtensions.exec(fileName)) {
-                                    event.preventDefault(); // Prevent form submission
-                        
-                                    const confirmUpload = confirm('Only MP4 and AVI files are allowed.');
-                        
-                                    if (!confirmUpload) {
-                                        return;
-                                    }
-                                }
-                            });
-                        </script>
-                </div> 
-            </div>
-        </div>
-</section>
-<div class="pagination">
-    <span class="step-links">
-      {% if score.has_previous %}
-      <a href="?page=1" class="page-select">&laquo; first</a>
-      <a href="?page={{ score.previous_page_number }}" class="page-select"
-        >previous</a
-      >
-      {% endif %}
-
-      <span class="current-page">{{ score.number }}</span>
-
-      {% if score.has_next %}
-      <a href="?page={{ score.next_page_number }}" class="page-select"
-        >next</a
-      >
-      <a href="?page={{ score.paginator.num_pages }}" class="page-select"
-        >last &raquo;</a
-      >
-      {% endif %}
-    </span>
-  </div>
-<footer class="footer spad set-bg" data-setbg="">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <div class="footer__address">
-                    <ul>
-                        <li>
-                            <a href="/policy" target='_blank' style="color: white;">이용약관</a>
-                        </li>
-                        <li>
-                            <a href="/privacy" target='_blank' style="color: white;">개인정보 처리방침</a>
-                        </li>
-                        <li>
-                            <h2 style="color: white;">ALIVE</h2>
-                        </li>
-                    </ul>
+                    </div> 
                 </div>
             </div>
-            <div class="col-lg-4 offset-lg-1 col-md-6">
-                <div class="footer__social">
-                    <div class="footer__social__links">
-                        <p>주소 부분</p>
-                        <p style="color:white;">광주광역시 북구 신안동 무등로202번길 15<br>KT신안빌딩</p>
+    </section>
+
+    <!-- 페이지 네이션 -->
+    <div class="pagination">
+        <span class="step-links">
+        {% if score.has_previous %}
+        <a href="?page=1" class="page-select">&laquo; first</a>
+        <a href="?page={{ score.previous_page_number }}" class="page-select"
+            >previous</a
+        >
+        {% endif %}
+        <span class="current-page">{{ score.number }}</span>
+        {% if score.has_next %}
+        <a href="?page={{ score.next_page_number }}" class="page-select"
+            >next</a
+        >
+        <a href="?page={{ score.paginator.num_pages }}" class="page-select"
+            >last &raquo;</a
+        >
+        {% endif %}
+        </span>
+    </div>
+
+    <!-- Footer 영역 -->
+    <footer class="footer spad set-bg" data-setbg="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer__address">
+                        <ul>
+                            <li>
+                                <a href="/policy" target='_blank' style="color: white;">이용약관</a>
+                            </li>
+                            <li>
+                                <a href="/privacy" target='_blank' style="color: white;">개인정보 처리방침</a>
+                            </li>
+                            <li>
+                                <h2 style="color: white;">ALIVE</h2>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-1 col-md-6">
+                    <div class="footer__social">
+                        <div class="footer__social__links">
+                            <p>주소 부분</p>
+                            <p style="color:white;">광주광역시 북구 신안동 무등로202번길 15<br>KT신안빌딩</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer__address" style="margin-left: 90px;">
+                        <ul style="display: flex;">
+                            <li class="icon_li">
+                                <a href="https://www.youtube.com/watch?v=oSfiSswjiBQ&list=PL_WCuvyChN3g7tC-_q1UexhM61t51yPM_" target='_blank' style="color: white;">
+                                    <img src="/static/img/youtube.png" alt="" style="width: 50px;">
+                                </a>
+                            </li>
+                            <li class="icon_li">
+                                <a href="https://github.com/Junobee25/ai-33-project/tree/develop" target='_blank' style="color: white;">
+                                    <img src="/static/img/github.png" alt="" style="width: 50px;">
+                                </a>
+                            </li>
+                            <li class="icon_li">
+                                <a href="https://www.instagram.com/aivlestory/" target='_blank' style="color: white;">
+                                    <img src="/static/img/instagram.png" alt="" style="width: 50px;">
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="footer__address" style="margin-left: 90px;">
-                    <ul style="display: flex;">
-                        <li class="icon_li">
-                            <a href="https://www.youtube.com/watch?v=oSfiSswjiBQ&list=PL_WCuvyChN3g7tC-_q1UexhM61t51yPM_" target='_blank' style="color: white;">
-                                <img src="/static/img/youtube.png" alt="" style="width: 50px;">
-                            </a>
-                        </li>
-                        <li class="icon_li">
-                            <a href="https://github.com/Junobee25/ai-33-project/tree/develop" target='_blank' style="color: white;">
-                                <img src="/static/img/github.png" alt="" style="width: 50px;">
-                            </a>
-                        </li>
-                        <li class="icon_li">
-                            <a href="https://www.instagram.com/aivlestory/" target='_blank' style="color: white;">
-                                <img src="/static/img/instagram.png" alt="" style="width: 50px;">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
         <div class="footer__copyright__text">
             <p>Copyright &copy; 카피라이트 부분
