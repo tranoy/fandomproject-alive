@@ -152,3 +152,110 @@
     });
 
 })(jQuery);
+
+
+function handleDrop(event) {
+    event.preventDefault();
+    var file = event.dataTransfer.files[0];
+    var input = document.getElementById("chooseImage");
+    input.files = event.dataTransfer.files;
+    handleFiles(input.files);
+  }
+
+  function handleDragOver(event) {
+    event.preventDefault();
+    var file = event.dataTransfer.items[0].getAsFile();
+    var input = document.getElementById("chooseImage");
+    input.files = event.dataTransfer.files;
+    handleFiles(input.files);
+  }
+
+  function handleFiles(files) {
+    const imagePreviewContainer = document.getElementById(
+      "image-preview-container"
+    );
+    const previewImage = document.getElementById("previewImage");
+    const dragMessage = document.querySelector("#drop-file .drag_message"); // 추가
+
+    if (files.length === 0) {
+      imagePreviewContainer.innerHTML = ""; // 이미지 미리보기 컨테이너를 비웁니다.
+      dragMessage.style.display = "block"; // 이미지가 없을 때는 메시지를 보이도록 설정
+      return;
+    }
+
+    const file = files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      const imageUrl = event.target.result;
+      previewImage.src = imageUrl;
+      dragMessage.style.display = "none"; // 이미지가 업로드되면 메시지를 숨김
+
+      // 선택한 이미지를 이미지 미리보기 컨테이너 안에도 표시할 수 있습니다. (선택사항)
+      const imagePreview = document.createElement("img");
+      imagePreview.src = imageUrl;
+      imagePreviewContainer.innerHTML = ""; // 추가하기 전에 컨테이너를 비웁니다.
+      imagePreviewContainer.appendChild(imagePreview);
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  function handleFile(file) {
+    var reader = new FileReader();
+    reader.onload = function (event) {
+      var img = document.getElementById("previewImage");
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function uploadImage(event) {
+    event.preventDefault();
+
+    const fileInput = document.getElementById("chooseImage");
+    const file = fileInput.files[0];
+
+    if (!file) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append(
+      "style",
+      document.querySelector("select[name='style']").value
+    );
+
+    fetch("{% url 'making:transform' %}", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "X-CSRFToken": document.querySelector(
+          "[name='csrfmiddlewaretoken']"
+        ).value,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // 이미지 저장 및 출력 처리
+        sessionStorage.setItem("transformedImage", data.transformed_image);
+        window.location.href = "{% url 'making:display' %}";
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+  const createAlbumArtButton = document.getElementById(
+    "create-album-art-button"
+  );
+  createAlbumArtButton.addEventListener("click", uploadImage);
+
+  // 페이지 로드 시 이미지 미리보기 처리
+  window.addEventListener("DOMContentLoaded", function () {
+    var fileInput = document.getElementById("chooseImage");
+    fileInput.addEventListener("change", function () {
+      handleFiles(fileInput.files);
+    });
+  });
