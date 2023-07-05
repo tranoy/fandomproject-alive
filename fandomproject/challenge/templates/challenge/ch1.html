@@ -113,7 +113,7 @@
                                 <div class="filebox">
                                     <input class="upload-name" value="첨부파일" placeholder="첨부파일" name='video_file'>
                                     <label for="video_file">파일 찾기</label>
-                                    <input type="file" id="video_file" name = "video_file" accept="video/*" readonly />
+                                    <input type="file" id="video_file" name = "video_file" accept="video/mp4 video/avi" readonly />
                                     <button id = "submit-btn" type="submit">업로드</button>
                                 </div>
                                 <div id="upload-content-form" style="display: none;">
@@ -125,6 +125,24 @@
                                 </div>
                             </div>
                         </form>
+                        <script>
+                            const form = document.getElementById('upload-form');
+                            const fileInput = document.getElementById('video_file');
+                            form.addEventListener('submit', function (event) {
+                                const fileName = fileInput.value;
+                                const allowedExtensions = /(\.mp4|\.avi)$/i;
+                        
+                                if (!allowedExtensions.exec(fileName)) {
+                                    event.preventDefault(); // Prevent form submission
+                        
+                                    const confirmUpload = confirm('Only MP4 and AVI files are allowed.');
+                        
+                                    if (!confirmUpload) {
+                                        return;
+                                    }
+                                }
+                            });
+                        </script>
                 </div> 
             </div>
         </div>
