@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,8 +7,6 @@
     <title>Alive_Album</title>
     <!-- Css Styles -->
     <link rel="stylesheet" href="{% static 'mkcss/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'mkcss/rockville.css'%}" />
-    <link rel="stylesheet" href="{% static 'mkcss/slicknav.min.css'%}" />
     <link rel="stylesheet" href="{% static 'mkcss/index.css'%}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +17,7 @@
     <div id="preloder">
       <div class="loader"></div>
     </div>
+    <!-- header 영역 -->
     <header class="header">
       <div class="container">
         <div class="row">
@@ -135,6 +133,7 @@
         </div>
       </div>
     </div>
+    <!-- footer 영역 -->
     <footer class="footer spad set-bg" data-setbg="">
       <div class="container">
         <div class="row">
@@ -232,10 +231,6 @@
     <script src="{% static 'mkjs/jquery-3.3.1.min.js'%}"></script>
     <script src="{% static 'mkjs/bootstrap.min.js'%}"></script>
     <script src="{% static 'mkjs/main.js'%}"></script>
-    <script src="{% static 'mkjs/jquery.magnific-popup.min.js'%}"></script>
-    <script src="{% static 'mkjs/jquery.nicescroll.min.js'%}"></script>
-    <script src="{% static 'mkjs/jquery.countdown.min.js'%}"></script>
-    <script src="{% static 'mkjs/jquery.slicknav.js'%}"></script>
     <script>
       function downloadImage(imageUrl) {
         const link = document.createElement("a");
