@@ -73,11 +73,10 @@
         <div class="content-container-inner">
           <p>저희 서비스에 총 {{ score_count }} 명이 참가하였습니다.</p>
         </div>
-        <form action="">
+        <form method="GET" action="">
           <input
             id="summonerNameInput"
-            name="summonerNameInput"
-            autocomplete="off"
+            name="query"
             type="text"
             placeholder="참가자명"
           />

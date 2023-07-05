@@ -41,7 +41,8 @@ def Main(request):
                 ref_video = None
 
             result.append([score.id, score.nickname, score.score, score.text, ref_video.title if ref_video else '', ref_video.singer if ref_video else '', mk_image.image_url if mk_image else '/media/20230424_002724.png'])
-        paginator = Paginator(result, 9)
+        r_result = result[::-1]
+        paginator = Paginator(r_result, 9)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         context = {

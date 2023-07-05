@@ -61,7 +61,7 @@ class Main(APIView):
         except KeyError:
             nickname = None
             user = None
-        transformItem = TransformedLog.objects.all()
+        transformItem = TransformedLog.objects.order_by('-id').all()
         print(data)
         context = {'user': user,
                    'transformItem' : transformItem,
