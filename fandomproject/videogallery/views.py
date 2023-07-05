@@ -40,7 +40,7 @@ def Main(request):
                 # Handle the case when Ref_Video object does not exist
                 ref_video = None
 
-            result.append([score.id, score.nickname, score.score, score.text, ref_video.title if ref_video else '', ref_video.singer if ref_video else '', mk_image.image_url if mk_image else '/media/20230424_002724.png'])
+            result.append([score.id, score.nickname, score.score, score.text, ref_video.title if ref_video else '', ref_video.singer if ref_video else '', mk_image.image_url if mk_image else '/media/defaultimg.png'])
         r_result = result[::-1]
         paginator = Paginator(r_result, 9)
         page_number = request.GET.get('page')
