@@ -16,9 +16,11 @@
     <title>More</title>
   </head>
   <body>
+    <!-- preloader -->
     <div id="preloder">
       <div class="loader"></div>
     </div>
+    <!-- header 영역 추가 -->
     <header class="header">
       <div class="container">
         <div class="row">
@@ -59,6 +61,7 @@
         <div id="mobile-menu-wrap"></div>
       </div>
     </header>
+    <!-- section 영역 추가 -->
     <section class="discography spad">
       <div class="container">
         <div class="row" style="margin-bottom: 30px">
@@ -106,8 +109,6 @@
                         xhr.readyState === XMLHttpRequest.DONE &&
                         xhr.status === 200
                       ) {
-                        // Handle the response or perform any necessary actions
-                        // For example, you can update the UI dynamically
                         console.log("Row updated successfully");
                       }
                     };
@@ -116,7 +117,6 @@
                     location.href = "/videogallery/" + id;
                   }
                 }
-                //location.href='/';
               </script>
             </div>
             <div class="card-body">
@@ -180,6 +180,7 @@
         {% endif %}
       </span>
     </div>
+    <!-- footer 영역 추가 -->
     <footer class="footer spad set-bg" data-setbg="">
       <div class="container">
         <div class="row">
