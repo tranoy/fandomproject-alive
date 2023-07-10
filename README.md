@@ -36,8 +36,6 @@
 
 ---
 
-## Setup
-
 ## 1. 개발 배경 및 목적
 
 > 💡 **'AI기술을 통해 팬들에게 창작과 참여의 기회를 제공하기 위해서 개발하게 되었다.'** 팬더스트리는 팬(fan)과 인더스트리(industy)의 합성어로 팬덤 기반의 비지니스 산업을 말합니다.
@@ -76,7 +74,7 @@
     <summary>메인 화면</summary>
     <div markdown="1">
     <br>
-    <img src="https://blog.kakaocdn.net/dn/MLksq/btsnaMZfaRr/C4jr5GIqAFAwxksHUCx3S1/img.gif" witdh="900" height="300">
+    <img src="https://github.com/Junobee25/ai-33-project/assets/109403631/94e59b22-1b10-478c-8e28-777637430e9b" witdh="900" height="300">
     <br>
     <text> ⇒ 홈 화면 우측 상단의 ul태그를 통해서 챌린지, 앨범자켓 제작 등의 서비스 이용 가능 </text>
 </details>
@@ -95,31 +93,138 @@
   <summary><strong>2) 현재 진행중인 챌린지 페이지 / 로그인 된 사용자 챌린지 참여 페이지</strong></summary>
    <div markdown="1"> 
     <br>      
-     <img src="https://blog.kakaocdn.net/dn/MLksq/btsnaMZfaRr/C4jr5GIqAFAwxksHUCx3S1/img.gif" width="650" height="350">
+     <img src="https://t1.daumcdn.net/tistory_admin/static/images/pc-image-censoring-v1.gif" width="650" height="350">
      <br>
      <text>⇒ 고객이 상담할 수 있는 상담사를 선택해 상담을 신청할 수 있다</text>
    </div>
  </details>
 
   <details>
-  <summary><strong>2) 동영상 업로드 모달 창</strong></summary>
+  <summary><strong>3) 동영상 업로드 모달 창</strong></summary>
    <div markdown="1"> 
     <br>      
-     <img src="https://user-images.githubusercontent.com/37900424/167588687-ba52d2a5-bdc3-473b-a7ab-17808e5b9121.png" width="700" height="412">
+     <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FvhhhR%2Fbtsm8M0d6hR%2FFdldWmGO25zZNlKXFeXKqK%2Fimg.png" width="655" height="400">
      <br>
-     <text>⇒ 고객이 상담할 수 있는 상담사를 선택해 상담을 신청할 수 있다</text>
+     <text>⇒ 고객이 상담할 수 있는 상담사를 선택해 상담을 신청할 수 있다.</text>
    </div>
  </details>
 
  <details>
-  <summary><strong>2) 챌린지 영상 점수 결과가 나오는 페이지</strong></summary>
+  <summary><strong>4) 챌린지 영상 점수 결과가 나오는 페이지</strong></summary>
    <div markdown="1"> 
     <br>      
-     <img src="https://user-images.githubusercontent.com/37900424/167588687-ba52d2a5-bdc3-473b-a7ab-17808e5b9121.png" width="700" height="412">
+     <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FHnN8n%2Fbtsm838xhgr%2FnWeG8s4dxGQuvqR3N904m0%2Fimg.png" width="500" height="300">
      <br>
-     <text>⇒ 고객이 상담할 수 있는 상담사를 선택해 상담을 신청할 수 있다</text>
+     <text>⇒ 참여한 챌린지 영상과 함께 AI모델을 통한 점수 측정 결과를 확인할 수 있다.</text>
    </div>
  </details>
+
+  <details>
+  <summary><strong>5) 챌린지 랭킹 페이지</strong></summary>
+   <div markdown="1"> 
+    <br>      
+     <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdtcnQZ%2Fbtsm9BcSd3O%2F1PYkdvaaKcuK021TyiYYW0%2Fimg.png" width="500" height="300">
+     <br>
+     <text>⇒ 총 챌린지 참여자 수 와 본인의 랭킹을 확인 할 수 있다.</text>
+   </div>
+ </details>
+
+   <details>
+  <summary><strong>6) 앨범자켓 일러스트화 기능</strong></summary>
+   <div markdown="1"> 
+    <br> 
+    <h3>🖌 앨범자켓 일러스트화</h3>
+     <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbRuu2M%2Fbtsm1TziFu4%2FDreLxfZQED3jm9R3KTbqnk%2Fimg.png" width="500" height="500">
+     <h3>🖌 일러스트화 결과</h3>
+     <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbDe3h9%2Fbtsm8QauPPd%2FIshTgKrjCqPIp3ioVzJtVK%2Fimg.png" width="500" height="500">
+     <br>
+     <text>⇒ 자신이 원하는 아이돌의 앨범 자켓을 원하는 화풍으로 일러스트화 할 수 있다.</text>
+   </div>
+ </details>
+
+ <details>
+  <summary><strong>7) 챌린지 참가자들의 모든 영상을 확일할 수 있는 전체 공유 게시판 </strong></summary>
+   <div markdown="1"> 
+    <br>    
+     <h3>📝 전체 게시판 </h3>  
+     <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCMoh9%2Fbtsm9wbypUj%2F9gZ1n4jsybMclfCtTSl201%2Fimg.png" width="650" height="350">
+     <h3>🔎 게시물 상세보기 </h3>
+     <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FWHfiW%2Fbtsm4C5c1SV%2Fh0rm48j6mCXiD9EkReANK1%2Fimg.png">
+     <br>
+     <text>⇒ 모든 사용자는 챌린지 참가자들의 모든 게시물을 확인 할 수 있다. 게시물 ID정보와 일치하는 사용자는 수정 및 삭제가 가능하다.</text>
+   </div>
+ </details>
+<br>
+
+`AI 주요 기능`
+
+ <details>
+    <summary><strong>1) 사용자가 춘 영상데이터를 기반으로 정확도를 측정 </strong></summary>
+    <text>1. Pose Estimation Model(Blaze Pose)를 이용해서 사용자의 관절 위치를 찾음</text>
+    <br>
+    <text>2. 비교하려는 팔, 다리 부분의 관절 위치를 찾음</text>
+    <br>
+    <text>3. 관절 접합부의 (x,y)좌표를 이용하여 기울기를 계산</text>
+    <br>
+    <text>4. 원본 영상의 춤과 사용자 사이의 기울기 차이를 백분율로 구한 후 모든 관절의 접합부에 대해 반복하고 평균을 구함</text>
+    <br>
+    <text>5. 4번을 모든 프레임에 대해서 반복</text>
+ </details>
+  <details>
+    <summary><strong>2) 앨범자켓을 일러스트 화</strong></summary>
+    <text>=> 모델 학습 방법</text>
+    <text>1. 카툰 이미지셋과 실사 이미지셋을 준비</text>
+    <br>
+    <text>2. train:test 비율을 9:1로 분리</text>
+    <br>
+    <text>3. 카툰 데이터셋을 edge smooting을 적용</text>
+    <br>
+    <text>4. 모델을 사용하여 best epoch를 구한 후 저장</text>
+    <br>
+    <text>5. 비저장한 모델을 Transformer를 통해 적용</text>
+    <br>
+ </details>
+
+<br>
+
+## 3. 서비스 FLOW
+
+- `주요 기능 Flow 1`
+  ![서비스 흐름](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FvvY4S%2Fbtsm9CvZsFl%2FvFDvAIi5DkDLnMXVkY17ZK%2Fimg.png)
+- `주요 기능 Flow 2`
+  ![서비스 흐름](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F7dqWW%2Fbtsm8OqeCZ1%2Fc1jeknNX8hRkolGKIquur1%2Fimg.png)
+- `서비스 Flow`
+  ![서비스FLOW](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb3DsRI%2Fbtsm7xWPhTG%2FqtnQzxEPEsAckNCfXvKkrK%2Fimg.png)
+  <br>
+
+## 4. 3 Tier Architecture
+
+![아키텍쳐](https://github.com/Junobee25/ai-33-project/assets/109403631/f661a3a5-8306-4e67-be2b-8bba9dc34a5e)
+
+<br>
+
+## 5. DB 설계
+
+- `ERD`
+  ![ERD](https://github.com/Junobee25/ai-33-project/assets/109403631/97b0bac5-5f72-4bfd-afa8-700f9e9bcac5)
+
+<br>
+
+## 6. 개발 환경
+
+- `Front-End`
+
+  |                                                      HTML                                                      |                                                      CSS                                                      |                                                      JS                                                      |                                                      Bootstrap                                                      |
+  | :------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: |
+  | ![html](https://user-images.githubusercontent.com/68097036/151471705-99458ff8-186c-435b-ac5c-f348fd836e40.png) | ![css](https://user-images.githubusercontent.com/68097036/151471805-14e89a94-59e8-468f-8192-c10746b93896.png) | ![js](https://user-images.githubusercontent.com/68097036/151471854-e0134a79-b7ef-4a0f-99fd-53e8ee5baf50.png) | ![bootstrap](https://user-images.githubusercontent.com/68097036/151480381-2b23a8af-c6b4-43a6-96a6-ea69e0b953e0.png) |
+
+- `Back-End`
+
+  |                                                        Python                                                         |                                                          Django                                                           |                                                         Sqlite3                                                          |
+  | :-------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------: |
+  | ![pngwing com](https://user-images.githubusercontent.com/68097036/151479684-a85d26d4-e79e-47c9-9023-bf6d92f57536.png) | ![pngwing com (1)](https://user-images.githubusercontent.com/68097036/151466729-9cad0405-85ad-454e-815a-1a4fd065f8b7.png) | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/SQLite370.svg/2560px-SQLite370.svg.png" width="300"> |
+
+## Setup
 
 The first thing to do is to clone the repository:
 
