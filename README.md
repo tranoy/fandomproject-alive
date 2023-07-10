@@ -6,6 +6,14 @@
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbKQwvz%2Fbtsm9u5QTU7%2FnJM1GD3ujkBgma68oWcg4k%2Fimg.png" width="1000" height="460">
 <br>
+<details>
+  <summary><strong>More</strong></summary>
+   <div markdown="1"> 
+    <h3>전체 서비스 요약</h3>
+     <img src="https://github.com/Junobee25/fandomproject-alive/assets/109403631/877f4597-a7ac-4a27-b7fc-88efc590e2d7" width="1000" height="700">
+   </div>
+ </details>
+<br>
 
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/Junobee25/ai-33-project&count_bg=%236EFF00&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
