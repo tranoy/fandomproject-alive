@@ -81,6 +81,46 @@
     <text> ⇒ 홈 화면 우측 상단의 ul태그를 통해서 챌린지, 앨범자켓 제작 등의 서비스 이용 가능 </text>
 </details>
 
+<details>
+    <summary><strong>1) 회원가입/로그인</strong></summary>
+        <div markdown="1">  
+            <h3>📝 이용약관/개인정보/회원가입</h3>
+            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FciAK3n%2Fbtsm8h7hi9j%2F6PK2EdV3i3r5HQ5jUTBDck%2Fimg.png" width="700" height="412">
+            <h3>🔒 로그인</h3>
+            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fd2RwCk%2Fbtsm4Cc5qD7%2FumTOTQHGJESrRTBvgGY41K%2Fimg.png" width="700" height="412">
+        </div>
+</details>
+
+<details>
+  <summary><strong>2) 현재 진행중인 챌린지 페이지 / 로그인 된 사용자 챌린지 참여 페이지</strong></summary>
+   <div markdown="1"> 
+    <br>      
+     <img src="https://blog.kakaocdn.net/dn/mLTb0/btsnbOJfKy2/5bCPgNeGqtLbjkPC4IVJGk/img.gif" width="650" height="350">
+     <br>
+     <text>⇒ 고객이 상담할 수 있는 상담사를 선택해 상담을 신청할 수 있다</text>
+   </div>
+ </details>
+
+  <details>
+  <summary><strong>2) 동영상 업로드 모달 창</strong></summary>
+   <div markdown="1"> 
+    <br>      
+     <img src="https://user-images.githubusercontent.com/37900424/167588687-ba52d2a5-bdc3-473b-a7ab-17808e5b9121.png" width="700" height="412">
+     <br>
+     <text>⇒ 고객이 상담할 수 있는 상담사를 선택해 상담을 신청할 수 있다</text>
+   </div>
+ </details>
+
+ <details>
+  <summary><strong>2) 챌린지 영상 점수 결과가 나오는 페이지</strong></summary>
+   <div markdown="1"> 
+    <br>      
+     <img src="https://user-images.githubusercontent.com/37900424/167588687-ba52d2a5-bdc3-473b-a7ab-17808e5b9121.png" width="700" height="412">
+     <br>
+     <text>⇒ 고객이 상담할 수 있는 상담사를 선택해 상담을 신청할 수 있다</text>
+   </div>
+ </details>
+
 The first thing to do is to clone the repository:
 
 ```sh
