@@ -95,7 +95,7 @@
   <summary><strong>2) 현재 진행중인 챌린지 페이지 / 로그인 된 사용자 챌린지 참여 페이지</strong></summary>
    <div markdown="1"> 
     <br>      
-     <img src="https://blog.kakaocdn.net/dn/mLTb0/btsnbOJfKy2/5bCPgNeGqtLbjkPC4IVJGk/img.gif" width="650" height="350">
+     <img src="https://blog.kakaocdn.net/dn/MLksq/btsnaMZfaRr/C4jr5GIqAFAwxksHUCx3S1/img.gif" width="650" height="350">
      <br>
      <text>⇒ 고객이 상담할 수 있는 상담사를 선택해 상담을 신청할 수 있다</text>
    </div>
