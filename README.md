@@ -92,10 +92,14 @@
 <details>
   <summary><strong>2) 현재 진행중인 챌린지 페이지 / 로그인 된 사용자 챌린지 참여 페이지</strong></summary>
    <div markdown="1"> 
-    <br>      
-     <img src="https://t1.daumcdn.net/tistory_admin/static/images/pc-image-censoring-v1.gif" width="650" height="350">
+    <h3>🎉현재 진행중인 챌린지 페이지</h3>
+     <img src="https://github.com/Junobee25/ai-33-project/assets/109403631/d9af2a2f-fba2-4e3d-9ae4-9c5ba918597f" width="650" height="350">
      <br>
-     <text>⇒ 고객이 상담할 수 있는 상담사를 선택해 상담을 신청할 수 있다</text>
+     <text>⇒ 현재 진행중인 챌린지의 Best Score와 참여자 수 를 확인할 수 있다.</text>
+     <h3>🎉로그인 된 사용자 챌린지 참여 페이지 </h3>
+     <img src="https://github.com/Junobee25/ai-33-project/assets/109403631/125da9f3-b343-464c-9147-068d20cb9691" width="650" height="350">
+     <br>
+     <text>⇒ 해당 챌린지의 참여 게시물과 챌린지 참고영상을 확인할 수 있다.</text>
    </div>
  </details>
 
