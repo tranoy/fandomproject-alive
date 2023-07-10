@@ -72,6 +72,15 @@
 
 - `서비스 주요 기능`
 
+<details>
+    <summary>메인 화면</summary>
+    <div markdown="1">
+    <br>
+    <img src="https://blog.kakaocdn.net/dn/MLksq/btsnaMZfaRr/C4jr5GIqAFAwxksHUCx3S1/img.gif" witdh="900" height="300">
+    <br>
+    <text> ⇒ 홈 화면 우측 상단의 ul태그를 통해서 챌린지, 앨범자켓 제작 등의 서비스 이용 가능 </text>
+</details>
+
 The first thing to do is to clone the repository:
 
 ```sh
