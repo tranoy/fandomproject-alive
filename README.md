@@ -2,7 +2,7 @@
 
 # 🏆 A-LIVE : K-POP 팬덤을 위한 AI 퍼펙트 댄싱 경쟁 서비스
 
-> 2023.05.26 ~ 2023.07.11 KT AIVLE 전남/전북 33조 빅프로젝트<br> > _'A-live'는 아이돌 팬덤들을 위한 플랫폼으로 자신이 도전한 챌린지 영상을 기반으로 정확도를 측정하고 참여자들의 실시간 랭킹을 확인할 수 있습니다. 또한 본인이 일러스트화 하고 싶은 앨범자켓을 선택해 커스터마이징 할 수 있는 AI서비스입니다_
+> 2023.05.26 ~ 2023.07.11 KT AIVLE 빅프로젝트<br> > _'A-live'는 아이돌 팬덤들을 위한 플랫폼으로 자신이 도전한 챌린지 영상을 기반으로 정확도를 측정하고 참여자들의 실시간 랭킹을 확인할 수 있습니다. 또한 본인이 일러스트화 하고 싶은 앨범자켓을 선택해 커스터마이징 할 수 있는 AI서비스입니다_
 
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbKQwvz%2Fbtsm9u5QTU7%2FnJM1GD3ujkBgma68oWcg4k%2Fimg.png" width="1000" height="460">
 <br>
@@ -19,9 +19,8 @@
 
 ## 팀 구성
 
-- `AI전남/전북 9반 33조`
 
-|                       [🏆조창근](https://github.com/geun98)                       |                      [배준오](https://github.com/Junobee25)                      |                     [김규리](https://github.com/GYURI-KIM)                      |                      [송준원](https://github.com/tranoy)                       |                      [이진하](https://github.com/Haariiii)                      |                     [이민흠](https://github.com/Leecoderse)                     |
+|                       [🏆XXX](https://github.com/geun98)                       |                      [XXX](https://github.com/Junobee25)                      |                     [XXX](https://github.com/GYURI-KIM)                      |                      [XXX](https://github.com/tranoy)                       |                      [XXX](https://github.com/Haariiii)                      |                     [XXX](https://github.com/Leecoderse)                     |
 | :-------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: |
 | <img width="130px" src="https://avatars.githubusercontent.com/u/105584915?v=4" /> | <img width="130px" src="https://avatars.githubusercontent.com/u/109403631?v=4"/> | <img width="130px" src="https://avatars.githubusercontent.com/u/66521889?v=4"/> | <img width="130px" src="https://avatars.githubusercontent.com/u/38881159?v=4"> | <img width="130px" src="https://avatars.githubusercontent.com/u/124108779?v=4"> | <img width="130px" src="https://avatars.githubusercontent.com/u/118246579?v=4"> |
 |                                     **AI/BE**                                     |                                    **FE/BE**                                     |                                    **FE/BE**                                    |                                   **AI/BE**                                    |                                    **AI/BE**                                    |                                    **AI/BE**                                    |
