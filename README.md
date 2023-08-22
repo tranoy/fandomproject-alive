@@ -10,7 +10,7 @@
   <summary><strong>More</strong></summary>
    <div markdown="1"> 
     <h3>전체 서비스 요약</h3>
-     <img src="https://github.com/Junobee25/fandomproject-alive/assets/109403631/877f4597-a7ac-4a27-b7fc-88efc590e2d7" width="1000" height="700">
+     <!--<img src="https://github.com/Junobee25/fandomproject-alive/assets/109403631/877f4597-a7ac-4a27-b7fc-88efc590e2d7" width="1000" height="700">-->
    </div>
  </details>
 <br>
